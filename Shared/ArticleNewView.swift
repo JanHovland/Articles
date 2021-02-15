@@ -27,10 +27,12 @@ struct ArticleNewView: View {
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }, label: {
-                Image(systemName: "chevron.left")
-                    .foregroundColor(Color.blue)
-                    .font(.system(size: 15, design: .rounded))
-                
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(Color.blue)
+                        .font(.system(size: 15, design: .rounded))
+                    Text(NSLocalizedString("Return", comment: "ArticleNewView"))
+                }
             })
             Spacer()
             Button(action: {
