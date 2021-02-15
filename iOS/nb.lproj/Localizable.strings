@@ -1,0 +1,118 @@
+/* SearchBar
+   UserOverView */
+"Cancel" = "Avbryt";
+
+/* AddArticleView
+   saveEditArticle */
+"Check that all fields have a value" = "Sjekk at alle felt har en verdi.";
+
+/* AddArticleView
+   saveEditArticle */
+"Check that the url contains https:// or http://, but some url only accepts https" = "Sjekk at nettadressen inneholder https: // eller http: //, men noen url godtar bare https.";
+
+/* Articles */
+"Delete Article?" = "Slett artikkelen?";
+
+/* Articles */
+"Delete this article" = "Slette denne artikkelen";
+
+/* ArticleEditView */
+"Edit an article" = "Oppdatere artikkel";
+
+/* ArticleEditView */
+"Enter a new article" = "Legg inn en ny artikkel";
+
+/* ArticleEditView
+   ArticleNewView */
+"Enter Introduction" = "Legg inn introduksjon";
+
+/* ArticleEditView
+   ArticleNewView */
+"Enter subTitle" = "Legg inn subTitle";
+
+/* ArticleEditView
+   ArticleNewView */
+"Enter subTitle1" = "Legg inn subTitle1";
+
+/* ArticleEditView
+   ArticleNewView */
+"Enter Title" = "Legg inn tittel";
+
+/* ArticleEditView
+   ArticleNewView */
+"Enter Url" = "Legg inn url";
+
+/* AddArticleView */
+"Existing data" = "Artikkelen finnes";
+
+/* AddArticleView
+   saveEditArticle */
+"Incorrect url" = "Feil med url";
+
+/* ArticleEditView
+   ArticleNewView */
+"Introduction" = "Introduksjon";
+
+/* ArticleEditView
+   ArticleNewView */
+"mainType" = "mainType";
+
+/* AddArticleView
+   saveEditArticle */
+"Missing data" = "Mangler data";
+
+/* Articles */
+"New Article" = "Ny artikkel";
+
+/* SignInView */
+"No Internet connection for this " = "Ingen internettforbindelse for denne ";
+
+/* No comment provided by engineer. */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"Refresh" = "Frisk opp";
+
+/* ArticleNewView */
+"Save article" = "Save article";
+
+/* SearchBar */
+"Search..." = "Søk...";
+
+/* ArticleEditView
+   ArticleNewView */
+"SubTitle" = "SubTitle";
+
+/* ArticleEditView
+   ArticleNewView */
+"SubTitle1" = "SubTitle1";
+
+/* UserOverView */
+"Successfully deleted an article" = "Artikkelen er nå slettet";
+
+/* AddArticleView */
+"This article is now stored in CloudKit" = "Artikkelen er nå lagret i CloudKit";
+
+/* saveEditArticle */
+"This article is now updated" = "Artikkelen er nå oppdatert.";
+
+/* AddArticleView */
+"This article was stored earlier" = "Artikkelen er lagret tidligene.";
+
+/* ArticleEditView
+   ArticleNewView */
+"Title" = "Tittel";
+
+/* ArticleEditView */
+"Update article" = "Oppdater artikken";
+
+/* saveEditArticle */
+"Updated data" = "Oppdatert artikkel";
+
+/* ArticleEditView
+   ArticleNewView */
+"Url" = "Url";
+
+/* saveEditArticle */
+"Url error" = "Url er feil";
+
