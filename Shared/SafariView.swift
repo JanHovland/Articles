@@ -16,9 +16,9 @@ import SafariServices
 
 /// Denne virker som test under macOS
 struct WebView: NSViewRepresentable {
-
+    
     let view: WKWebView = WKWebView()
-
+    
     var request: URLRequest {
         get{
             let url: URL = URL(string: "https://google.com")!
@@ -26,16 +26,16 @@ struct WebView: NSViewRepresentable {
             return request
         }
     }
-
+    
     func makeNSView(context: Context) -> WKWebView {
         view.load(request)
         return view
     }
-
+    
     func updateNSView(_ view: WKWebView, context: Context) {
         view.load(request)
     }
-
+    
 }
 
 /// Grunnen til at denne "ikke virket" var følgende:
@@ -65,27 +65,60 @@ struct SafariView : NSViewRepresentable {
 #elseif os(iOS)
 
 /// Avhengig av en knapp og returnerer ikke !!
-//struct SafariView: View {
-//    var url: String
-//    @Environment(\.openURL) var openURL
-//    var body: some View {
-//        Button("Start Safari") {
-//            openURL(URL(string: url)!)
-//        }
-//    }
-//}
+struct SafariViewIPone: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.openURL) var openURL
+    
+    var url: String
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(Color.blue)
+                            .font(.system(size: 15, design: .rounded))
+                        Text(NSLocalizedString("Return", comment: "ArticleEditView"))
+                        
+                    }
+                })
+                Spacer()
+            }
+            .padding()
+            Text(NSLocalizedString("Safari View", comment: "ArticleEditView"))
+                .font(.system(size: 30, weight: .ultraLight, design: .rounded))
+                .padding(.top, 100)
+            HStack (alignment: .center, spacing: 10) {
+                Image(systemName: "info.circle")
+                Text("On the iPhone (due to a software faulure?), you must press the \"Return\" key in order to go back to the overview.")
+                    .padding()
+            }
+            .font(.system(size: 15, weight: .regular, design: .rounded))
+            .foregroundColor(.accentColor)
+            .padding(.top, 50)
+            .padding(.leading, 10)
+            Spacer()
+        }
+        .onAppear {
+            openURL(URL(string: url)!)
+        }
+    }
+}
 
 /// Denne virker kun på iPad og ikke på iPhone
 /// Kan dette ha noe med beta versjonene?
 struct SafariView: UIViewControllerRepresentable {
     typealias UIViewControllerType = SFSafariViewController
-
+    
     var url: String
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
         return SFSafariViewController(url: URL(string: url)!)
     }
-
+    
     func updateUIViewController(_ safariViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
     }
 }

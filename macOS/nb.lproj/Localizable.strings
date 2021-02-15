@@ -72,7 +72,13 @@
 "OK" = "OK";
 
 /* No comment provided by engineer. */
+"On the iPhone (due to a software faulure?), you must press the \"Return\" key in order to go back to the overview." = "På iPhone (på grunn av programvarefeil?) må du trykke på \"Return\" -tasten for å gå tilbake til oversikten.";
+
+/* No comment provided by engineer. */
 "Refresh" = "Frisk opp";
+
+/* ArticleEditView */
+"Return" = "Tilbake";
 
 /* ArticleNewView */
 "Save article" = "Lagre artikkel";

@@ -67,8 +67,15 @@ struct Articles: View {
                     ForEach(articles.filter({ searchText.isEmpty ||
                                                 $0.title.localizedStandardContains (searchText) } )) {
                         article in
-                        NavigationLink(destination: SafariView(url: article.url)) {
-                            ArticleAllView(article: article)
+                        if UIDevice.current.model == "iPad" {
+                            NavigationLink(destination: SafariView(url: article.url)) {
+                                ArticleAllView(article: article)
+                            }
+                        }
+                        else {
+                            NavigationLink(destination: SafariViewIPone(url: article.url)) {
+                                ArticleAllView(article: article)
+                            }
                         }
                     }
                     /// onDelete finne bare i iOS
