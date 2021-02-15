@@ -50,11 +50,11 @@ struct CloudKitArticle {
                     return
                 }
                 
-                guard let mainType = record["mainType"] as? String else {
+                guard let mainType = record["mainType"] as? Int else {
                     completion(.failure(CloudKitHelperError.castFailure))
                     return
                 }
-                guard let subType = record["subType"] as? String else {
+                guard let subType = record["subType"] as? Int else {
                     completion(.failure(CloudKitHelperError.castFailure))
                     return
                 }
@@ -134,14 +134,9 @@ struct CloudKitArticle {
                 guard let title1  = record["title"] as? String else { return }
                 guard let introduction1 = record["introduction"] as? String else { return }
                 
-                /// Dette er greit dersom det finnes data i disse feltene
-//                guard let mainType = record["mainType"] as? String else { return }
-//                guard let subType = record["subType"] as? String else { return }
-//                guard let subType1 = record["subType1"] as? String else { return }
-                
                 /// Dersom det ikke finnes data i feltene, gjøres det  slik:
-                let mainType = record["mainType"] as? String
-                let subType = record["subType"] as? String
+                let mainType = record["mainType"] as? Int
+                let subType = record["subType"] as? Int
                 let subType1 = record["subType1"] as? String
                 
                 guard let url = record["url"] as? String else { return }
@@ -153,8 +148,8 @@ struct CloudKitArticle {
                 let article = Article(recordID: recordID,
                                       title: title,
                                       introduction: introduction,
-                                      mainType: mainType ?? " ",        /// Det må gjøres når noen feltet kan være blanke
-                                      subType: subType ?? " ",          /// Det må gjøres når noen feltet kan være blanke
+                                      mainType: mainType ?? 0,        /// Det må gjøres når noen feltet kan være blanke
+                                      subType: subType ?? 0,          /// Det må gjøres når noen feltet kan være blanke
                                       subType1: subType1 ?? " ",        /// Det må gjøres når noen feltet kan være blanke
                                       url: url)
                 completion(.success(article))
@@ -214,8 +209,8 @@ struct CloudKitArticle {
                         return
                     }
                     
-                    let mainType = record["url"] as? String
-                    let subType = record["subType"] as? String
+                    let mainType = record["mainType"] as? Int
+                    let subType = record["subType"] as? Int
                     let subType1 = record["subType1"] as? String
 
                     guard let url = record["url"] as? String else {
@@ -226,8 +221,8 @@ struct CloudKitArticle {
                     let article = Article(recordID: recordID,
                                           title: title,
                                           introduction: introduction,
-                                          mainType: mainType ?? " ",
-                                          subType: subType ?? " ",
+                                          mainType: mainType ?? 0,
+                                          subType: subType ?? 0,
                                           subType1: subType1 ?? " ",
                                           url: url)
                     

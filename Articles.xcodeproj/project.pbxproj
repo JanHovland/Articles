@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB33273225D9BEE800D6C27A /* ArticlesEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB33273125D9BEE800D6C27A /* ArticlesEditView.swift */; };
-		DB33273325D9BEE800D6C27A /* ArticlesEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB33273125D9BEE800D6C27A /* ArticlesEditView.swift */; };
+		DB3E182D25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */; };
+		DB3E182E25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */; };
+		DB3E183025DAFE4F0051ED4F /* ArticleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */; };
+		DB3E183125DAFE4F0051ED4F /* ArticleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */; };
 		DB49355C25DA769D00C73658 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB49355A25DA769D00C73658 /* Localizable.strings */; };
 		DB49355F25DA77F300C73658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB49355D25DA77F300C73658 /* InfoPlist.strings */; };
 		DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */; };
@@ -42,7 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DB33273125D9BEE800D6C27A /* ArticlesEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArticlesEditView.swift; path = ../../ArticlesEditView.swift; sourceTree = "<group>"; };
+		DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleEditView.swift; sourceTree = "<group>"; };
+		DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleType.swift; sourceTree = "<group>"; };
 		DB49355B25DA769D00C73658 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DB49355E25DA77F300C73658 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DBB20C0625D9250D007CAF2B /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
@@ -116,7 +119,8 @@
 				DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */,
 				DBE670F025D936F300AB15B6 /* ArticleSearchBar.swift */,
 				DBE670F325D9376100AB15B6 /* ArticleNewView.swift */,
-				DB33273125D9BEE800D6C27A /* ArticlesEditView.swift */,
+				DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */,
+				DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -270,12 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB3E183025DAFE4F0051ED4F /* ArticleType.swift in Sources */,
 				DBB20C1D25D9250F007CAF2B /* ArticlesApp.swift in Sources */,
 				DBE670EB25D92E8D00AB15B6 /* SafariView.swift in Sources */,
 				DBE670EE25D92F6F00AB15B6 /* CloudKitArticle.swift in Sources */,
 				DBE670F425D9376100AB15B6 /* ArticleNewView.swift in Sources */,
+				DB3E182D25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */,
 				DBB20C2125D9250F007CAF2B /* Persistence.swift in Sources */,
-				DB33273225D9BEE800D6C27A /* ArticlesEditView.swift in Sources */,
 				DBE670E525D92CF500AB15B6 /* AlertID.swift in Sources */,
 				DBE670E225D92C0900AB15B6 /* Article.swift in Sources */,
 				DBE670F125D936F300AB15B6 /* ArticleSearchBar.swift in Sources */,
@@ -289,12 +294,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB3E183125DAFE4F0051ED4F /* ArticleType.swift in Sources */,
 				DBB20C1E25D9250F007CAF2B /* ArticlesApp.swift in Sources */,
 				DBE670EC25D92E8D00AB15B6 /* SafariView.swift in Sources */,
 				DBE670EF25D92F6F00AB15B6 /* CloudKitArticle.swift in Sources */,
 				DBE670F525D9376100AB15B6 /* ArticleNewView.swift in Sources */,
+				DB3E182E25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */,
 				DBB20C2225D9250F007CAF2B /* Persistence.swift in Sources */,
-				DB33273325D9BEE800D6C27A /* ArticlesEditView.swift in Sources */,
 				DBE670E625D92CF500AB15B6 /* AlertID.swift in Sources */,
 				DBE670E325D92C0900AB15B6 /* Article.swift in Sources */,
 				DBE670F225D936F300AB15B6 /* ArticleSearchBar.swift in Sources */,

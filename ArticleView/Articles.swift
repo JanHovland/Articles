@@ -161,7 +161,6 @@ struct Articles: View {
                                                 $0.title.localizedStandardContains (searchText) })) {
                         article in
                         NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
-//                        NavigationLink(destination: WebView()) {
                             VStack (alignment: .leading) {
                                 ArticleAllView(article: article)
                             }

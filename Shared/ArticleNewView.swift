@@ -11,8 +11,8 @@ import CloudKit
 struct ArticleNewView: View {
     
     @State private var title = ""
-    @State private var mainType = ""
-    @State private var subType = ""
+    @State private var mainType = 0
+    @State private var subType = 0
     @State private var subType1 = ""
     @State private var introduction = ""
     @State private var url = ""
@@ -22,7 +22,7 @@ struct ArticleNewView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    var body: some View {
+     var body: some View {
         HStack {
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
@@ -55,14 +55,17 @@ struct ArticleNewView: View {
         }
         Form {
             VStack {
-                InputTextField(heading: NSLocalizedString("mainType", comment: "ArticleNewView"),
-                               placeHolder: NSLocalizedString("Enter mainType", comment: "ArticleNewView"),
-                               space: 24,
-                               value: $mainType)
-                InputTextField(heading: NSLocalizedString("SubTitle", comment: "ArticleNewView"),
-                               placeHolder: NSLocalizedString("Enter subTitle", comment: "ArticleNewView"),
-                               space: 34,
-                               value: $subType)
+                
+                InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleNewView"),
+                              mainTypes: mainTypes,
+                              spaceing: 20,
+                              value: $mainType)
+                
+                InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleNewView"),
+                             subTypes: subTypes,
+                             spaceing: 26,
+                             value: $subType)
+
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleNewView"),
                                space: 26,
@@ -105,16 +108,14 @@ struct ArticleNewView: View {
     
     func saveNewArticle(titleArt: String,
                         introductionArt: String,
-                        mainTypeArt: String,
-                        subTypeArt: String,
+                        mainTypeArt: Int,
+                        subTypeArt: Int,
                         subType1Art: String,
                         urlArt: String) {
         
         /// Alle feltene må ha verdi
         if  titleArt.count > 0,
             introductionArt.count > 0,
-            mainTypeArt.count > 0,
-            subTypeArt.count > 0,
             subType1Art.count > 0,
             urlArt.count > 0  {
             if urlArt.contains("https") ||
@@ -141,8 +142,8 @@ struct ArticleNewView: View {
                                 title = ""
                                 introduction = ""
                                 url = ""
-                                mainType = ""
-                                subType = ""
+                                mainType = 0
+                                subType = 0
                                 subType1 = ""
                                 message = NSLocalizedString("This article is now stored in CloudKit", comment: "AddArticleView")
                                 alertIdentifier = AlertID(id: .first)
@@ -204,11 +205,55 @@ struct InputTextField: View {
         #elseif os(macOS)
         HStack(alignment: .center, spacing: CGFloat(space*1.00)) {
             Text(heading)
+                .lineLimit(nil)
             TextField(placeHolder, text: $value)
         }
+        
         .font(.custom("Andale Mono Regular", size: 14))
         .padding(10)
         #endif
+    }
+}
+
+struct InputMainType: View {
+    var heading: String
+    var mainTypes: [String]
+    var spaceing: Int
+    @Binding var value: Int
+    
+    var body: some View {
+        HStack(alignment: .center, spacing: CGFloat(spaceing)) {
+            Text(heading)
+            /// .font(... virker ikke.
+            /// .font(.custom("Menlo Normal", size: 15))
+            Picker(selection: $value, label: Text("")) {
+                ForEach(0..<mainTypes.count) { index in
+                    Text(self.mainTypes[index]).tag(index)
+                }
+            }
+        }
+        .padding(10)
+    }
+}
+
+struct InputSubType: View {
+    var heading: String
+    var subTypes: [String]
+    var spaceing: Int
+    @Binding var value: Int
+    
+    var body: some View {
+        HStack(alignment: .center, spacing: CGFloat(spaceing)) {
+            Text(heading)
+            /// .font(... virker ikke.
+            /// .font(.custom("Menlo Normal", size: 15))
+            Picker(selection: $value, label: Text("")) {
+                ForEach(0..<subTypes.count) { index in
+                    Text(self.subTypes[index]).tag(index)
+                }
+            }
+        }
+        .padding(10)
     }
 }
 

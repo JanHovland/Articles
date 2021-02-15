@@ -13,8 +13,8 @@ struct Article: Identifiable {
     var recordID: CKRecord.ID?
     var title: String = ""
     var introduction: String = ""
-    var mainType: String = ""          /// iOS, macOS ...
-    var subType: String = ""           /// Swift, SwiftUI ...
-    var subType1: String = ""          /// List, Button, Navigation ...
+    var mainType: Int = 0
+    var subType: Int = 0
+    var subType1: String = ""          
     var url: String = ""
 }
