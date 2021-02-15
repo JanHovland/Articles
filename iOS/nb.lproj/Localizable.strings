@@ -28,6 +28,10 @@
 
 /* ArticleEditView
    ArticleNewView */
+"Enter mainType" = "Legg inn mainType";
+
+/* ArticleEditView
+   ArticleNewView */
 "Enter subTitle" = "Legg inn subTitle";
 
 /* ArticleEditView
@@ -74,7 +78,7 @@
 "Refresh" = "Frisk opp";
 
 /* ArticleNewView */
-"Save article" = "Save article";
+"Save article" = "Lagre artikkel";
 
 /* SearchBar */
 "Search..." = "Søk...";
@@ -104,7 +108,7 @@
 "Title" = "Tittel";
 
 /* ArticleEditView */
-"Update article" = "Oppdater artikken";
+"Update article" = "Oppdater artikkelen";
 
 /* saveEditArticle */
 "Updated data" = "Oppdatert artikkel";

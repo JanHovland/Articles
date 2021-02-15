@@ -54,7 +54,7 @@ struct ArticleNewView: View {
         Form {
             VStack {
                 InputTextField(heading: NSLocalizedString("mainType", comment: "ArticleNewView"),
-                               placeHolder: NSLocalizedString("Enter subTitle", comment: "ArticleNewView"),
+                               placeHolder: NSLocalizedString("Enter mainType", comment: "ArticleNewView"),
                                space: 24,
                                value: $mainType)
                 InputTextField(heading: NSLocalizedString("SubTitle", comment: "ArticleNewView"),

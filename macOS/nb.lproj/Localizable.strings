@@ -25,6 +25,10 @@
 
 /* ArticleEditView
    ArticleNewView */
+"Enter mainType" = "Legg inn mainType";
+
+/* ArticleEditView
+   ArticleNewView */
 "Enter subTitle" = "Legg inn subTitle";
 
 /* ArticleEditView
@@ -71,7 +75,7 @@
 "Refresh" = "Frisk opp";
 
 /* ArticleNewView */
-"Save article" = "Save article";
+"Save article" = "Lagre artikkel";
 
 /* SearchBar */
 "Search..." = "Søk...";
@@ -82,7 +86,7 @@
 
 /* ArticleEditView
    ArticleNewView */
-"SubTitle1" = "SubTitle";
+"SubTitle1" = "SubTitle1";
 
 /* UserOverView */
 "Successfully deleted an article" = "Artikkelen er nå slettet";
@@ -101,7 +105,7 @@
 "Title" = "Tittel";
 
 /* ArticleEditView */
-"Update article" = "Oppdater artikken";
+"Update article" = "Oppdater artikkelen";
 
 /* saveEditArticle */
 "Updated data" = "Oppdatert artikkel";
