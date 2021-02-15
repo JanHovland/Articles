@@ -23,9 +23,6 @@ struct ArticleNewView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
-            .font(.system(size: 35, weight: .ultraLight, design: .rounded))
-            .padding(.trailing, 100)
         HStack {
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
@@ -35,7 +32,7 @@ struct ArticleNewView: View {
                     .font(.system(size: 15, design: .rounded))
                 
             })
-            
+            Spacer()
             Button(action: {
                 saveNewArticle(titleArt: title,
                                introductionArt: introduction,
@@ -48,38 +45,14 @@ struct ArticleNewView: View {
                     Text(NSLocalizedString("Save article", comment: "ArticleNewView"))
                 }
             })
-            
+        }
+        .padding()
+        VStack (alignment: .center){
+            Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
+                .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
         Form {
             VStack {
-                HStack {
-                    //                    Button(action: {
-                    //                        presentationMode.wrappedValue.dismiss()
-                    //                    }, label: {
-                    //                        Image(systemName: "chevron.left")
-                    //                            .foregroundColor(Color.blue)
-                    //                            .font(.system(size: 15, design: .rounded))
-                    //                    })
-                    //                    .padding(.leading, 10
-                    //                     )
-                    Spacer()
-                    //                    Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
-                    //                        .font(.system(size: 35, weight: .ultraLight, design: .rounded))
-                    //                        .padding(.trailing, 100)
-                    //                    Button(action: {
-                    //                        saveNewArticle(titleArt: title,
-                    //                                       introductionArt: introduction,
-                    //                                       mainTypeArt: mainType,
-                    //                                       subTypeArt: subType,
-                    //                                       subType1Art: subType1,
-                    //                                       urlArt: url)
-                    //                    }, label: {
-                    //                        HStack {
-                    //                            Text(NSLocalizedString("Save article", comment: "ArticleNewView"))
-                    //                        }
-                    //                    })
-                    
-                }
                 InputTextField(heading: NSLocalizedString("mainType", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter subTitle", comment: "ArticleNewView"),
                                space: 24,
@@ -111,24 +84,9 @@ struct ArticleNewView: View {
                                space: 71,
                                value: $url)
                 #endif
-                Spacer()
-                
-                //                Button(action: {
-                //                    saveNewArticle(titleArt: title,
-                //                                   introductionArt: introduction,
-                //                                   mainTypeArt: mainType,
-                //                                   subTypeArt: subType,
-                //                                   subType1Art: subType1,
-                //                                   urlArt: url)
-                //                }, label: {
-                //                    HStack {
-                //                        Text(NSLocalizedString("Save article", comment: "ArticleNewView"))
-                //                    }
-                //                })
             }
             .padding()
         }
-        
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .alert(item: $alertIdentifier) { alert in
             switch alert.id {
