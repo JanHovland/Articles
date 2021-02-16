@@ -59,32 +59,30 @@ struct ArticleEditView: View {
             VStack {
                 
                 #if os(iOS)
-                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleNewView"),
-                        mainTypes: mainTypes,
-                        spacing: 20,
-                        value: $mainType)
+                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleEditView"),
+                              mainTypes: mainTypes,
+                              spacing: 20,
+                              value: $mainType)
                 
-                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleNewView"),
-                        subTypes: subTypes,
-                        spacing: 20,
-                        value: $subType)
+                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleEditView"),
+                             subTypes: subTypes,
+                             spacing: 20,
+                             value: $subType)
                 #elseif os(macOS)
                 InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleEditView"),
                               mainTypes: mainTypes,
-                              spaceing: 20,
+                              spaceing: 15,
                               value: $mainType)
-                
                 InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleEditView"),
                              subTypes: subTypes,
-                             spaceing: 26,
+                             spaceing: 15,
                              value: $subType)
                 #endif
-
+                
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleEditView"),
-                               space: 26,
+                               space: 15,
                                value: $subType1)
-                
                 InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter Title", comment: "ArticleEditView"),
                                space: 57,
@@ -93,7 +91,6 @@ struct ArticleEditView: View {
                                placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleEditView"),
                                space: 10,
                                value: $introduction)
-                
                 #if os(iOS)
                 InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
                                   placeHolder: NSLocalizedString("Enter Url", comment: "ArticleEditView"),
@@ -172,14 +169,14 @@ struct ArticleEditView: View {
                 
                 #if os(iOS)
                 InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleNewView"),
-                        mainTypes: mainTypes,
-                        spacing: 20,
-                        value: $mainType)
+                              mainTypes: mainTypes,
+                              spacing: 20,
+                              value: $mainType)
                 
                 InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleNewView"),
-                        subTypes: subTypes,
-                        spacing: 20,
-                        value: $subType)
+                             subTypes: subTypes,
+                             spacing: 20,
+                             value: $subType)
                 #elseif os(macOS)
                 InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleEditView"),
                               mainTypes: mainTypes,
@@ -191,7 +188,7 @@ struct ArticleEditView: View {
                              spaceing: 26,
                              value: $subType)
                 #endif
-
+                
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleEditView"),
                                space: 26,
@@ -255,76 +252,74 @@ struct ArticleEditView: View {
             introduction.count > 0,
             subType1.count > 0,
             url.count > 0  {
-            
-            #if os(iOS)
-            /// Dette må legges inn for å virke på iPhone og iPad !!!!!!!!! Hvorfor ??????
-            message = ""
-            message1 = ""
-            alertIdentifier = AlertID(id: .first)
-            #endif
             if url.contains("https") ||
-                url.contains("http") ||
-                url.contains("www")  ||
-                url.contains("://")  ||
-                url.contains(".") {
-                /// Sjekker om artikkelen finnes fra før
-                CloudKitArticle.doesArticleExist(url: url) { (result) in
-                    if result == false {
-                        let message0 = NSLocalizedString("Url error", comment: "saveEditArticle")
-                        message = message0 + " : \n" + url
-                        message1 = NSLocalizedString("Check that the url contains https:// or http://, but some url only accepts https", comment: "saveEditArticle")
-                        alertIdentifier = AlertID(id: .first)
-                    } else {
-                        /// Personen finnes i Artikkel tabellen
-                        /// Må finne recordID for den enkelte artikkelen
-                        let predicate = NSPredicate(format: "url == %@", url)
-                        CloudKitArticle.fetchArticle(predicate: predicate)  { (result) in
-                            switch result {
-                            /// Finne recordID for å kunne oppdatere artikkelen
-                            case .success(let article):
-                                let recordID = article.recordID
-                                let article = Article(
-                                    recordID: recordID,
-                                    title: title,
-                                    introduction: introduction,
-                                    mainType: mainType,
-                                    subType: subType,
-                                    subType1: subType1,
-                                    url: url)
-                                /// Oppdatere artikkelen
-                                CloudKitArticle.modifyArticle(item: article) { (res) in
-                                    switch res {
-                                    case .success:
-                                        
-                                        /// Finner ikke message og message1
-                                        
-                                        print("Updated data")
-                                        
-                                        message = NSLocalizedString("Updated data", comment: "saveEditArticle")
-                                        message1 = NSLocalizedString("This article is now updated", comment: "saveEditArticle")
-                                        alertIdentifier = AlertID(id: .first)
-                                    case .failure(let err):
-                                        message = err.localizedDescription
-                                        alertIdentifier = AlertID(id: .second)
+                url.contains("http")    {
+                if url.contains("www"),
+                   url.contains("://"),
+                   url.contains(".") {
+                    /// Sjekker om denne posten finnes fra før
+                    CloudKitArticle.doesArticleExist(url: url) { (result) in
+                        if result == false {
+                            let message0 = NSLocalizedString("Url error", comment: "saveEditArticle")
+                            message = message0 + " : \n" + url
+                            message1 = NSLocalizedString("Check that the url contains https:// or http://, but some url only accepts https", comment: "saveEditArticle")
+                            alertIdentifier = AlertID(id: .first)
+                        } else {
+                            /// Personen finnes i Artikkel tabellen
+                            /// Må finne recordID for den enkelte artikkelen
+                            let predicate = NSPredicate(format: "url == %@", url)
+                            CloudKitArticle.fetchArticle(predicate: predicate)  { (result) in
+                                switch result {
+                                /// Finne recordID for å kunne oppdatere artikkelen
+                                case .success(let article):
+                                    let recordID = article.recordID
+                                    let article = Article(
+                                        recordID: recordID,
+                                        title: title,
+                                        introduction: introduction,
+                                        mainType: mainType,
+                                        subType: subType,
+                                        subType1: subType1,
+                                        url: url)
+                                    /// Oppdatere artikkelen
+                                    CloudKitArticle.modifyArticle(item: article) { (res) in
+                                        switch res {
+                                        case .success:
+                                            
+                                            /// Finner ikke message og message1
+                                            
+                                            print("Updated data")
+                                            
+                                            message = NSLocalizedString("Updated data", comment: "saveEditArticle")
+                                            message1 = NSLocalizedString("This article is now updated", comment: "saveEditArticle")
+                                            alertIdentifier = AlertID(id: .first)
+                                        case .failure(let err):
+                                            message = err.localizedDescription
+                                            alertIdentifier = AlertID(id: .second)
+                                        }
                                     }
+                                case .failure(let err):
+                                    let _ = err.localizedDescription
                                 }
-                            case .failure(let err):
-                                let _ = err.localizedDescription
                             }
                         }
                     }
-                 }
+                } else {
+                    message = NSLocalizedString("Incorrect url", comment: "saveEditArticle")
+                    message1 = NSLocalizedString("Check that the rest of the url following http is valid.", comment: "AddArticleView")
+                    alertIdentifier = AlertID(id: .first)
+                }
             } else {
                 message = NSLocalizedString("Incorrect url", comment: "saveEditArticle")
                 message1 = NSLocalizedString("Check that the url contains https:// or http://, but some url only accepts https", comment: "saveEditArticle")
                 alertIdentifier = AlertID(id: .first)
             }
         } else {
-            message = NSLocalizedString("Missing data", comment: "saveEditArticle")
+            message = NSLocalizedString("Missing Article Data", comment: "saveEditArticle")
             message1 = NSLocalizedString("Check that all fields have a value", comment: "saveEditArticle")
             alertIdentifier = AlertID(id: .first)
         }
     }
-
+    
 }
 

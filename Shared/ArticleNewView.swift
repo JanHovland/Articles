@@ -172,17 +172,17 @@ struct ArticleNewView: View {
                 #elseif os(macOS)
                 InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleNewView"),
                               mainTypes: mainTypes,
-                              spaceing: 20,
+                              spaceing: 15,
                               value: $mainType)
                 InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleNewView"),
                              subTypes: subTypes,
-                             spaceing: 26,
+                             spaceing: 15,
                              value: $subType)
                 #endif
                 
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleNewView"),
-                               space: 26,
+                               space: 15,
                                value: $subType1)
                 InputTextField(heading: NSLocalizedString("Title", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter Title", comment: "ArticleNewView"),
@@ -234,49 +234,54 @@ struct ArticleNewView: View {
             subType1Art.count > 0,
             urlArt.count >  0  {
             if urlArt.contains("https") ||
-                urlArt.contains("http") ||
-                urlArt.contains("www")     ||
-                urlArt.contains("://") ||
-                urlArt.contains(".") {
-                /// Sjekker om denne posten finnes fra før
-                CloudKitArticle.doesArticleExist(url: urlArt) { (result) in
-                    if result == true {
-                        message = NSLocalizedString("Existing data", comment: "AddArticleView")
-                        message1 = NSLocalizedString("This article was stored earlier", comment: "AddArticleView")
-                        alertIdentifier = AlertID(id: .first)
-                    } else {
-                        let article = Article(title: title,
-                                              introduction: introduction,
-                                              mainType: mainTypeArt,
-                                              subType: subTypeArt,
-                                              subType1: subType1Art,
-                                              url: urlArt)
-                        CloudKitArticle.saveArticle(item: article) { (result) in
-                            switch result {
-                            case .success:
-                                title = ""
-                                introduction = ""
-                                url = ""
-                                mainType = 0
-                                subType = 0
-                                subType1 = ""
-                                message = NSLocalizedString("This article is now stored in CloudKit", comment: "AddArticleView")
-                                alertIdentifier = AlertID(id: .first)
-                            case .failure(let err):
-                                message = err.localizedDescription
-                                alertIdentifier = AlertID(id: .first)
+                urlArt.contains("http")    {
+                if urlArt.contains("www"),
+                   urlArt.contains("://"),
+                   urlArt.contains(".") {
+                    /// Sjekker om denne posten finnes fra før
+                    CloudKitArticle.doesArticleExist(url: urlArt) { (result) in
+                        if result == true {
+                            message = NSLocalizedString("Existing data", comment: "AddArticleView")
+                            message1 = NSLocalizedString("This article was stored earlier", comment: "AddArticleView")
+                            alertIdentifier = AlertID(id: .first)
+                        } else {
+                            let article = Article(title: title,
+                                                  introduction: introduction,
+                                                  mainType: mainTypeArt,
+                                                  subType: subTypeArt,
+                                                  subType1: subType1Art,
+                                                  url: urlArt)
+                            CloudKitArticle.saveArticle(item: article) { (result) in
+                                switch result {
+                                case .success:
+                                    title = ""
+                                    introduction = ""
+                                    url = ""
+                                    mainType = 0
+                                    subType = 0
+                                    subType1 = ""
+                                    message = NSLocalizedString("This article is now stored in CloudKit", comment: "AddArticleView")
+                                    alertIdentifier = AlertID(id: .first)
+                                case .failure(let err):
+                                    message = err.localizedDescription
+                                    alertIdentifier = AlertID(id: .first)
+                                }
                             }
                         }
                     }
+                } else {
+                    message = NSLocalizedString("Incorrect url", comment: "AddArticleView")
+                    message1 = NSLocalizedString("Check that the rest of the url following http is valid.", comment: "AddArticleView")
+                    alertIdentifier = AlertID(id: .first)
                 }
             } else {
                 message = NSLocalizedString("Incorrect url", comment: "AddArticleView")
-                message1 = NSLocalizedString("Check that the url contains https:// or http://, but some url only accepts https", comment: "AddArticleView")
+                message1 = NSLocalizedString("Check that the url contains https or http.", comment: "AddArticleView")
                 alertIdentifier = AlertID(id: .first)
             }
         } else {
-            message = NSLocalizedString("Missing data", comment: "AddArticleView")
-            message1 = NSLocalizedString("Check that all fields have a value", comment: "AddArticleView")
+            message = NSLocalizedString("Missing Article Data", comment: "AddArticleView")
+            message1 = NSLocalizedString("Check that all fields have a value.", comment: "AddArticleView")
             alertIdentifier = AlertID(id: .first)
         }
     }
@@ -320,10 +325,8 @@ struct InputTextField: View {
         #elseif os(macOS)
         HStack(alignment: .center, spacing: CGFloat(space*1.00)) {
             Text(heading)
-                .lineLimit(nil)
             TextField(placeHolder, text: $value)
         }
-        
         .font(.custom("Andale Mono Regular", size: 14))
         .padding(10)
         #endif

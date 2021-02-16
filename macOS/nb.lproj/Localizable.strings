@@ -2,16 +2,26 @@
    UserOverView */
 "Cancel" = "Avbryt";
 
-/* AddArticleView
-   saveEditArticle */
+/* saveEditArticle */
 "Check that all fields have a value" = "Sjekk at alle felt har en verdi.";
 
-/* AddArticleView
-   saveEditArticle */
+/* AddArticleView */
+"Check that all fields have a value." = "Sjekk at alle felt har en verdi.";
+
+/* AddArticleView */
+"Check that the rest of the url following http is valid." = "Kontroller at resten av nettadressen etter http er gyldig.";
+
+/* AddArticleView */
+"Check that the url contains https or http." = "Kontroller at url inneholder https eller http.";
+
+/* saveEditArticle */
 "Check that the url contains https:// or http://, but some url only accepts https" = "Sjekk at nettadressen inneholder https: // eller http: //, men noen url godtar bare https.";
 
 /* Articles */
 "Delete Article?" = "Slett artikkelen?";
+
+/* Articles */
+"Delete this article" = "Slette denne artikkelen";
 
 /* ArticleEditView */
 "Edit an article" = "Oppdatere artikkel";
@@ -25,15 +35,7 @@
 
 /* ArticleEditView
    ArticleNewView */
-"Enter mainType" = "Legg inn mainType";
-
-/* ArticleEditView
-   ArticleNewView */
-"Enter subTitle" = "Legg inn subTitle";
-
-/* ArticleEditView
-   ArticleNewView */
-"Enter subTitle1" = "Legg inn subTitle1";
+"Enter subTitle1" = "Legg inn beskrivelse";
 
 /* ArticleEditView
    ArticleNewView */
@@ -56,11 +58,11 @@
 
 /* ArticleEditView
    ArticleNewView */
-"mainType" = "mainType";
+"MainType" = "Hoved nivå";
 
 /* AddArticleView
    saveEditArticle */
-"Missing data" = "Mangler data";
+"Missing Article Data" = "Manglende artikkeldata";
 
 /* Articles */
 "New Article" = "Ny artikkel";
@@ -77,7 +79,8 @@
 /* No comment provided by engineer. */
 "Refresh" = "Frisk opp";
 
-/* ArticleEditView */
+/* ArticleEditView
+   ArticleNewView */
 "Return" = "Tilbake";
 
 /* ArticleNewView */
@@ -88,11 +91,11 @@
 
 /* ArticleEditView
    ArticleNewView */
-"SubTitle" = "SubTitle";
+"SubTitle1" = "Beskrivelse";
 
 /* ArticleEditView
    ArticleNewView */
-"SubTitle1" = "SubTitle1";
+"SubType" = "Under nivå";
 
 /* UserOverView */
 "Successfully deleted an article" = "Artikkelen er nå slettet";
