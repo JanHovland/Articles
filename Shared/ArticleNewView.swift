@@ -269,8 +269,7 @@ struct ArticleNewView: View {
             urlArt.count >  0  {
             if urlArt.contains("https") ||
                 urlArt.contains("http")    {
-                if urlArt.contains("www"),
-                   urlArt.contains("://"),
+                if urlArt.contains("://"),
                    urlArt.contains(".") {
                     /// Sjekker om denne posten finnes fra før
                     CloudKitArticle.doesArticleExist(url: urlArt) { (result) in

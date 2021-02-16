@@ -269,8 +269,7 @@ struct ArticleEditView: View {
             url.count > 0  {
             if url.contains("https") ||
                 url.contains("http")    {
-                if url.contains("www"),
-                   url.contains("://"),
+                if url.contains("://"),
                    url.contains(".") {
                     /// Sjekker om denne posten finnes fra før
                     CloudKitArticle.doesArticleExist(url: url) { (result) in
