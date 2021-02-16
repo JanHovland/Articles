@@ -59,46 +59,61 @@ struct ArticleNewView: View {
             VStack {
                 
                 #if os(iOS)
-                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleNewView"),
+                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleEditView"),
                               mainTypes: mainTypes,
                               spacing: 20,
                               value: $mainType)
                 
-                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleNewView"),
+                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleEditView"),
                              subTypes: subTypes,
                              spacing: 20,
                              value: $subType)
-                #elseif os(macOS)
-                InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleNewView"),
-                              mainTypes: mainTypes,
-                              spaceing: 20,
-                              value: $mainType)
-                InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleNewView"),
-                             subTypes: subTypes,
-                             spaceing: 26,
-                             value: $subType)
-                #endif
                 
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
-                               placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleNewView"),
-                               space: 26,
+                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
+                               placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleEditView"),
+                               space: 12,
                                value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleNewView"),
-                               placeHolder: NSLocalizedString("Enter Title", comment: "ArticleNewView"),
+
+                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
+                               placeHolder: NSLocalizedString("Enter Title", comment: "ArticleEditView"),
+                               space: 43,
+                               value: $title)
+                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
+                               placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleEditView"),
+                               space: 11,
+                               value: $introduction)
+ 
+                InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
+                                  placeHolder: NSLocalizedString("Enter Url", comment: "ArticleEditView"),
+                                  space: 62,
+                                  value: $url)
+                
+                #elseif os(macOS)
+                
+                InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleEditView"),
+                              mainTypes: mainTypes,
+                              spaceing: 10,
+                              value: $mainType)
+                InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleEditView"),
+                             subTypes: subTypes,
+                             spaceing: 10,
+                             value: $subType)
+               
+                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
+                               placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleEditView"),
+                               space: 10,
+                               value: $subType1)
+                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
+                               placeHolder: NSLocalizedString("Enter Title", comment: "ArticleEditView"),
                                space: 57,
                                value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleNewView"),
-                               placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleNewView"),
-                               space: 10,
+                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
+                               placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleEditView"),
+                               space: 50,
                                value: $introduction)
-                #if os(iOS)
-                InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleNewView"),
-                                  placeHolder: NSLocalizedString("Enter Url", comment: "ArticleNewView"),
-                                  space: 71,
-                                  value: $url)
-                #elseif os(macOS)
-                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleNewView"),
-                               placeHolder: NSLocalizedString("Enter Url", comment: "ArticleNewView"),
+                
+                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
+                               placeHolder: NSLocalizedString("Enter Url", comment: "ArticleEditView"),
                                space: 71,
                                value: $url)
                 #endif
@@ -343,6 +358,7 @@ struct InputTextFieldURL: View {
 }
 
 #elseif os(macOS)
+
 struct InputTextField: View {
     var heading: String
     var placeHolder: String
@@ -357,6 +373,7 @@ struct InputTextField: View {
         .padding(10)
     }
 }
+
 #endif
 
 #if os(iOS)
