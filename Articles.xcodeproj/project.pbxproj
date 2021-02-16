@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB11366525DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */; };
+		DB11366625DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */; };
+		DB11366825DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */; };
+		DB11366925DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */; };
 		DB3E182D25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */; };
 		DB3E182E25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */; };
 		DB3E183025DAFE4F0051ED4F /* ArticleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */; };
@@ -44,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
+		DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToSoftwareKeyboard.swift; sourceTree = "<group>"; };
 		DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleEditView.swift; sourceTree = "<group>"; };
 		DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleType.swift; sourceTree = "<group>"; };
 		DB49355B25DA769D00C73658 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -121,6 +127,8 @@
 				DBE670F325D9376100AB15B6 /* ArticleNewView.swift */,
 				DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */,
 				DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */,
+				DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */,
+				DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -276,10 +284,12 @@
 			files = (
 				DB3E183025DAFE4F0051ED4F /* ArticleType.swift in Sources */,
 				DBB20C1D25D9250F007CAF2B /* ArticlesApp.swift in Sources */,
+				DB11366525DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */,
 				DBE670EB25D92E8D00AB15B6 /* SafariView.swift in Sources */,
 				DBE670EE25D92F6F00AB15B6 /* CloudKitArticle.swift in Sources */,
 				DBE670F425D9376100AB15B6 /* ArticleNewView.swift in Sources */,
 				DB3E182D25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */,
+				DB11366825DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift in Sources */,
 				DBB20C2125D9250F007CAF2B /* Persistence.swift in Sources */,
 				DBE670E525D92CF500AB15B6 /* AlertID.swift in Sources */,
 				DBE670E225D92C0900AB15B6 /* Article.swift in Sources */,
@@ -296,10 +306,12 @@
 			files = (
 				DB3E183125DAFE4F0051ED4F /* ArticleType.swift in Sources */,
 				DBB20C1E25D9250F007CAF2B /* ArticlesApp.swift in Sources */,
+				DB11366625DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */,
 				DBE670EC25D92E8D00AB15B6 /* SafariView.swift in Sources */,
 				DBE670EF25D92F6F00AB15B6 /* CloudKitArticle.swift in Sources */,
 				DBE670F525D9376100AB15B6 /* ArticleNewView.swift in Sources */,
 				DB3E182E25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */,
+				DB11366925DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift in Sources */,
 				DBB20C2225D9250F007CAF2B /* Persistence.swift in Sources */,
 				DBE670E625D92CF500AB15B6 /* AlertID.swift in Sources */,
 				DBE670E325D92C0900AB15B6 /* Article.swift in Sources */,

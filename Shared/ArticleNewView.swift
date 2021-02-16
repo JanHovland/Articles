@@ -22,7 +22,9 @@ struct ArticleNewView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-     var body: some View {
+    #if os(iOS)
+    
+    var body: some View {
         HStack {
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
@@ -56,16 +58,27 @@ struct ArticleNewView: View {
         Form {
             VStack {
                 
+                #if os(iOS)
+                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleNewView"),
+                              mainTypes: mainTypes,
+                              spacing: 20,
+                              value: $mainType)
+                
+                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleNewView"),
+                             subTypes: subTypes,
+                             spacing: 20,
+                             value: $subType)
+                #elseif os(macOS)
                 InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleNewView"),
                               mainTypes: mainTypes,
                               spaceing: 20,
                               value: $mainType)
-                
                 InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleNewView"),
                              subTypes: subTypes,
                              spaceing: 26,
                              value: $subType)
-
+                #endif
+                
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleNewView"),
                                space: 26,
@@ -104,7 +117,109 @@ struct ArticleNewView: View {
                              secondaryButton: .default(Text("OK"), action: {}))
             }
         }
-    }
+        /// Ta bort tastaturet når en klikker utenfor feltet
+        .modifier(DismissingKeyboard())
+        /// Flytte opp feltene slik at keyboard ikke skjuler aktuelt felt
+        .modifier(AdaptsToSoftwareKeyboard())
+    } /// var Body
+    
+    #elseif os(macOS)
+    
+    var body: some View {
+        HStack {
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(Color.blue)
+                        .font(.system(size: 15, design: .rounded))
+                    Text(NSLocalizedString("Return", comment: "ArticleNewView"))
+                }
+            })
+            Spacer()
+            Button(action: {
+                saveNewArticle(titleArt: title,
+                               introductionArt: introduction,
+                               mainTypeArt: mainType,
+                               subTypeArt: subType,
+                               subType1Art: subType1,
+                               urlArt: url)
+            }, label: {
+                HStack {
+                    Text(NSLocalizedString("Save article", comment: "ArticleNewView"))
+                }
+            })
+        }
+        .padding()
+        VStack (alignment: .center){
+            Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
+                .font(.system(size: 30, weight: .ultraLight, design: .rounded))
+        }
+        Form {
+            VStack {
+                
+                #if os(iOS)
+                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleNewView"),
+                              mainTypes: mainTypes,
+                              spacing: 20,
+                              value: $mainType)
+                
+                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleNewView"),
+                             subTypes: subTypes,
+                             spacing: 20,
+                             value: $subType)
+                #elseif os(macOS)
+                InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleNewView"),
+                              mainTypes: mainTypes,
+                              spaceing: 20,
+                              value: $mainType)
+                InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleNewView"),
+                             subTypes: subTypes,
+                             spaceing: 26,
+                             value: $subType)
+                #endif
+                
+                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
+                               placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleNewView"),
+                               space: 26,
+                               value: $subType1)
+                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleNewView"),
+                               placeHolder: NSLocalizedString("Enter Title", comment: "ArticleNewView"),
+                               space: 57,
+                               value: $title)
+                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleNewView"),
+                               placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleNewView"),
+                               space: 10,
+                               value: $introduction)
+                #if os(iOS)
+                InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleNewView"),
+                                  placeHolder: NSLocalizedString("Enter Url", comment: "ArticleNewView"),
+                                  space: 71,
+                                  value: $url)
+                #elseif os(macOS)
+                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleNewView"),
+                               placeHolder: NSLocalizedString("Enter Url", comment: "ArticleNewView"),
+                               space: 71,
+                               value: $url)
+                #endif
+            }
+            .padding()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .alert(item: $alertIdentifier) { alert in
+            switch alert.id {
+            case .first:
+                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
+            case .second:
+                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
+            case .delete:
+                return Alert(title: Text(message), message: Text(message1), primaryButton: .cancel(),
+                             secondaryButton: .default(Text("OK"), action: {}))
+            }
+        }
+    } /// var Body
+    #endif
     
     func saveNewArticle(titleArt: String,
                         introductionArt: String,
@@ -117,7 +232,7 @@ struct ArticleNewView: View {
         if  titleArt.count > 0,
             introductionArt.count > 0,
             subType1Art.count > 0,
-            urlArt.count > 0  {
+            urlArt.count >  0  {
             if urlArt.contains("https") ||
                 urlArt.contains("http") ||
                 urlArt.contains("www")     ||
@@ -215,6 +330,78 @@ struct InputTextField: View {
     }
 }
 
+#if os(iOS)
+
+/// https://www.hackingwithswift.com/forums/swiftui/menupickerstyle-looks-disabled/4782
+
+struct InputMainType: View {
+    var heading: String
+    var mainTypes: [String]
+    var spacing: Int
+    @Binding var value: Int
+    
+    var body: some View {
+        HStack(alignment: .center, spacing: CGFloat(spacing)) {
+            Text(heading)
+            Spacer()
+            Picker(selection: $value, label: Text(mainTypes[value])) {
+                ForEach(0 ..< mainTypes.count) { index in
+                    SelectedItemView(item: mainTypes[index])
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
+        }
+        .padding(10)
+    }
+    
+    struct SelectedItemView: View, Identifiable {
+        let id = UUID()
+        @State var item: String
+        var body: some View {
+            HStack {
+                Text(item)
+                    .font(.headline)
+            }
+        }
+    }
+    
+}
+
+struct InputSubType: View {
+    var heading: String
+    var subTypes: [String]
+    var spacing: Int
+    @Binding var value: Int
+    
+    var body: some View {
+        HStack(alignment: .center, spacing: CGFloat(spacing)) {
+            Text(heading)
+            Spacer()
+            Picker(selection: $value, label: Text(subTypes[value])) {
+                ForEach(0 ..< subTypes.count) { index in
+                    SelectedItemView(item: subTypes[index])
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
+        }
+        .padding(10)
+    }
+    
+    struct SelectedItemView: View, Identifiable {
+        let id = UUID()
+        @State var item: String
+        var body: some View {
+            HStack {
+                Text(item)
+                    .font(.headline)
+            }
+        }
+    }
+    
+}
+
+#elseif os(macOS)
+
 struct InputMainType: View {
     var heading: String
     var mainTypes: [String]
@@ -224,8 +411,6 @@ struct InputMainType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spaceing)) {
             Text(heading)
-            /// .font(... virker ikke.
-            /// .font(.custom("Menlo Normal", size: 15))
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<mainTypes.count) { index in
                     Text(self.mainTypes[index]).tag(index)
@@ -245,8 +430,6 @@ struct InputSubType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spaceing)) {
             Text(heading)
-            /// .font(... virker ikke.
-            /// .font(.custom("Menlo Normal", size: 15))
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<subTypes.count) { index in
                     Text(self.subTypes[index]).tag(index)
@@ -257,3 +440,4 @@ struct InputSubType: View {
     }
 }
 
+#endif
