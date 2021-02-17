@@ -187,7 +187,7 @@ struct ArticleNewView: View {
                 
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleNewView"),
-                               space: 15,
+                               space: 10,
                                value: $subType1)
 
                 InputTextField(heading: NSLocalizedString("Title", comment: "ArticleNewView"),
