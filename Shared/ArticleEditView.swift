@@ -53,6 +53,7 @@ struct ArticleEditView: View {
         .padding()
         VStack (alignment: .center){
             Text(NSLocalizedString("Edit an article", comment: "ArticleEditView"))
+                .foregroundColor(.green)
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
         Form {
@@ -177,6 +178,7 @@ struct ArticleEditView: View {
         .padding()
         VStack (alignment: .center){
             Text(NSLocalizedString("Edit an article", comment: "ArticleEditView"))
+                .foregroundColor(.green)
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
         Form {
@@ -217,32 +219,32 @@ struct ArticleEditView: View {
                 
                 InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleEditView"),
                               mainTypes: mainTypes,
-                              spaceing: 10,
+                              spacing: 10,
                               value: $mainType)
                 
                 InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleEditView"),
                              subTypes: subTypes,
-                             spaceing: 10,
+                             spacing: 10,
                              value: $subType)
                
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleEditView"),
-                               space: 10,
+                               spacing: 10,
                                value: $subType1)
                 
                 InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter Title", comment: "ArticleEditView"),
-                               space: 55,
+                               spacing: 55,
                                value: $title)
                 
                 InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleEditView"),
-                               space: 10,
+                               spacing: 10,
                                value: $introduction)
                 
                 InputTextField(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter Url", comment: "ArticleEditView"),
-                               space: 68,
+                               spacing: 68,
                                value: $url)
                 #endif
             }

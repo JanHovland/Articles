@@ -53,6 +53,7 @@ struct ArticleNewView: View {
         .padding()
         VStack (alignment: .center){
             Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
+                .foregroundColor(.green)
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
         Form {
@@ -168,6 +169,7 @@ struct ArticleNewView: View {
         .padding()
         VStack (alignment: .center){
             Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
+                .foregroundColor(.green)
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
         Form {
@@ -208,32 +210,32 @@ struct ArticleNewView: View {
                 
                 InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleNewView"),
                               mainTypes: mainTypes,
-                              spaceing: 10,
+                              spacing: 10,
                               value: $mainType)
                 
                 InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleNewView"),
                              subTypes: subTypes,
-                             spaceing: 10,
+                             spacing: 10,
                              value: $subType)
                
                 InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter subTitle1", comment: "ArticleNewView"),
-                               space: 10,
+                               spacing: 10,
                                value: $subType1)
                 
                 InputTextField(heading: NSLocalizedString("Title", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter Title", comment: "ArticleNewView"),
-                               space: 55,
+                               spacing: 55,
                                value: $title)
                 
                 InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleNewView"),
-                               space: 10,
+                               spacing: 10,
                                value: $introduction)
                 
                 InputTextField(heading: NSLocalizedString("Url", comment: "ArticleNewView"),
                                placeHolder: NSLocalizedString("Enter Url", comment: "ArticleNewView"),
-                               space: 68,
+                               spacing: 68,
                                value: $url)
                 #endif
             }
@@ -330,6 +332,8 @@ struct InputTextField: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(space*1.75)) {
             Text(heading)
+                .foregroundColor(.green)
+                .foregroundColor(.green)
             //            TextField(placeHolder, text: $value)
             TextEditor(text: $value)
                 .lineSpacing(5)
@@ -350,6 +354,7 @@ struct InputTextFieldURL: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(space*1.50)) {
             Text(heading)
+                .foregroundColor(.green)
             //            TextField(placeHolder, text: $value)
             TextEditor(text: $value)
                 .lineSpacing(5)
@@ -377,6 +382,7 @@ struct InputMainType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
+                .foregroundColor(.green)
             Spacer()
             Picker(selection: $value, label: Text(mainTypes[value])) {
                 ForEach(0 ..< mainTypes.count) { index in
@@ -410,6 +416,7 @@ struct InputSubType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
+                .foregroundColor(.green)
             Spacer()
             Picker(selection: $value, label: Text(subTypes[value])) {
                 ForEach(0 ..< subTypes.count) { index in
@@ -439,11 +446,12 @@ struct InputSubType: View {
 struct InputTextField: View {
     var heading: String
     var placeHolder: String
-    var space: Double
+    var spacing: Double
     @Binding var value: String
     var body: some View {
-        HStack(alignment: .center, spacing: CGFloat(space*1.00)) {
+        HStack(alignment: .center, spacing: CGFloat(spacing*1.00)) {
             Text(heading)
+                .foregroundColor(.green)
             //            TextField(placeHolder, text: $value)
             TextEditor(text: $value)
                 .lineSpacing(5)
@@ -459,12 +467,13 @@ struct InputTextField: View {
 struct InputMainType: View {
     var heading: String
     var mainTypes: [String]
-    var spaceing: Int
+    var spacing: Int
     @Binding var value: Int
     
     var body: some View {
-        HStack(alignment: .center, spacing: CGFloat(spaceing)) {
+        HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
+                .foregroundColor(.green)
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<mainTypes.count) { index in
                     Text(self.mainTypes[index]).tag(index)
@@ -478,12 +487,13 @@ struct InputMainType: View {
 struct InputSubType: View {
     var heading: String
     var subTypes: [String]
-    var spaceing: Int
+    var spacing: Int
     @Binding var value: Int
     
     var body: some View {
-        HStack(alignment: .center, spacing: CGFloat(spaceing)) {
+        HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
+                .foregroundColor(.green)
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<subTypes.count) { index in
                     Text(self.subTypes[index]).tag(index)
