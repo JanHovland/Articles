@@ -185,7 +185,6 @@ struct ArticleEditView: View {
                                placeHolder: NSLocalizedString("Enter Title", comment: "ArticleEditView"),
                                space: 10,
                                value: $title)
-                
                 InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
                                placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleEditView"),
                                space: 60,
