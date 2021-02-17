@@ -189,6 +189,7 @@ struct ArticleEditView: View {
                                placeHolder: NSLocalizedString("Enter Introduction", comment: "ArticleEditView"),
                                space: 60,
                                value: $introduction)
+                
                 InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
                                   placeHolder: NSLocalizedString("Enter Url", comment: "ArticleEditView"),
                                   space: 10,
