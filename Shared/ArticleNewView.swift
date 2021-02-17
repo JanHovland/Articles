@@ -444,7 +444,12 @@ struct InputTextField: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(space*1.00)) {
             Text(heading)
-            TextField(placeHolder, text: $value)
+            //            TextField(placeHolder, text: $value)
+            TextEditor(text: $value)
+                .lineSpacing(5)
+                .lineLimit(nil)
+                .allowsTightening(true)
+            //                .minimumScaleFactor(0.5)
         }
         .font(.custom("Andale Mono Regular", size: 14))
         .padding(10)
