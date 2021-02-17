@@ -246,7 +246,6 @@ struct ArticleEditView: View {
                                value: $url)
                 #endif
             }
-            .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .alert(item: $alertIdentifier) { alert in

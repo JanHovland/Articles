@@ -84,7 +84,7 @@
 "Return" = "Tilbake";
 
 /* ArticleNewView */
-"Save article" = "Lagre artikkel";
+"Save article" = "Lagre";
 
 /* SearchBar */
 "Search..." = "Søk...";
@@ -114,7 +114,7 @@
 "Title" = "Tittel";
 
 /* ArticleEditView */
-"Update article" = "Oppdater artikkelen";
+"Update article" = "Oppdater";
 
 /* saveEditArticle */
 "Updated data" = "Oppdatert artikkel";

@@ -118,7 +118,6 @@ struct ArticleNewView: View {
                                value: $url)
                 #endif
             }
-            .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .alert(item: $alertIdentifier) { alert in
@@ -331,7 +330,12 @@ struct InputTextField: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(space*1.75)) {
             Text(heading)
-            TextField(placeHolder, text: $value)
+            //            TextField(placeHolder, text: $value)
+            TextEditor(text: $value)
+                .lineSpacing(5)
+                .lineLimit(nil)
+                .allowsTightening(true)
+            //                .minimumScaleFactor(0.5)
         }
         .font(.custom("Andale Mono Regular", size: 17))
         .padding(10)
@@ -346,7 +350,12 @@ struct InputTextFieldURL: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(space*1.50)) {
             Text(heading)
-            TextField(placeHolder, text: $value)
+            //            TextField(placeHolder, text: $value)
+            TextEditor(text: $value)
+                .lineSpacing(5)
+                .lineLimit(nil)
+                .allowsTightening(true)
+            //                .minimumScaleFactor(0.5)
         }
         .font(.custom("Andale Mono Regular", size: 17))
         .padding(10)
@@ -356,8 +365,9 @@ struct InputTextFieldURL: View {
     }
 }
 
+///
 /// https://www.hackingwithswift.com/forums/swiftui/menupickerstyle-looks-disabled/4782
-
+///
 struct InputMainType: View {
     var heading: String
     var mainTypes: [String]
