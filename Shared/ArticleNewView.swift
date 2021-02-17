@@ -356,27 +356,6 @@ struct InputTextFieldURL: View {
     }
 }
 
-#elseif os(macOS)
-
-struct InputTextField: View {
-    var heading: String
-    var placeHolder: String
-    var space: Double
-    @Binding var value: String
-    var body: some View {
-        HStack(alignment: .center, spacing: CGFloat(space*1.00)) {
-            Text(heading)
-            TextField(placeHolder, text: $value)
-        }
-        .font(.custom("Andale Mono Regular", size: 14))
-        .padding(10)
-    }
-}
-
-#endif
-
-#if os(iOS)
-
 /// https://www.hackingwithswift.com/forums/swiftui/menupickerstyle-looks-disabled/4782
 
 struct InputMainType: View {
@@ -446,6 +425,21 @@ struct InputSubType: View {
 }
 
 #elseif os(macOS)
+
+struct InputTextField: View {
+    var heading: String
+    var placeHolder: String
+    var space: Double
+    @Binding var value: String
+    var body: some View {
+        HStack(alignment: .center, spacing: CGFloat(space*1.00)) {
+            Text(heading)
+            TextField(placeHolder, text: $value)
+        }
+        .font(.custom("Andale Mono Regular", size: 14))
+        .padding(10)
+    }
+}
 
 struct InputMainType: View {
     var heading: String
