@@ -22,8 +22,6 @@ struct ArticleNewView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    #if os(iOS)
-    
     var body: some View {
         HStack {
             Button(action: {
@@ -83,127 +81,26 @@ struct ArticleNewView: View {
                 #elseif os(macOS)
                 InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleEditView"),
                               mainTypes: mainTypes,
-                              spaceing: 10,
+                              spacing: 10,
                               value: $mainType)
                 InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleEditView"),
                              subTypes: subTypes,
-                             spaceing: 10,
-                             value: $subType)
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
-                               space: 10,
-                               value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
-                               space: 57,
-                               value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
-                               space: 50,
-                               value: $introduction)
-                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
-                               space: 71,
-                               value: $url)
-                #endif
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .alert(item: $alertIdentifier) { alert in
-            switch alert.id {
-            case .first:
-                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
-            case .second:
-                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
-            case .delete:
-                return Alert(title: Text(message), message: Text(message1), primaryButton: .cancel(),
-                             secondaryButton: .default(Text("OK"), action: {}))
-            }
-        }
-        /// Ta bort tastaturet når en klikker utenfor feltet
-        .modifier(DismissingKeyboard())
-        /// Flytte opp feltene slik at keyboard ikke skjuler aktuelt felt
-        .modifier(AdaptsToSoftwareKeyboard())
-    } /// var Body
-    
-    #elseif os(macOS)
-    
-    var body: some View {
-        HStack {
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(Color.blue)
-                        .font(.system(size: 15, design: .rounded))
-                    Text(NSLocalizedString("Return", comment: "ArticleNewView"))
-                }
-            })
-            Spacer()
-            Button(action: {
-                saveNewArticle(titleArt: title,
-                               introductionArt: introduction,
-                               mainTypeArt: mainType,
-                               subTypeArt: subType,
-                               subType1Art: subType1,
-                               urlArt: url)
-            }, label: {
-                HStack {
-                    Text(NSLocalizedString("Save article", comment: "ArticleNewView"))
-                }
-            })
-        }
-        .padding()
-        VStack (alignment: .center){
-            Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
-                .foregroundColor(.green)
-                .font(.system(size: 30, weight: .ultraLight, design: .rounded))
-        }
-        Form {
-            VStack {
-                
-                #if os(iOS)
-                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleNewView"),
-                              mainTypes: mainTypes,
-                              spacing: 20,
-                              value: $mainType)
-                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleNewView"),
-                             subTypes: subTypes,
-                             spacing: 20,
-                             value: $subType)
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
-                               space: 10,
-                               value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleNewView"),
-                               space: 10,
-                               value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleNewView"),
-                               space: 60,
-                               value: $introduction)
-                InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleNewView"),
-                                  space: 10,
-                                  value: $url)
-                #elseif os(macOS)
-                InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleNewView"),
-                              mainTypes: mainTypes,
-                              spacing: 10,
-                              value: $mainType)
-                InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleNewView"),
-                             subTypes: subTypes,
                              spacing: 10,
                              value: $subType)
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleNewView"),
+                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
                                spacing: 10,
                                value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleNewView"),
-                               spacing: 55,
+                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
+                               spacing: 57,
                                value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleNewView"),
-                               spacing: 10,
+                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
+                               spacing: 12,
                                value: $introduction)
-                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleNewView"),
-                               spacing: 68,
+                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
+                               spacing: 71,
                                value: $url)
                 #endif
             }
-            .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .alert(item: $alertIdentifier) { alert in
@@ -217,8 +114,8 @@ struct ArticleNewView: View {
                              secondaryButton: .default(Text("OK"), action: {}))
             }
         }
+        .modifier01()
     } /// var Body
-    #endif
     
     func saveNewArticle(titleArt: String,
                         introductionArt: String,

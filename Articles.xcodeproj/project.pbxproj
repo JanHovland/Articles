@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0089AC25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0089AB25DDA7440071E25E /* SwiftUIViewModifer.swift */; };
+		DB0089AD25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0089AB25DDA7440071E25E /* SwiftUIViewModifer.swift */; };
 		DB11366525DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */; };
 		DB11366625DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */; };
 		DB11366825DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */; };
@@ -48,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB0089AB25DDA7440071E25E /* SwiftUIViewModifer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewModifer.swift; sourceTree = "<group>"; };
 		DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboard.swift; sourceTree = "<group>"; };
 		DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToSoftwareKeyboard.swift; sourceTree = "<group>"; };
 		DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleEditView.swift; sourceTree = "<group>"; };
@@ -114,21 +117,22 @@
 		DBB20C0425D9250D007CAF2B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				DBE670E125D92C0900AB15B6 /* Article.swift */,
+				DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */,
 				DBE670E425D92CF500AB15B6 /* AlertID.swift */,
-				DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */,
+				DBE670E125D92C0900AB15B6 /* Article.swift */,
 				DBB20C3425D92849007CAF2B /* ArticleAllView.swift */,
-				DBE670ED25D92F6F00AB15B6 /* CloudKitArticle.swift */,
-				DBE670EA25D92E8D00AB15B6 /* SafariView.swift */,
-				DBB20C0925D9250D007CAF2B /* Persistence.swift */,
-				DBB20C0A25D9250F007CAF2B /* Assets.xcassets */,
+				DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */,
+				DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */,
+				DBE670F325D9376100AB15B6 /* ArticleNewView.swift */,
 				DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */,
 				DBE670F025D936F300AB15B6 /* ArticleSearchBar.swift */,
-				DBE670F325D9376100AB15B6 /* ArticleNewView.swift */,
-				DB3E182C25DAEC9D0051ED4F /* ArticleEditView.swift */,
 				DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */,
+				DBB20C0A25D9250F007CAF2B /* Assets.xcassets */,
+				DBE670ED25D92F6F00AB15B6 /* CloudKitArticle.swift */,
 				DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */,
-				DB11366725DC3EF20065B836 /* AdaptsToSoftwareKeyboard.swift */,
+				DBB20C0925D9250D007CAF2B /* Persistence.swift */,
+				DBE670EA25D92E8D00AB15B6 /* SafariView.swift */,
+				DB0089AB25DDA7440071E25E /* SwiftUIViewModifer.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -297,6 +301,7 @@
 				DBB20C3525D92849007CAF2B /* ArticleAllView.swift in Sources */,
 				DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */,
 				DBB20C1F25D9250F007CAF2B /* Articles.swift in Sources */,
+				DB0089AC25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +324,7 @@
 				DBB20C3625D92849007CAF2B /* ArticleAllView.swift in Sources */,
 				DBB20C1C25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */,
 				DBB20C2025D9250F007CAF2B /* Articles.swift in Sources */,
+				DB0089AD25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
