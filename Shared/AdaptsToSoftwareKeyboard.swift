@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 #if os(iOS)
+
 /// Flytte opp feltene slik at keyboard ikke skjuler aktuelt felt
 struct AdaptsToSoftwareKeyboard: ViewModifier {
     @State var currentHeight: CGFloat = 0
@@ -31,4 +32,5 @@ struct AdaptsToSoftwareKeyboard: ViewModifier {
             .assign(to: \.currentHeight, on: self)
     }
 }
+
 #endif 

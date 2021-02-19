@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct Modifier01: ViewModifier {                               /// Se linje     1  4  6
+struct Modifier01: ViewModifier {                              
     #if os(iOS)
     func body(content: Content) -> some View {
         content
             /// Ta bort tastaturet når en klikker utenfor feltet
             .modifier(DismissingKeyboard())
-            /// Flytte opp feltene slik at keyboard ikke skjuler aktuelt felt
-            .modifier(AdaptsToSoftwareKeyboard())
+//            /// Flytte opp feltene slik at keyboard ikke skjuler aktuelt felt
+//            .modifier(AdaptsToSoftwareKeyboard())
     }
     #elseif os(macOS)
     func body(content: Content) -> some View {
