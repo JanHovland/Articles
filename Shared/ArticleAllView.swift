@@ -19,9 +19,9 @@ struct ArticleAllView: View {
             HStack {
                 Image(systemName: "square.and.pencil")
                     .resizable()
-                    .frame(width: 10, height: 10, alignment: .center)
-                    .font(Font.title.weight(.semibold))
-                    .foregroundColor(.accentColor)
+                    .frame(width: 12, height: 12, alignment: .center)
+                    .font(Font.title.weight(.heavy))
+                    .foregroundColor(.yellow)
                     .gesture(
                         TapGesture()
                             .onEnded({_ in
