@@ -19,6 +19,8 @@
 		DB3E183125DAFE4F0051ED4F /* ArticleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */; };
 		DB49355C25DA769D00C73658 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB49355A25DA769D00C73658 /* Localizable.strings */; };
 		DB49355F25DA77F300C73658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB49355D25DA77F300C73658 /* InfoPlist.strings */; };
+		DB6FA61D25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
+		DB6FA61E25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
 		DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */; };
 		DBB20C1C25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */; };
 		DBB20C1D25D9250F007CAF2B /* ArticlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */; };
@@ -57,6 +59,7 @@
 		DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleType.swift; sourceTree = "<group>"; };
 		DB49355B25DA769D00C73658 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DB49355E25DA77F300C73658 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Create iOS Icons.jsx"; sourceTree = "<group>"; };
 		DBB20C0625D9250D007CAF2B /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesApp.swift; sourceTree = "<group>"; };
 		DBB20C0825D9250D007CAF2B /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 				DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */,
 				DBB20C0A25D9250F007CAF2B /* Assets.xcassets */,
 				DBE670ED25D92F6F00AB15B6 /* CloudKitArticle.swift */,
+				DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */,
 				DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */,
 				DBB20C0925D9250D007CAF2B /* Persistence.swift */,
 				DBE670EA25D92E8D00AB15B6 /* SafariView.swift */,
@@ -265,6 +269,7 @@
 			files = (
 				DBB20C2325D9250F007CAF2B /* Assets.xcassets in Resources */,
 				DBB2E3BF25DA7460005E9EE5 /* Localizable.strings in Resources */,
+				DB6FA61D25E56E1000B16944 /* Create iOS Icons.jsx in Resources */,
 				DBB2E3BC25DA7460005E9EE5 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +280,7 @@
 			files = (
 				DBB20C2425D9250F007CAF2B /* Assets.xcassets in Resources */,
 				DB49355F25DA77F300C73658 /* InfoPlist.strings in Resources */,
+				DB6FA61E25E56E1000B16944 /* Create iOS Icons.jsx in Resources */,
 				DB49355C25DA769D00C73658 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
