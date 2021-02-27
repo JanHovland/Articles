@@ -42,30 +42,38 @@ struct Articles: View {
             VStack {
                 ArticleSearchBar(text: $searchText)
                     .padding(.top, 10)
-                HStack (alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 50) {
-                    HStack (alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 50) {
-                        Button(action: {
-                            isShowingNewView.toggle()
-                        }, label: {
-                            HStack {
-                                Text(NSLocalizedString("New Article", comment: "Articles"))
-                            }
-                        })
-                        Button(action: {
-                            refresh()
-                        }, label: {
-                            HStack {
-                                Text("Refresh")
-                            }
-                        })
-                    }
-                    .padding(.top, 5)
-                    .padding(.leading, 5)
+                HStack {
+                    Button(action: {
+                        isShowingNewView.toggle()
+                    }, label: {
+                        HStack {
+                            Text(NSLocalizedString("New Article", comment: "Articles"))
+                        }
+                    })
+                    Spacer()
+                    Button(action: {
+                        refresh()
+                    }, label: {
+                        HStack {
+                            Text("Refresh")
+                        }
+                    })
                 }
+                .padding(.top, 5)
+                .padding(.leading, 10)
+                .padding(.trailing, 10)
                 #if os(iOS)
                 List {
+                    ///
+                    /// Søker nå i både:
+                    ///     title
+                    ///     introduction
+                    ///     subtype1
+                    ///
                     ForEach(articles.filter({ searchText.isEmpty ||
-                                                $0.title.localizedStandardContains (searchText) } )) {
+                                                $0.title.localizedStandardContains (searchText) ||
+                                                $0.introduction.localizedStandardContains (searchText) ||
+                                                $0.subType1.localizedStandardContains (searchText)    } )) {
                         article in
                         if UIDevice.current.model == "iPad" {
                             NavigationLink(destination: SafariView(url: article.url)) {
@@ -95,8 +103,16 @@ struct Articles: View {
                 .navigationBarHidden(true)
                 #elseif os(macOS)
                 List {
+                    ///
+                    /// Søker nå i både:
+                    ///     title
+                    ///     introduction
+                    ///     subtype1
+                    ///
                     ForEach(articles.filter({ searchText.isEmpty ||
-                                                $0.title.localizedStandardContains (searchText) })) {
+                                                $0.title.localizedStandardContains (searchText) ||
+                                                $0.introduction.localizedStandardContains (searchText) ||
+                                                $0.subType1.localizedStandardContains (searchText)    } )) {
                         article in
                         NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
                             VStack (alignment: .leading) {
@@ -155,7 +171,7 @@ struct Articles: View {
         .sheet(isPresented: $isShowingNewView) {
             ArticleNewView()
         }
-
+        
     } /// var body
     
     func refresh() {
