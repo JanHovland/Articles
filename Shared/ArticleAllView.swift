@@ -11,6 +11,7 @@ import CloudKit
 struct ArticleAllView: View {
     
     var article: Article
+    var searchText: String
 
     @State private var isShowingEditView: Bool = false
 
@@ -37,16 +38,18 @@ struct ArticleAllView: View {
                     Text(subTypes[article.subType])
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    Text(article.subType1)
-                        .font(.system(size: 15, weight: .regular))
+                    hilightedText(str: article.subType1,
+                                  search: searchText)
+                       .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    Text(article.title)
+                    hilightedText(str: article.title,
+                                  search: searchText)
                         .font(.system(size: 15, weight: .regular))
-                    Text(article.introduction)
-                        .font(.system(size: 13, weight: .light))
+                    hilightedText(str: article.introduction,
+                                  search: searchText)
                     Text(article.url)
                         .font(.system(size: 13, weight: .light))
-                        .foregroundColor(.blue)
+                        .foregroundColor(.gray)
                     #elseif os(macOS)
                     Text(mainTypes[article.mainType])
                         .font(.system(size: 15, weight: .regular))
@@ -54,18 +57,21 @@ struct ArticleAllView: View {
                     Text(subTypes[article.subType])
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    Text(article.subType1)
+                    hilightedText(str: article.subType1,
+                                  search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    Text(article.title)
+                    hilightedText(str: article.title,
+                                  search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .lineLimit(nil)
-                    Text(article.introduction)
+                    hilightedText(str: article.introduction,
+                                  search: searchText)
                         .font(.system(size: 11, weight: .light))
                         .lineLimit(nil)
                     Text(article.url)
                         .font(.system(size: 11, weight: .light))
-                        .foregroundColor(.green)
+                        .foregroundColor(.gray)
                         .lineLimit(nil)
                     #endif
                 }
@@ -76,4 +82,24 @@ struct ArticleAllView: View {
             ArticleEditView(article: article)
         }
     }
+}
+
+func hilightedText(str: String,
+                   search: String) -> Text {
+    var result: Text!
+    
+    for word in str.split(separator: " ") {
+        var text = Text(word)
+        if word.contains(search) {
+            ///     Finn posisjonen i word hvor search begynner
+            ///     let startPos = posisjon der search begynner
+            ///     let length = length of word
+            ///     ext = string foran search + search + resten av word
+            ///     let index2 = phone2.index(phone2.startIndex, offsetBy: 2)
+            
+            text = text.bold().foregroundColor(.green)
+       }
+        result = (result == nil ? text : result + Text(" ") + text)
+    }
+    return result ?? Text(str)
 }

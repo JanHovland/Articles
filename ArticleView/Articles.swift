@@ -77,7 +77,8 @@ struct Articles: View {
                         article in
                         if UIDevice.current.model == "iPad" {
                             NavigationLink(destination: SafariView(url: article.url)) {
-                                ArticleAllView(article: article)
+                                ArticleAllView(article: article,
+                                               searchText: searchText)
                             }
                         }
                         else {
@@ -86,7 +87,8 @@ struct Articles: View {
                             /// Nå virker denne
                             ///
                             NavigationLink(destination: SafariView(url: article.url)) {
-                                ArticleAllView(article: article)
+                                ArticleAllView(article: article,
+                                               searchText: searchText)
                             }
                         }
                     }
@@ -116,7 +118,8 @@ struct Articles: View {
                         article in
                         NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
                             VStack (alignment: .leading) {
-                                ArticleAllView(article: article)
+                                ArticleAllView(article: article,
+                                               searchText: searchText)
                             }
                         }
                     }

@@ -48,7 +48,7 @@ struct ArticleSearchBar: View {
                 .onTapGesture {
                     isEditing = true
                 }
-            
+                .autocapitalization(.none)
             if isEditing {
                 Button(action: {
                     isEditing = false
