@@ -87,19 +87,26 @@ struct ArticleAllView: View {
 func hilightedText(str: String,
                    search: String) -> Text {
     var result: Text!
-    
+    var search1 = ""
     for word in str.split(separator: " ") {
         var text = Text(word)
-        if word.contains(search) {
-            ///     Finn posisjonen i word hvor search begynner
-            ///     let startPos = posisjon der search begynner
-            ///     let length = length of word
-            ///     ext = string foran search + search + resten av word
-            ///     let index2 = phone2.index(phone2.startIndex, offsetBy: 2)
-            
-            text = text.bold().foregroundColor(.green)
-       }
+        search1 = search.capitalizingFirstLetter()
+        if word.contains(search) || word.contains(search1) {
+            text = text.bold().foregroundColor(.green).underline()
+        }
         result = (result == nil ? text : result + Text(" ") + text)
     }
     return result ?? Text(str)
+}
+
+/// https://www.hackingwithswift.com/example-code/strings/how-to-capitalize-the-first-letter-of-a-string
+
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
 }
