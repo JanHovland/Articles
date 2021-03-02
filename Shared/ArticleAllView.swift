@@ -32,40 +32,44 @@ struct ArticleAllView: View {
                     )
                 VStack (alignment: .leading, spacing: 5) {
                     #if os(iOS)
-                    Text(mainTypes[article.mainType])
+                    HilightedText(str: mainTypes[article.mainType],
+                                  search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    Text(subTypes[article.subType])
+                    HilightedText(str: mainTypes[article.subType],
+                                  search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    hilightedText(str: article.subType1,
+                    HilightedText(str: article.subType1,
                                   search: searchText)
                        .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    hilightedText(str: article.title,
+                    HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
-                    hilightedText(str: article.introduction,
+                    HilightedText(str: article.introduction,
                                   search: searchText)
                     Text(article.url)
                         .font(.system(size: 13, weight: .light))
                         .foregroundColor(.gray)
                     #elseif os(macOS)
-                    Text(mainTypes[article.mainType])
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
-                    Text(subTypes[article.subType])
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
-                    hilightedText(str: article.subType1,
+                    HilightedText(str: mainTypes[article.mainType],
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    hilightedText(str: article.title,
+                    HilightedText(str: mainTypes[article.subType],
+                                  search: searchText)
+                        .font(.system(size: 15, weight: .regular))
+                        .foregroundColor(.red)
+                    HilightedText(str: article.subType1,
+                                  search: searchText)
+                        .font(.system(size: 15, weight: .regular))
+                        .foregroundColor(.red)
+                    HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .lineLimit(nil)
-                    hilightedText(str: article.introduction,
+                    HilightedText(str: article.introduction,
                                   search: searchText)
                         .font(.system(size: 11, weight: .light))
                         .lineLimit(nil)
@@ -84,14 +88,12 @@ struct ArticleAllView: View {
     }
 }
 
-func hilightedText(str: String,
+func HilightedText(str: String,
                    search: String) -> Text {
     var result: Text!
-    var search1 = ""
     for word in str.split(separator: " ") {
         var text = Text(word)
-        search1 = search.capitalizingFirstLetter()
-        if word.contains(search) || word.contains(search1) {
+        if word.uppercased().contains(search.uppercased())  {
             text = text.bold().foregroundColor(.green).underline()
         }
         result = (result == nil ? text : result + Text(" ") + text)
