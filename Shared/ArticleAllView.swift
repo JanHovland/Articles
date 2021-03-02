@@ -36,7 +36,7 @@ struct ArticleAllView: View {
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    HilightedText(str: mainTypes[article.subType],
+                    HilightedText(str: subTypes[article.subType],
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
@@ -57,7 +57,7 @@ struct ArticleAllView: View {
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    HilightedText(str: mainTypes[article.subType],
+                    HilightedText(str: subTypes[article.subType],
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)

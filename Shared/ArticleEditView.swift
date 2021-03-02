@@ -171,11 +171,6 @@ struct ArticleEditView: View {
                                     CloudKitArticle.modifyArticle(item: article) { (res) in
                                         switch res {
                                         case .success:
-                                            
-                                            /// Finner ikke message og message1
-                                            
-                                            print("Updated data")
-                                            
                                             message = NSLocalizedString("Updated data", comment: "saveEditArticle")
                                             message1 = NSLocalizedString("This article is now updated", comment: "saveEditArticle")
                                             alertIdentifier = AlertID(id: .first)

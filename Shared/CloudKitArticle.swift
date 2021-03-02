@@ -209,6 +209,14 @@ struct CloudKitArticle {
                         return
                     }
                     
+                    let mainTypeTest = record["mainType"]
+                    print("mainType = \(String(describing: mainTypeTest))")
+                    
+                    let subTypeTest = record["subType"]
+                    print("subType = \(String(describing: subTypeTest))")
+                    
+ 
+                    
                     let mainType = record["mainType"] as? Int
                     let subType = record["subType"] as? Int
                     let subType1 = record["subType1"] as? String
