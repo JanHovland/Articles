@@ -17,6 +17,7 @@
 import SwiftUI
 import Network
 import CoreData
+import CloudKit
 
 var selectedRecordId: CKRecord.ID?
 

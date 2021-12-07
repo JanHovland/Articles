@@ -104,7 +104,7 @@ struct CloudKitArticle {
         let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
         DispatchQueue.main.async {
              /// inZoneWith: nil : Specify nil to search the default zone of the database.
-             CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil, completionHandler: { (results, er) in
+        CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil, completionHandler: { (results, er) in
                 DispatchQueue.main.async {
                     if results != nil {
                         if results!.count >= 1 {
