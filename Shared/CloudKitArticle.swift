@@ -9,9 +9,13 @@ import CloudKit
 import SwiftUI
 
 struct CloudKitArticle {
+    
+    static var database = CKContainer(identifier: Config.containerIdentifier).privateCloudDatabase
+    
     struct RecordType {
         static let Article = "Article"
     }
+    
     /// MARK: - errors
     enum CloudKitHelperError: Error {
         case recordFailure
@@ -21,227 +25,146 @@ struct CloudKitArticle {
     }
     
     /// MARK: - saving to CloudKit inside CloudKitArticle
-    static func saveArticle(item: Article, completion: @escaping (Result<Article, Error>) -> ()) {
-        let itemRecord = CKRecord(recordType: RecordType.Article)
-        itemRecord["title"] = item.title as CKRecordValue
-        itemRecord["introduction"] = item.introduction as CKRecordValue
-        itemRecord["mainType"] = item.mainType as CKRecordValue
-        itemRecord["subType"] = item.subType as CKRecordValue
-        itemRecord["subType1"] = item.subType1 as CKRecordValue
-        itemRecord["url"] = item.url as CKRecordValue
-        
-        CKContainer.default().privateCloudDatabase.save(itemRecord) { (record, err) in
-            DispatchQueue.main.async {
-                if let err = err {
-                    completion(.failure(err))
-                    return
-                }
-                guard let record = record else {
-                    completion(.failure(CloudKitHelperError.recordFailure))
-                    return
-                }
-                let recordID = record.recordID
-                guard let title = record["title"] as? String else {
-                    completion(.failure(CloudKitHelperError.castFailure))
-                    return
-                }
-                guard let introduction = record["introduction"] as? String else {
-                    completion(.failure(CloudKitHelperError.castFailure))
-                    return
-                }
-                
-                guard let mainType = record["mainType"] as? Int else {
-                    completion(.failure(CloudKitHelperError.castFailure))
-                    return
-                }
-                guard let subType = record["subType"] as? Int else {
-                    completion(.failure(CloudKitHelperError.castFailure))
-                    return
-                }
-                guard let subType1 = record["subType1"] as? String else {
-                    completion(.failure(CloudKitHelperError.castFailure))
-                    return
-                }
-                guard let url = record["url"] as? String else {
-                    completion(.failure(CloudKitHelperError.castFailure))
-                    return
-                }
-                let article = Article(recordID: recordID,
-                                      title: title,
-                                      introduction: introduction,
-                                      mainType: mainType,
-                                      subType: subType,
-                                      subType1: subType1,
-                                      url: url)
-
-                completion(.success(article))
-            }
-        }
-    }
-    
-    // MARK: - delete from CloudKit inside CloudKitArticle
-    static func deleteArticle(recordID: CKRecord.ID, completion: @escaping (Result<CKRecord.ID, Error>) -> ()) {
-        CKContainer.default().privateCloudDatabase.delete(withRecordID: recordID) { (recordID, err) in
-            DispatchQueue.main.async {
-                if let err = err {
-                    completion(.failure(err))
-                    return
-                }
-                guard let recordID = recordID else {
-                    completion(.failure(CloudKitHelperError.recordIDFailure))
-                    return
-                }
-                completion(.success(recordID))
-            }
+    static func saveArticle(_ article: Article) async throws {
+        let articleRecord = CKRecord(recordType: RecordType.Article)
+        articleRecord["title"] = article.title
+        articleRecord["introduction"] = article.introduction
+        articleRecord["mainType"] = article.mainType
+        articleRecord["subType"] = article.subType
+        articleRecord["subType1"] = article.subType1
+        articleRecord["url"] = article.url
+        do {
+            try await database.save(articleRecord)
+        } catch {
+            throw error
         }
     }
     
     // MARK: - check if the article record exists inside CloudKitArticle
-    static func doesArticleExist(url: String,
-                                 completion: @escaping (Bool) -> ()) {
-        var result = false
-        let predicate = NSPredicate(format: "url == %@", url)
+    static func existArticle(_ predicate: NSPredicate,_ article: Article) async throws -> Bool {
         let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
-        DispatchQueue.main.async {
-             /// inZoneWith: nil : Specify nil to search the default zone of the database.
-        CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil, completionHandler: { (results, er) in
-                DispatchQueue.main.async {
-                    if results != nil {
-                        if results!.count >= 1 {
-                            result = true
-                        }
-                    }
-                    completion(result)
-                }
-            })
+        do {
+            let result = try await database.records(matching: query)
+            for _ in result.0 {
+                return true
+            }
+        } catch {
+            throw error
         }
+        return false
     }
 
     // MARK: - fetching from CloudKit inside CloudKitArticle
-    static func fetchArticle(predicate:  NSPredicate, completion: @escaping (Result<Article, Error>) -> ()) {
+    static func getAllArticles(_ predicate:  NSPredicate) async throws -> [Article] {
+        var articles = [Article]()
         let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
-        let operation = CKQueryOperation(query: query)
-        operation.desiredKeys = ["title",
-                                 "introduction",
-                                 "mainType",
-                                 "subType",
-                                 "subType1",
-                                 "url"]
-        operation.resultsLimit = 500
-        operation.recordFetchedBlock = { record in
-            DispatchQueue.main.async {
-                let recordID = record.recordID
-                guard let title1  = record["title"] as? String else { return }
-                guard let introduction1 = record["introduction"] as? String else { return }
+        do {
+            ///
+            /// Slik finnes alle postene
+            ///
+            let result = try await database.records(matching: query)
+            
+            for record in result .matchResults {
+                var article = Article()
+                ///
+                /// Slik hentes de enkelte feltene ut:
+                ///
+                let art  = try record.1.get()
                 
-                /// Dersom det ikke finnes data i feltene, gjøres det  slik:
-                let mainType = record["mainType"] as? Int
-                let subType = record["subType"] as? Int
-                let subType1 = record["subType1"] as? String
+                let id = record.0.recordName
+                let recID = CKRecord.ID(recordName: id)
                 
-                guard let url = record["url"] as? String else { return }
+                let title = art.value(forKey: "title") ?? ""
+                let introduction = art.value(forKey: "introduction") ?? ""
+                let mainType = art.value(forKey: "mainType") ?? 0
+                let subType = art.value(forKey: "subType") ?? 0
+                let subType1 = art.value(forKey: "subType1") ?? ""
+                let url = art.value(forKey: "url") ?? ""
                 
-                /// Fjerner eventuelle linjeskift med et balnkt tegn
-                let title = title1.replacingOccurrences(of: "\n", with: "")
-                let introduction = introduction1.replacingOccurrences(of: "\n", with: "")
-                
-                let article = Article(recordID: recordID,
-                                      title: title,
-                                      introduction: introduction,
-                                      mainType: mainType ?? 0,        /// Det må gjøres når noen feltet kan være blanke
-                                      subType: subType ?? 0,          /// Det må gjøres når noen feltet kan være blanke
-                                      subType1: subType1 ?? " ",        /// Det må gjøres når noen feltet kan være blanke
-                                      url: url)
-                completion(.success(article))
+                article.recordID = recID
+                article.title = title as! String
+                article.introduction = introduction as! String
+                article.mainType = mainType as! Int
+                article.subType = subType as! Int
+                article.subType1 = subType1 as! String
+                article.url = url as! String
+ 
+                articles.append(article)
+                articles.sort(by: {$0.title < $1.title})
             }
+            return articles
+        } catch {
+            throw error
         }
-        operation.queryCompletionBlock = { ( _, err) in
-            DispatchQueue.main.async {
-                if let err = err {
-                    completion(.failure(err))
-                    return
-                }
-            }
+
+    }
+    
+    // MARK: - delete from CloudKit inside CloudKitArticle
+    static func deleteOneArticle(_ recID: CKRecord.ID) async throws {
+        do {
+            try await database.deleteRecord(withID: recID)
+        } catch {
+            throw error
         }
-        CKContainer.default().privateCloudDatabase.add(operation)
     }
     
     // MARK: - modify in CloudKit inside CloudKitArticle
-    static func modifyArticle(item: Article, completion: @escaping (Result<Article, Error>) -> ()) {
-        guard let recordID = item.recordID else { return }
-        CKContainer.default().privateCloudDatabase.fetch(withRecordID: recordID) { record, err in
-            if let err = err {
-                DispatchQueue.main.async {
-                    completion(.failure(err))
-                }
-                return
+    static func modifyArticle(_ article: Article) async throws {
+        
+        guard let recID = article.recordID else { return }
+        
+        do {
+            let articleRecord = CKRecord(recordType: RecordType.Article)
+            articleRecord["title"] = article.title
+            articleRecord["introduction"] = article.introduction
+            articleRecord["mainType"] = article.mainType
+            articleRecord["subType"] = article.subType
+            articleRecord["subType1"] = article.subType1
+            articleRecord["url"] = article.url
+            do {
+                let _ = try await database.modifyRecords(saving: [articleRecord], deleting: [recID])
+            } catch {
+                throw error
             }
-            guard let record = record else {
-                DispatchQueue.main.async {
-                    completion(.failure(CloudKitHelperError.recordFailure))
-                }
-                return
+        } catch {
+            throw error
+        }
+    }
+    
+    func getArticleRecordID(_ predicate: NSPredicate,_ article: Article) async throws -> CKRecord.ID? {
+        let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
+        do {
+            ///
+            /// Siden database.records(matching: query) er brukt tidligere må CloudKitArticle settes inn foran database
+            ///
+            let result = try await CloudKitArticle.database.records(matching: query)
+            for res in result.0 {
+                let id = res.0.recordName
+                return CKRecord.ID(recordName: id)
             }
-            record["title"] = item.title as CKRecordValue
-            record["introduction"] = item.introduction as CKRecordValue
-            record["mainType"] = item.mainType as CKRecordValue
-            record["subType"] = item.subType as CKRecordValue
-            record["subType1"] = item.subType1 as CKRecordValue
-            record["url"] = item.url as CKRecordValue
-
-            CKContainer.default().privateCloudDatabase.save(record) { (record, err) in
-                DispatchQueue.main.async {
-                    if let err = err {
-                        completion(.failure(err))
-                        return
-                    }
-                    guard let record = record else {
-                        completion(.failure(CloudKitHelperError.recordFailure))
-                        return
-                    }
-                    let recordID = record.recordID
-                    guard let title = record["title"] as? String else {
-                        completion(.failure(CloudKitHelperError.castFailure))
-                        return
-                    }
-                    guard let introduction = record["introduction"] as? String else {
-                        completion(.failure(CloudKitHelperError.castFailure))
-                        return
-                    }
-                    
-                    let mainTypeTest = record["mainType"]
-                    print("mainType = \(String(describing: mainTypeTest))")
-                    
-                    let subTypeTest = record["subType"]
-                    print("subType = \(String(describing: subTypeTest))")
-                    
- 
-                    
-                    let mainType = record["mainType"] as? Int
-                    let subType = record["subType"] as? Int
-                    let subType1 = record["subType1"] as? String
-
-                    guard let url = record["url"] as? String else {
-                        completion(.failure(CloudKitHelperError.castFailure))
-                        return
-                    }
-
-                    let article = Article(recordID: recordID,
-                                          title: title,
-                                          introduction: introduction,
-                                          mainType: mainType ?? 0,
-                                          subType: subType ?? 0,
-                                          subType1: subType1 ?? " ",
-                                          url: url)
-                    
-                    completion(.success(article))
-                }
+        } catch {
+            throw error
+        }
+        return nil
+    }
+    
+    
+    func deleteAllArticles(_ predicate: NSPredicate, _ recID: CKRecord.ID) async throws {
+        let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
+        do {
+            let result = try await CloudKitArticle.database.records(matching: query)
+            for res in result.0 {
+                let id = res.0.recordName
+                let recID = CKRecord.ID(recordName: id)
+                try await CloudKitArticle.database.deleteRecord(withID: recID)
             }
+        } catch {
+            throw error
         }
     }
 
-    
-    
+
+   
 }
 
 

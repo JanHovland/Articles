@@ -16,9 +16,11 @@ struct ArticleEditView: View {
     @State private var subType1 = ""
     @State private var introduction = ""
     @State private var url = ""
-    @State private var alertIdentifier: AlertID?
-    @State private var message: String = ""
-    @State private var message1: String = ""
+    @State private var message: LocalizedStringKey = ""
+    @State private var message1: LocalizedStringKey = ""
+    @State private var title1: LocalizedStringKey = ""
+    
+    @State private var isAlertActive = false
     
     @Environment(\.presentationMode) var presentationMode
 
@@ -31,26 +33,31 @@ struct ArticleEditView: View {
                     Image(systemName: "chevron.left")
                         .foregroundColor(Color.blue)
                         .font(.system(size: 15, design: .rounded))
-                    Text(NSLocalizedString("Return", comment: "ArticleNewView"))
+                    Text("Return")
                 }
             })
             Spacer()
             Button(action: {
-                saveEditArticle(title: title,
-                                introduction: introduction,
-                                mainType: mainType,
-                                subType: subType,
-                                subType1: subType1,
-                                url: url)
+                Task.init {
+                    let article = Article(title: title,
+                                          introduction: introduction,
+                                          mainType: mainType,
+                                          subType: subType,
+                                          subType1: subType1,
+                                          url: url)
+                    message = await modifyArticle(article)
+                    title1 = "Update an article"
+                    isAlertActive.toggle()
+                }
             }, label: {
                 HStack {
-                    Text(NSLocalizedString("Update article", comment: "ArticleEditView"))
+                    Text("Update article")
                 }
             })
         }
         .padding()
         VStack (alignment: .center){
-            Text(NSLocalizedString("Edit an article", comment: "ArticleEditView"))
+            Text("Edit an article")
                 .foregroundColor(.green)
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
@@ -58,45 +65,45 @@ struct ArticleEditView: View {
             VStack {
                 
                 #if os(iOS)
-                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleEditView"),
+                InputMainType(heading: "MainType",
                               mainTypes: mainTypes,
                               spacing: 20,
                               value: $mainType)
-                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleEditView"),
+                InputSubType(heading: "SubType",
                              subTypes: subTypes,
                              spacing: 20,
                              value: $subType)
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
+                InputTextField(heading: "SubTitle1",
                                space: 12,
                                value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
+                InputTextField(heading: "Title",
                                space: 43,
                                value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
+                InputTextField(heading: "Introduction",
                                space: 11,
                                value: $introduction)
-                InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
+                InputTextFieldURL(heading: "Url",
                                   space: 62,
                                   value: $url)
                 #elseif os(macOS)
-                InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleEditView"),
+                InputMainType(heading:  "MainType",
                               mainTypes: mainTypes,
                               spacing: 5,
                               value: $mainType)
-                InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleEditView"),
+                InputSubType(heading:   "SubType",
                              subTypes: subTypes,
                              spacing: 10,
                              value: $subType)
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
+                InputTextField(heading: "SubTitle1",
                                spacing: 10,
                                value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
+                InputTextField(heading: "Title",
                                spacing: 57,
                                value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
+                InputTextField(heading: "Introduction",
                                spacing: 11,
                                value: $introduction)
-                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
+                InputTextField(heading: "Url",
                                spacing: 71,
                                value: $url)
                 #endif
@@ -104,17 +111,6 @@ struct ArticleEditView: View {
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .alert(item: $alertIdentifier) { alert in
-            switch alert.id {
-            case .first:
-                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
-            case .second:
-                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
-            case .delete:
-                return Alert(title: Text(message), message: Text(message1), primaryButton: .cancel(),
-                             secondaryButton: .default(Text("OK"), action: {}))
-            }
-        }
         .onAppear {
             title = article.title
             introduction = article.introduction
@@ -125,82 +121,6 @@ struct ArticleEditView: View {
         }
         .modifier01()
     } /// var Body
-    
-    
-    func saveEditArticle(title: String,
-                         introduction: String,
-                         mainType: Int,
-                         subType: Int,
-                         subType1: String,
-                         url: String) {
-        
-        /// Alle feltene må ha verdi
-        if  title.count > 0,
-            introduction.count > 0,
-            subType1.count > 0,
-            url.count > 0  {
-            if url.contains("https") ||
-                url.contains("http")    {
-                if url.contains("://"),
-                   url.contains(".") {
-                    /// Sjekker om denne posten finnes fra før
-                    CloudKitArticle.doesArticleExist(url: url) { (result) in
-                        if result == false {
-                            let message0 = NSLocalizedString("Url error", comment: "saveEditArticle")
-                            message = message0 + " : \n" + url
-                            message1 = NSLocalizedString("Check that the url contains https:// or http://, but some url only accepts https", comment: "saveEditArticle")
-                            alertIdentifier = AlertID(id: .first)
-                        } else {
-                            /// Personen finnes i Artikkel tabellen
-                            /// Må finne recordID for den enkelte artikkelen
-                            let predicate = NSPredicate(format: "url == %@", url)
-                            CloudKitArticle.fetchArticle(predicate: predicate)  { (result) in
-                                switch result {
-                                /// Finne recordID for å kunne oppdatere artikkelen
-                                case .success(let article):
-                                    let recordID = article.recordID
-                                    let article = Article(
-                                        recordID: recordID,
-                                        title: title,
-                                        introduction: introduction,
-                                        mainType: mainType,
-                                        subType: subType,
-                                        subType1: subType1,
-                                        url: url)
-                                    /// Oppdatere artikkelen
-                                    CloudKitArticle.modifyArticle(item: article) { (res) in
-                                        switch res {
-                                        case .success:
-                                            message = NSLocalizedString("Updated data", comment: "saveEditArticle")
-                                            message1 = NSLocalizedString("This article is now updated", comment: "saveEditArticle")
-                                            alertIdentifier = AlertID(id: .first)
-                                        case .failure(let err):
-                                            message = err.localizedDescription
-                                            alertIdentifier = AlertID(id: .second)
-                                        }
-                                    }
-                                case .failure(let err):
-                                    let _ = err.localizedDescription
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    message = NSLocalizedString("Incorrect url", comment: "saveEditArticle")
-                    message1 = NSLocalizedString("Check that the rest of the url following http is valid.", comment: "AddArticleView")
-                    alertIdentifier = AlertID(id: .first)
-                }
-            } else {
-                message = NSLocalizedString("Incorrect url", comment: "saveEditArticle")
-                message1 = NSLocalizedString("Check that the url contains https:// or http://, but some url only accepts https", comment: "saveEditArticle")
-                alertIdentifier = AlertID(id: .first)
-            }
-        } else {
-            message = NSLocalizedString("Missing Article Data", comment: "saveEditArticle")
-            message1 = NSLocalizedString("Check that all fields have a value", comment: "saveEditArticle")
-            alertIdentifier = AlertID(id: .first)
-        }
-    }
     
 }
 

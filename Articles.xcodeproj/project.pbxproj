@@ -19,6 +19,12 @@
 		DB3E183125DAFE4F0051ED4F /* ArticleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */; };
 		DB49355C25DA769D00C73658 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB49355A25DA769D00C73658 /* Localizable.strings */; };
 		DB49355F25DA77F300C73658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DB49355D25DA77F300C73658 /* InfoPlist.strings */; };
+		DB507CFE2761000B00AA6C31 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507CFD2761000B00AA6C31 /* Config.swift */; };
+		DB507CFF2761000B00AA6C31 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507CFD2761000B00AA6C31 /* Config.swift */; };
+		DB507D012761141700AA6C31 /* CloudKitArticleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */; };
+		DB507D022761141700AA6C31 /* CloudKitArticleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */; };
+		DB507D042761415000AA6C31 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D032761415000AA6C31 /* ToDoView.swift */; };
+		DB507D052761415000AA6C31 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D032761415000AA6C31 /* ToDoView.swift */; };
 		DB6FA61D25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
 		DB6FA61E25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
 		DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */; };
@@ -59,6 +65,9 @@
 		DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleType.swift; sourceTree = "<group>"; };
 		DB49355B25DA769D00C73658 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DB49355E25DA77F300C73658 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DB507CFD2761000B00AA6C31 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitArticleHelper.swift; sourceTree = "<group>"; };
+		DB507D032761415000AA6C31 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
 		DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Create iOS Icons.jsx"; sourceTree = "<group>"; };
 		DBB20C0625D9250D007CAF2B /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesApp.swift; sourceTree = "<group>"; };
@@ -132,11 +141,13 @@
 				DB3E182F25DAFE4F0051ED4F /* ArticleType.swift */,
 				DBB20C0A25D9250F007CAF2B /* Assets.xcassets */,
 				DBE670ED25D92F6F00AB15B6 /* CloudKitArticle.swift */,
+				DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */,
 				DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */,
 				DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */,
 				DBB20C0925D9250D007CAF2B /* Persistence.swift */,
 				DBE670EA25D92E8D00AB15B6 /* SafariView.swift */,
 				DB0089AB25DDA7440071E25E /* SwiftUIViewModifer.swift */,
+				DB507D032761415000AA6C31 /* ToDoView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -184,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB20C0825D9250D007CAF2B /* Articles.swift */,
+				DB507CFD2761000B00AA6C31 /* Config.swift */,
 			);
 			path = ArticleView;
 			sourceTree = "<group>";
@@ -294,8 +306,10 @@
 			files = (
 				DB3E183025DAFE4F0051ED4F /* ArticleType.swift in Sources */,
 				DBB20C1D25D9250F007CAF2B /* ArticlesApp.swift in Sources */,
+				DB507D042761415000AA6C31 /* ToDoView.swift in Sources */,
 				DB11366525DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */,
 				DBE670EB25D92E8D00AB15B6 /* SafariView.swift in Sources */,
+				DB507CFE2761000B00AA6C31 /* Config.swift in Sources */,
 				DBE670EE25D92F6F00AB15B6 /* CloudKitArticle.swift in Sources */,
 				DBE670F425D9376100AB15B6 /* ArticleNewView.swift in Sources */,
 				DB3E182D25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */,
@@ -306,6 +320,7 @@
 				DBE670F125D936F300AB15B6 /* ArticleSearchBar.swift in Sources */,
 				DBB20C3525D92849007CAF2B /* ArticleAllView.swift in Sources */,
 				DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */,
+				DB507D012761141700AA6C31 /* CloudKitArticleHelper.swift in Sources */,
 				DBB20C1F25D9250F007CAF2B /* Articles.swift in Sources */,
 				DB0089AC25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */,
 			);
@@ -317,8 +332,10 @@
 			files = (
 				DB3E183125DAFE4F0051ED4F /* ArticleType.swift in Sources */,
 				DBB20C1E25D9250F007CAF2B /* ArticlesApp.swift in Sources */,
+				DB507D052761415000AA6C31 /* ToDoView.swift in Sources */,
 				DB11366625DC3EAA0065B836 /* DismissingKeyboard.swift in Sources */,
 				DBE670EC25D92E8D00AB15B6 /* SafariView.swift in Sources */,
+				DB507CFF2761000B00AA6C31 /* Config.swift in Sources */,
 				DBE670EF25D92F6F00AB15B6 /* CloudKitArticle.swift in Sources */,
 				DBE670F525D9376100AB15B6 /* ArticleNewView.swift in Sources */,
 				DB3E182E25DAEC9D0051ED4F /* ArticleEditView.swift in Sources */,
@@ -329,6 +346,7 @@
 				DBE670F225D936F300AB15B6 /* ArticleSearchBar.swift in Sources */,
 				DBB20C3625D92849007CAF2B /* ArticleAllView.swift in Sources */,
 				DBB20C1C25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */,
+				DB507D022761141700AA6C31 /* CloudKitArticleHelper.swift in Sources */,
 				DBB20C2025D9250F007CAF2B /* Articles.swift in Sources */,
 				DB0089AD25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */,
 			);
@@ -551,7 +569,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.janhovland.Articles;
 				PRODUCT_NAME = Articles;
 				SDKROOT = macosx;
@@ -576,7 +594,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.janhovland.Articles;
 				PRODUCT_NAME = Articles;
 				SDKROOT = macosx;

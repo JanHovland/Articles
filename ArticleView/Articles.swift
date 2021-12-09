@@ -24,16 +24,15 @@ var selectedRecordId: CKRecord.ID?
 struct Articles: View {
     
     @State private var articles = [Article]()
-    @State private var alertIdentifier: AlertID?
-    @State private var message: String = ""
-    @State private var message1: String = ""
-    @State private var title: String = ""
-    @State private var choise: String = ""
+    @State private var message: LocalizedStringKey = ""
+    @State private var message1: LocalizedStringKey = ""
+    @State private var title: LocalizedStringKey = ""
     @State private var indexSetDelete = IndexSet()
     @State private var searchText: String = ""
-    @State private var device = ""
+    @State private var device: LocalizedStringKey = ""
     @State private var hasConnectionPath = false
     @State private var isShowingNewView : Bool = false
+    @State private var isAlertActive = false
     
     let internetMonitor = NWPathMonitor()
     let internetQueue = DispatchQueue(label: "InternetMonitor")
@@ -48,12 +47,14 @@ struct Articles: View {
                         isShowingNewView.toggle()
                     }, label: {
                         HStack {
-                            Text(NSLocalizedString("New Article", comment: "Articles"))
+                            Text("New Article")
                         }
                     })
                     Spacer()
                     Button(action: {
-                        refresh()
+                        Task.init {
+                            await findAllArticles()
+                        }
                     }, label: {
                         HStack {
                             Text("Refresh")
@@ -94,13 +95,16 @@ struct Articles: View {
                         }
                     }
                     /// onDelete finne bare i iOS
-                    .onDelete(perform: { indexSet in
+                    .onDelete { (indexSet) in
                         indexSetDelete = indexSet
                         selectedRecordId = articles[indexSet.first!].recordID
-                        title = NSLocalizedString("Delete Article?", comment: "Articles")
-                        choise = NSLocalizedString("Delete this article", comment: "Articles")
-                        alertIdentifier = AlertID(id: .delete)
-                    })
+                        articles.removeAll()
+                        Task.init {
+                            await message = deleteArticle(selectedRecordId!)
+                            title = "Delete"
+                            isAlertActive.toggle()
+                        }
+                    }
                 }
                 /// navigationBarHidden kan kun brukes i iOS
                 .navigationBarHidden(true)
@@ -128,49 +132,25 @@ struct Articles: View {
                 .listStyle(SidebarListStyle())
                 /// onDelete finne bare i macOS
                 .onDeleteCommand {
-                    /// Sjekk om denne artikkelen virkelig skal slettes
-                    title = NSLocalizedString("Delete Article?", comment: "Articles")
-                    choise = NSLocalizedString("Delete this article", comment: "Articles")
-                    alertIdentifier = AlertID(id: .delete)
+//                    indexSetDelete = indexSet
+//                    selectedRecordId = articles[indexSet.first!].recordID
+//                    articles.removeAll()
+//                    Task.init {
+//                        await message = deleteArticle(selectedRecordId!)
+//                        title = "Delete"
+//                        isAlertActive.toggle()
+//                    }
                 }
                 #endif
                 Spacer()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear(perform: {
+        .task {
             /// Sjekker internett forbindelse
             startInternetTracking()
             /// Henter alle artiklene på nytt
-            refresh()
-        })
-        .alert(item: $alertIdentifier) { alert in
-            switch alert.id {
-            case .first:
-                return Alert(title: Text(message))
-            case .second:
-                return Alert(title: Text(message))
-            case .delete:
-                return Alert(title: Text(title),
-                             message: Text(message),
-                             primaryButton: .destructive(Text(choise),
-                                                         action: {
-                                                            CloudKitArticle.deleteArticle(recordID: selectedRecordId!) { (result) in
-                                                                switch result {
-                                                                case .success :
-                                                                    message =  NSLocalizedString("Successfully deleted an article", comment: "UserOverView")
-                                                                    alertIdentifier = AlertID(id: .first)
-                                                                case .failure(let err):
-                                                                    message = err.localizedDescription
-                                                                    alertIdentifier = AlertID(id: .first)
-                                                                }
-                                                            }
-                                                            /// Sletter den valgte raden i iOS
-                                                            articles.remove(atOffsets: indexSetDelete)
-                                                            
-                                                         }),
-                             secondaryButton: .default(Text(NSLocalizedString("Cancel", comment: "UserOverView"))))
-            }
+            await findAllArticles()
         }
         .sheet(isPresented: $isShowingNewView) {
             ArticleNewView()
@@ -178,21 +158,18 @@ struct Articles: View {
         
     } /// var body
     
-    func refresh() {
-        //// Sletter alt tidligere innhold i article
-        articles.removeAll()
-        /// Fetch all articless  from CloudKit
+    func findAllArticles() async {
+        var value: (LocalizedStringKey, [Article])
         let predicate = NSPredicate(value: true)
-        CloudKitArticle.fetchArticle(predicate: predicate)  { (result) in
-            switch result {
-            case .success(let article):
-                articles.append(article)
-                articles.sort(by: {$0.title.uppercased() < $1.title.uppercased()})
-            case .failure(let err):
-                message = err.localizedDescription
-                alertIdentifier = AlertID(id: .first)
-            }
+        await value = findArticles(predicate)
+        if value.0 != "" {
+            message = value.0
+            title = "Error message from the Server"
+            isAlertActive.toggle()
+        } else {
+            articles = value.1
         }
+
     }
     
     func startInternetTracking() {
@@ -218,9 +195,9 @@ struct Articles: View {
             } else if UIDevice.current.localizedModel == "iPad" {
                 device = "iPad"
             }
-            let message1 = NSLocalizedString("No Internet connection for this ", comment: "SignInView")
-            message = message1 + device + "."
-            alertIdentifier = AlertID(id: .first)
+            title = device
+            message = "No Internet connection for this device."
+            isAlertActive.toggle()
         }
         #endif
         

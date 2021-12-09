@@ -81,14 +81,14 @@ struct SafariViewIPone: View {
                         Image(systemName: "chevron.left")
                             .foregroundColor(Color.blue)
                             .font(.system(size: 15, design: .rounded))
-                        Text(NSLocalizedString("Return", comment: "ArticleEditView"))
+                        Text("Return")
                         
                     }
                 })
                 Spacer()
             }
             .padding()
-            Text(NSLocalizedString("Safari View", comment: "ArticleEditView"))
+            Text("Safari View")
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
                 .padding(.top, 100)
             HStack (alignment: .center, spacing: 10) {

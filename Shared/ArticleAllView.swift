@@ -8,6 +8,8 @@
 import SwiftUI
 import CloudKit
 
+@MainActor
+
 struct ArticleAllView: View {
     
     var article: Article

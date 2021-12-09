@@ -17,8 +17,10 @@ struct ArticleNewView: View {
     @State private var introduction = ""
     @State private var url = ""
     @State private var alertIdentifier: AlertID?
-    @State private var message: String = ""
-    @State private var message1: String = ""
+    @State private var message: LocalizedStringKey = ""
+    @State private var message1: LocalizedStringKey = ""
+    @State private var title1: LocalizedStringKey = ""
+    @State private var isAlertActive = false
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -31,26 +33,40 @@ struct ArticleNewView: View {
                     Image(systemName: "chevron.left")
                         .foregroundColor(Color.blue)
                         .font(.system(size: 15, design: .rounded))
-                    Text(NSLocalizedString("Return", comment: "ArticleNewView"))
+                    Text("Return")
                 }
             })
             Spacer()
             Button(action: {
-                saveNewArticle(titleArt: title,
-                               introductionArt: introduction,
-                               mainTypeArt: mainType,
-                               subTypeArt: subType,
-                               subType1Art: subType1,
-                               urlArt: url)
+                Task.init {
+                    let article = Article(title: title,
+                                          introduction: introduction,
+                                          mainType: mainType,
+                                          subType: subType,
+                                          subType1: subType1,
+                                          url: url)
+                    message = await saveArticle(article)
+                    title1 = "Save a new article"
+                    isAlertActive.toggle()
+                    
+                    
+                    
+                }
+//                saveNewArticle(titleArt: title,
+//                               introductionArt: introduction,
+//                               mainTypeArt: mainType,
+//                               subTypeArt: subType,
+//                               subType1Art: subType1,
+//                               urlArt: url)
             }, label: {
                 HStack {
-                    Text(NSLocalizedString("Save article", comment: "ArticleNewView"))
+                    Text("Save article")
                 }
             })
         }
         .padding()
         VStack (alignment: .center){
-            Text(NSLocalizedString("Enter a new article", comment: "ArticleEditView"))
+            Text("Enter a new article")
                 .foregroundColor(.green)
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
@@ -58,45 +74,45 @@ struct ArticleNewView: View {
             VStack {
                 
                 #if os(iOS)
-                InputMainType(heading: NSLocalizedString("MainType", comment: "ArticleEditView"),
+                InputMainType(heading: "MainType",
                               mainTypes: mainTypes,
                               spacing: 20,
                               value: $mainType)
-                InputSubType(heading: NSLocalizedString("SubType", comment: "ArticleEditView"),
+                InputSubType(heading: "SubType",
                              subTypes: subTypes,
                              spacing: 20,
                              value: $subType)
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
+                InputTextField(heading: "SubTitle1",
                                space: 12,
                                value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
+                InputTextField(heading: "Title",
                                space: 43,
                                value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
+                InputTextField(heading: "Introduction",
                                space: 11,
                                value: $introduction)
-                InputTextFieldURL(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
+                InputTextFieldURL(heading: "Url",
                                   space: 62,
                                   value: $url)
                 #elseif os(macOS)
-                InputMainType(heading:  NSLocalizedString("MainType", comment: "ArticleEditView"),
+                InputMainType(heading:  "MainType",
                               mainTypes: mainTypes,
                               spacing: 10,
                               value: $mainType)
-                InputSubType(heading:   NSLocalizedString("SubType", comment: "ArticleEditView"),
+                InputSubType(heading:   "SubType",
                              subTypes: subTypes,
                              spacing: 10,
                              value: $subType)
-                InputTextField(heading: NSLocalizedString("SubTitle1", comment: "ArticleEditView"),
+                InputTextField(heading: "SubTitle1",
                                spacing: 10,
                                value: $subType1)
-                InputTextField(heading: NSLocalizedString("Title", comment: "ArticleEditView"),
+                InputTextField(heading: "Title",
                                spacing: 57,
                                value: $title)
-                InputTextField(heading: NSLocalizedString("Introduction", comment: "ArticleEditView"),
+                InputTextField(heading: "Introduction",
                                spacing: 12,
                                value: $introduction)
-                InputTextField(heading: NSLocalizedString("Url", comment: "ArticleEditView"),
+                InputTextField(heading: "Url",
                                spacing: 71,
                                value: $url)
                 #endif
@@ -116,70 +132,6 @@ struct ArticleNewView: View {
         }
         .modifier01()
     } /// var Body
-    
-    func saveNewArticle(titleArt: String,
-                        introductionArt: String,
-                        mainTypeArt: Int,
-                        subTypeArt: Int,
-                        subType1Art: String,
-                        urlArt: String) {
-        
-        /// Alle feltene må ha verdi
-        if  titleArt.count > 0,
-            introductionArt.count > 0,
-            subType1Art.count > 0,
-            urlArt.count >  0  {
-            if urlArt.contains("https") ||
-                urlArt.contains("http")    {
-                if urlArt.contains("://"),
-                   urlArt.contains(".") {
-                    /// Sjekker om denne posten finnes fra før
-                    CloudKitArticle.doesArticleExist(url: urlArt) { (result) in
-                        if result == true {
-                            message = NSLocalizedString("Existing data", comment: "AddArticleView")
-                            message1 = NSLocalizedString("This article was stored earlier", comment: "AddArticleView")
-                            alertIdentifier = AlertID(id: .first)
-                        } else {
-                            let article = Article(title: title,
-                                                  introduction: introduction,
-                                                  mainType: mainTypeArt,
-                                                  subType: subTypeArt,
-                                                  subType1: subType1Art,
-                                                  url: urlArt)
-                            CloudKitArticle.saveArticle(item: article) { (result) in
-                                switch result {
-                                case .success:
-                                    title = ""
-                                    introduction = ""
-                                    url = ""
-                                    mainType = 0
-                                    subType = 0
-                                    subType1 = ""
-                                    message = NSLocalizedString("This article is now stored in CloudKit", comment: "AddArticleView")
-                                    alertIdentifier = AlertID(id: .first)
-                                case .failure(let err):
-                                    message = err.localizedDescription
-                                    alertIdentifier = AlertID(id: .first)
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    message = NSLocalizedString("Incorrect url", comment: "AddArticleView")
-                    message1 = NSLocalizedString("Check that the rest of the url following http is valid.", comment: "AddArticleView")
-                    alertIdentifier = AlertID(id: .first)
-                }
-            } else {
-                message = NSLocalizedString("Incorrect url", comment: "AddArticleView")
-                message1 = NSLocalizedString("Check that the url contains https or http.", comment: "AddArticleView")
-                alertIdentifier = AlertID(id: .first)
-            }
-        } else {
-            message = NSLocalizedString("Missing Article Data", comment: "AddArticleView")
-            message1 = NSLocalizedString("Check that all fields have a value.", comment: "AddArticleView")
-            alertIdentifier = AlertID(id: .first)
-        }
-    }
     
 }
 

@@ -24,7 +24,7 @@ struct ArticleSearchBar: View {
     #if os(iOS)
     var body: some View {
         HStack {
-            TextField(NSLocalizedString("Search...", comment: "SearchBar"), text: $text)
+            TextField("Search...", text: $text)
                 .padding(.leading, 30)
                 .padding(.trailing, 10)
                 .cornerRadius(8)
@@ -54,11 +54,10 @@ struct ArticleSearchBar: View {
                     isEditing = false
                     text = ""
                 }) {
-                    Text(NSLocalizedString("Cancel", comment: "SearchBar"))
+                    Text("Cancel")
                 }
                 .padding(.trailing, 15)
                 .transition(.move(edge: .trailing))
-                .animation(.default)
             }
         }
     }
@@ -68,7 +67,7 @@ struct ArticleSearchBar: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
-                TextField(NSLocalizedString("Search...", comment: "SearchBar"), text: $text)
+                TextField("Search...", text: $text)
                     .padding(.leading, 5)
                     .padding(.trailing, 10)
                     .cornerRadius(8)
@@ -83,11 +82,10 @@ struct ArticleSearchBar: View {
                     isEditing = false
                     text = ""
                 }) {
-                    Text(NSLocalizedString("Cancel", comment: "SearchBar"))
+                    Text("Cancel")
                 }
                 .padding(.trailing, 10)
                 .transition(.move(edge: .trailing))
-                .animation(.default)
             }
         }
     }
