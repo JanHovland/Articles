@@ -61,8 +61,8 @@ struct Articles: View {
                         }
                     })
                 }
-                .padding(.leading, 10)
-                .padding(.trailing, 10)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
 #if os(iOS)
                 List {
                     ///

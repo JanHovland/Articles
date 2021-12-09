@@ -52,13 +52,7 @@ struct ArticleNewView: View {
                     
                     
                 }
-//                saveNewArticle(titleArt: title,
-//                               introductionArt: introduction,
-//                               mainTypeArt: mainType,
-//                               subTypeArt: subType,
-//                               subType1Art: subType1,
-//                               urlArt: url)
-            }, label: {
+           }, label: {
                 HStack {
                     Text("Save article")
                 }
@@ -67,13 +61,14 @@ struct ArticleNewView: View {
         .padding()
         VStack (alignment: .center){
             Text("Enter a new article")
-                .foregroundColor(.green)
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
+                .padding()
         }
         Form {
             VStack {
                 
                 #if os(iOS)
+                
                 InputMainType(heading: "MainType",
                               mainTypes: mainTypes,
                               spacing: 20,
@@ -82,39 +77,34 @@ struct ArticleNewView: View {
                              subTypes: subTypes,
                              spacing: 20,
                              value: $subType)
-                InputTextField(heading: "SubTitle1",
-                               space: 12,
-                               value: $subType1)
-                InputTextField(heading: "Title",
-                               space: 43,
-                               value: $title)
-                InputTextField(heading: "Introduction",
-                               space: 11,
-                               value: $introduction)
-                InputTextFieldURL(heading: "Url",
-                                  space: 62,
-                                  value: $url)
+                
+                TextField("SubTitle1", text: $subType1)
+                TextField("Title", text: $title)
+                TextField("Introduction", text: $introduction)
+                TextField("Url", text: $url)
+                
                 #elseif os(macOS)
-                InputMainType(heading:  "MainType",
-                              mainTypes: mainTypes,
-                              spacing: 10,
-                              value: $mainType)
-                InputSubType(heading:   "SubType",
-                             subTypes: subTypes,
-                             spacing: 10,
-                             value: $subType)
-                InputTextField(heading: "SubTitle1",
-                               spacing: 10,
-                               value: $subType1)
-                InputTextField(heading: "Title",
-                               spacing: 57,
-                               value: $title)
-                InputTextField(heading: "Introduction",
-                               spacing: 12,
-                               value: $introduction)
-                InputTextField(heading: "Url",
-                               spacing: 71,
-                               value: $url)
+                    InputMainType(heading:  "MainType",
+                                  mainTypes: mainTypes,
+                                  spacing: 10,
+                                  value: $mainType)
+                    InputSubType(heading:   "SubType",
+                                 subTypes: subTypes,
+                                 spacing: 10,
+                                 value: $subType)
+                VStack {
+                    TextField("SubTitle1", text: $subType1)
+                        .padding(.bottom,10)
+                    TextField("Title", text: $title)
+                        .padding(.bottom,10)
+                    TextField("Introduction", text: $introduction)
+                        .padding(.bottom,10)
+                    TextField("Url", text: $url)
+                        .padding(.bottom,10)
+                }
+                .padding(.leading, 10)
+                .padding(.trailing, 10)
+                Spacer()
                 #endif
             }
         }
@@ -189,7 +179,6 @@ struct InputMainType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
-                .foregroundColor(.green)
             Spacer()
             Picker(selection: $value, label: Text(mainTypes[value])) {
                 ForEach(0 ..< mainTypes.count) { index in
@@ -198,7 +187,6 @@ struct InputMainType: View {
             }
             .pickerStyle(MenuPickerStyle())
         }
-        .padding(10)
     }
     
     struct SelectedItemView: View, Identifiable {
@@ -223,7 +211,6 @@ struct InputSubType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
-                .foregroundColor(.green)
             Spacer()
             Picker(selection: $value, label: Text(subTypes[value])) {
                 ForEach(0 ..< subTypes.count) { index in
@@ -232,7 +219,6 @@ struct InputSubType: View {
             }
             .pickerStyle(MenuPickerStyle())
         }
-        .padding(10)
     }
     
     struct SelectedItemView: View, Identifiable {
@@ -257,7 +243,6 @@ struct InputTextField: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing*1.00)) {
             Text(heading)
-                .foregroundColor(.green)
             TextEditor(text: $value)
                 .lineSpacing(5)
                 .lineLimit(nil)
@@ -277,7 +262,6 @@ struct InputMainType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
-                .foregroundColor(.green)
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<mainTypes.count) { index in
                     Text(self.mainTypes[index]).tag(index)
@@ -297,7 +281,6 @@ struct InputSubType: View {
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(heading)
-                .foregroundColor(.green)
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<subTypes.count) { index in
                     Text(self.subTypes[index]).tag(index)
