@@ -17,8 +17,8 @@ struct toDoView: View {
       1. 🟢 Legg inn async await på CloudKit.
       2. 🟢 Ny Search bar iOS 15.
       3. 🟢 Tastaturet skjuler ikke feltet lenger.
-      4. 🔴 Rett sletting på macOS
-      5. 🔴 Etter å ha valgt et view og kommer tilbake er alle i viewet valgt.
+      4. 🟢 Etter å ha valgt et view og kommer tilbake er alle i viewet valgt.
+      5. 🔴 Rett sletting på macOS
       6. 🔴 .
 
     
