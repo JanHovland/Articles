@@ -14,16 +14,23 @@
 ///     SafariView.swift
 /// 
 
+
 import SwiftUI
-import Network
-import CoreData
 import CloudKit
+import Network
 
 var selectedRecordId: CKRecord.ID?
 
 @MainActor
 
 struct Articles: View {
+    
+//#if os(iOS)
+//    /// Skjuler scroll indicators.
+//    init() {
+//        UITableView.appearance().showsVerticalScrollIndicator = false
+//    }
+//#endif
     
     @State private var articles = [Article]()
     @State private var message: LocalizedStringKey = ""
@@ -113,7 +120,7 @@ struct Articles: View {
                 
 #elseif os(macOS)
                 Spacer()
-                .searchable(text: $searchFor)
+                    .searchable(text: $searchFor)
                 List {
                     ///
                     /// Søker nå i både:
@@ -143,7 +150,7 @@ struct Articles: View {
                         isAlertActive.toggle()
                     }
                 }
-               
+                
 #endif
             } // VStack
         }

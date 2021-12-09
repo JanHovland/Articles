@@ -10,8 +10,6 @@ import CloudKit
 import WebKit
 import SafariServices
 
-
-
 #if os(macOS)
 
 /// Denne virker som test under macOS
