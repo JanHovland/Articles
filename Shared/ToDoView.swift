@@ -14,9 +14,11 @@ struct toDoView: View {
     var toDo =
     """
     
-      1. 🔴 Legg inn async await på CloudKit.
-      2. 🔴 Search bar iOS 15.
-      3. 🔴 .
+      1. 🟢 Legg inn async await på CloudKit.
+      2. 🟢 Rett sletting på macOS
+      3. 🔴 Search bar iOS 15.
+      4. 🔴 .
+    
     """
     
     var body: some View {

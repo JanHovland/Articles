@@ -21,6 +21,8 @@ import CloudKit
 
 var selectedRecordId: CKRecord.ID?
 
+@MainActor
+
 struct Articles: View {
     
     @State private var articles = [Article]()
@@ -98,7 +100,6 @@ struct Articles: View {
                     .onDelete { (indexSet) in
                         indexSetDelete = indexSet
                         selectedRecordId = articles[indexSet.first!].recordID
-                        articles.removeAll()
                         Task.init {
                             await message = deleteArticle(selectedRecordId!)
                             title = "Delete"
@@ -132,14 +133,11 @@ struct Articles: View {
                 .listStyle(SidebarListStyle())
                 /// onDelete finne bare i macOS
                 .onDeleteCommand {
-//                    indexSetDelete = indexSet
-//                    selectedRecordId = articles[indexSet.first!].recordID
-//                    articles.removeAll()
-//                    Task.init {
-//                        await message = deleteArticle(selectedRecordId!)
-//                        title = "Delete"
-//                        isAlertActive.toggle()
-//                    }
+                    Task.init {
+                        await message = deleteArticle(selectedRecordId!)
+                        title = "Delete"
+                        isAlertActive.toggle()
+                    }
                 }
                 #endif
                 Spacer()
@@ -161,6 +159,7 @@ struct Articles: View {
     func findAllArticles() async {
         var value: (LocalizedStringKey, [Article])
         let predicate = NSPredicate(value: true)
+        articles.removeAll()
         await value = findArticles(predicate)
         if value.0 != "" {
             message = value.0
