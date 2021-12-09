@@ -30,7 +30,7 @@ struct Articles: View {
     @State private var message1: LocalizedStringKey = ""
     @State private var title: LocalizedStringKey = ""
     @State private var indexSetDelete = IndexSet()
-    @State private var searchText: String = ""
+    @State private var searchFor: String = ""
     @State private var device: LocalizedStringKey = ""
     @State private var hasConnectionPath = false
     @State private var isShowingNewView : Bool = false
@@ -42,8 +42,6 @@ struct Articles: View {
     var body: some View {
         NavigationView {
             VStack {
-                ArticleSearchBar(text: $searchText)
-                    .padding(.top, 10)
                 HStack {
                     Button(action: {
                         isShowingNewView.toggle()
@@ -63,10 +61,9 @@ struct Articles: View {
                         }
                     })
                 }
-                .padding(.top, 5)
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
-                #if os(iOS)
+#if os(iOS)
                 List {
                     ///
                     /// Søker nå i både:
@@ -74,42 +71,49 @@ struct Articles: View {
                     ///     introduction
                     ///     subtype1
                     ///
-                    ForEach(articles.filter({ searchText.isEmpty ||
-                                                $0.title.localizedStandardContains (searchText) ||
-                                                $0.introduction.localizedStandardContains (searchText) ||
-                                                $0.subType1.localizedStandardContains (searchText)    } )) {
-                        article in
-                        if UIDevice.current.model == "iPad" {
-                            NavigationLink(destination: SafariView(url: article.url)) {
-                                ArticleAllView(article: article,
-                                               searchText: searchText)
+                    ForEach(articles.filter({ searchFor.isEmpty ||
+                        $0.title.localizedStandardContains (searchFor) ||
+                        $0.introduction.localizedStandardContains (searchFor) ||
+                        $0.subType1.localizedStandardContains (searchFor)    } )) {
+                            article in
+                            if UIDevice.current.model == "iPad" {
+                                NavigationLink(destination: SafariView(url: article.url)) {
+                                    ArticleAllView(article: article,
+                                                   searchText: searchFor)
+                                }
+                            }
+                            else {
+                                // NavigationLink(destination: SafariViewIPone(url: article.url)) {
+                                ///
+                                /// Nå virker denne
+                                ///
+                                NavigationLink(destination: SafariView(url: article.url)) {
+                                    ArticleAllView(article: article,
+                                                   searchText: searchFor)
+                                }
                             }
                         }
-                        else {
-                            // NavigationLink(destination: SafariViewIPone(url: article.url)) {
-                            ///
-                            /// Nå virker denne
-                            ///
-                            NavigationLink(destination: SafariView(url: article.url)) {
-                                ArticleAllView(article: article,
-                                               searchText: searchText)
-                            }
-                        }
-                    }
+                    
+                    
                     /// onDelete finne bare i iOS
-                    .onDelete { (indexSet) in
-                        indexSetDelete = indexSet
-                        selectedRecordId = articles[indexSet.first!].recordID
-                        Task.init {
-                            await message = deleteArticle(selectedRecordId!)
-                            title = "Delete"
-                            isAlertActive.toggle()
+                        .onDelete { (indexSet) in
+                            indexSetDelete = indexSet
+                            selectedRecordId = articles[indexSet.first!].recordID
+                            Task.init {
+                                await message = deleteArticle(selectedRecordId!)
+                                title = "Delete"
+                                isAlertActive.toggle()
+                            }
                         }
-                    }
+                        .searchable(text: $searchFor, placement: .navigationBarDrawer, prompt: "Search...")
                 }
                 /// navigationBarHidden kan kun brukes i iOS
-                .navigationBarHidden(true)
-                #elseif os(macOS)
+                .navigationBarHidden(false)
+                .navigationTitle("Articles")
+                
+#elseif os(macOS)
+                Spacer()
+                .searchable(text: $searchFor)
                 List {
                     ///
                     /// Søker nå i både:
@@ -117,18 +121,18 @@ struct Articles: View {
                     ///     introduction
                     ///     subtype1
                     ///
-                    ForEach(articles.filter({ searchText.isEmpty ||
-                                                $0.title.localizedStandardContains (searchText) ||
-                                                $0.introduction.localizedStandardContains (searchText) ||
-                                                $0.subType1.localizedStandardContains (searchText)    } )) {
-                        article in
-                        NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
-                            VStack (alignment: .leading) {
-                                ArticleAllView(article: article,
-                                               searchText: searchText)
+                    ForEach(articles.filter({ searchFor.isEmpty ||
+                        $0.title.localizedStandardContains (searchFor) ||
+                        $0.introduction.localizedStandardContains (searchFor) ||
+                        $0.subType1.localizedStandardContains (searchFor)    } )) {
+                            article in
+                            NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
+                                VStack (alignment: .leading) {
+                                    ArticleAllView(article: article,
+                                                   searchText: searchFor)
+                                }
                             }
                         }
-                    }
                 }
                 .listStyle(SidebarListStyle())
                 /// onDelete finne bare i macOS
@@ -139,9 +143,9 @@ struct Articles: View {
                         isAlertActive.toggle()
                     }
                 }
-                #endif
-                Spacer()
-            }
+               
+#endif
+            } // VStack
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
@@ -150,9 +154,14 @@ struct Articles: View {
             /// Henter alle artiklene på nytt
             await findAllArticles()
         }
+        
         .sheet(isPresented: $isShowingNewView) {
             ArticleNewView()
-        }
+        } // NavigationView
+        
+        
+        
+        
         
     } /// var body
     
@@ -168,7 +177,7 @@ struct Articles: View {
         } else {
             articles = value.1
         }
-
+        
     }
     
     func startInternetTracking() {
@@ -184,7 +193,7 @@ struct Articles: View {
             }
         }
         internetMonitor.start(queue: internetQueue)
-        #if os(iOS)
+#if os(iOS)
         /// Legger inn en forsinkelse på 1 sekund
         /// Uten denne, kan det komme melding selv om Internett er tilhjengelig
         sleep(1)
@@ -198,7 +207,7 @@ struct Articles: View {
             message = "No Internet connection for this device."
             isAlertActive.toggle()
         }
-        #endif
+#endif
         
     }
     
