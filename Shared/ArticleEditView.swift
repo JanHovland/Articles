@@ -23,7 +23,7 @@ struct ArticleEditView: View {
     @State private var isAlertActive = false
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -39,13 +39,34 @@ struct ArticleEditView: View {
             Spacer()
             Button(action: {
                 Task.init {
-                    let article = Article(title: title,
+                    print(title)
+                    
+                /*
+                CoreData: CloudKit: CoreData+CloudKit: -[NSCloudKitMirroringDelegate checkAndExecuteNextRequest]_block_invoke(2856): <NSCloudKitMirroringDelegate: 0x600000340340>: No more requests to execute.
+                qqqq Create a macOS Menu Bar Application Using SwiftUI
+                (lldb) po article
+                ▿ Article
+                  ▿ id : D2858262-85F9-443E-8C14-7D9923EE840E
+                    - uuid : "D2858262-85F9-443E-8C14-7D9923EE840E"
+                  ▿ recordID : Optional<CKRecordID>
+                    - some : <CKRecordID: 0x6000038f4440; recordName=F0B22491-B6F0-4102-AE78-BE61EEE0BA6B, zoneID=_defaultZone:__defaultOwner__>
+                  - title : "Create a macOS Menu Bar Application Using SwiftUI"
+                  - introduction : "Learn how to create a menu bar application using SwiftUI"
+                  - mainType : 0
+                  - subType : 0
+                  - subType1 : ""
+                  - url : "https://medium.com/@acwrightdesign/creating-a-macos-menu-bar-application-using-swiftui-54572a5d5f87"
+                  */
+                    
+                    let artic  = Article(title: title,
                                           introduction: introduction,
                                           mainType: mainType,
                                           subType: subType,
                                           subType1: subType1,
                                           url: url)
-                    message = await modifyArticle(article)
+                    
+                    
+                    message = await modifyArticle(artic)
                     title1 = "Update an article"
                     isAlertActive.toggle()
                 }
@@ -64,7 +85,7 @@ struct ArticleEditView: View {
         Form {
             VStack {
                 
-                #if os(iOS)
+#if os(iOS)
                 InputMainType(heading: "MainType",
                               mainTypes: mainTypes,
                               spacing: 20,
@@ -73,6 +94,7 @@ struct ArticleEditView: View {
                              subTypes: subTypes,
                              spacing: 20,
                              value: $subType)
+                
                 InputTextField(heading: "SubTitle1",
                                space: 12,
                                value: $subType1)
@@ -85,7 +107,7 @@ struct ArticleEditView: View {
                 InputTextFieldURL(heading: "Url",
                                   space: 62,
                                   value: $url)
-                #elseif os(macOS)
+#elseif os(macOS)
                 InputMainType(heading:  "MainType",
                               mainTypes: mainTypes,
                               spacing: 5,
@@ -94,6 +116,7 @@ struct ArticleEditView: View {
                              subTypes: subTypes,
                              spacing: 10,
                              value: $subType)
+                
                 InputTextField(heading: "SubTitle1",
                                spacing: 10,
                                value: $subType1)
@@ -106,18 +129,23 @@ struct ArticleEditView: View {
                 InputTextField(heading: "Url",
                                spacing: 71,
                                value: $url)
-                #endif
+#endif
             }
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear {
+        .task {
             title = article.title
             introduction = article.introduction
             mainType = article.mainType
             subType = article.subType
             subType1 = article.subType1
             url = article.url
+        }
+        .alert(title1, isPresented: $isAlertActive) {
+            Button("OK", action: {})
+        } message: {
+            Text(message)
         }
         .modifier01()
     } /// var Body

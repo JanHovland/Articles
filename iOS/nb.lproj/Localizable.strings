@@ -64,3 +64,9 @@
 /* No comment provided by engineer. */
 "ToDo" = "Oppgaver";
 
+/* No comment provided by engineer. */
+"Update an article" = "Oppdater en artikkel";
+
+/* No comment provided by engineer. */
+"The article has been modified in CloudKit" = "Atikkelen er oppdatert i CloudKit.";
+
