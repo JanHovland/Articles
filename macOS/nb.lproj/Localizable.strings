@@ -34,3 +34,18 @@
 /* No comment provided by engineer. */
 "Update article" = "Oppdater";
 
+/* No comment provided by engineer. */
+"Search" = "Søk";
+
+/* No comment provided by engineer. */
+"Article" = "Artikkel";
+
+/* No comment provided by engineer. */
+"Save a new article" = "Lagre en ny artikkel";
+
+/* No comment provided by engineer. */
+"This article exists i CloudKit" = "Denne artikkelen finnes allerede i CloudKit";
+
+/* No comment provided by engineer. */
+"The url is empty, must have a value" = "Url adressen er tom, må ha verdi";
+

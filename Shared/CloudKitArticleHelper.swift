@@ -32,11 +32,11 @@ func modifyArticle(_ article: Article) async -> LocalizedStringKey {
     }
 }
 
-func articleExist(_ predicate: NSPredicate, _ article: Article) async -> (err: LocalizedStringKey, exist: Bool) {
+func articleExist(_ article: Article) async -> (err: LocalizedStringKey, exist: Bool) {
     var err : LocalizedStringKey = ""
     var exist : Bool = false
     do {
-        exist = try await CloudKitArticle.existArticle(predicate, article)
+        exist = try await CloudKitArticle.existArticle(article)
         err = ""
     } catch {
         print(error.localizedDescription)

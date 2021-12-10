@@ -155,6 +155,13 @@ struct Articles: View {
         .sheet(isPresented: $isShowingNewView) {
             ArticleNewView()
         } // NavigationView
+        
+        .alert(title, isPresented: $isAlertActive) {
+            Button("OK", action: {})
+        } message: {
+            Text(message)
+        }
+
       
     } /// var body
     

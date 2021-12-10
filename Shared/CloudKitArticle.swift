@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CloudKitArticle {
     
-    static var database = CKContainer(identifier: Config.containerIdentifier).privateCloudDatabase
+    static var database = CKContainer(identifier: Config.containerIdentifier).publicCloudDatabase
     
     struct RecordType {
         static let Article = "Article"
@@ -41,7 +41,8 @@ struct CloudKitArticle {
     }
     
     // MARK: - check if the article record exists inside CloudKitArticle
-    static func existArticle(_ predicate: NSPredicate,_ article: Article) async throws -> Bool {
+    static func existArticle(_ article: Article) async throws -> Bool {
+        let predicate = NSPredicate(format: "url = %@", article.url)
         let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
         do {
             let result = try await database.records(matching: query)

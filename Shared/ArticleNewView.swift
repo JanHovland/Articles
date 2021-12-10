@@ -16,9 +16,7 @@ struct ArticleNewView: View {
     @State private var subType1 = ""
     @State private var introduction = ""
     @State private var url = ""
-    @State private var alertIdentifier: AlertID?
     @State private var message: LocalizedStringKey = ""
-    @State private var message1: LocalizedStringKey = ""
     @State private var title1: LocalizedStringKey = ""
     @State private var isAlertActive = false
     
@@ -45,12 +43,34 @@ struct ArticleNewView: View {
                                           subType: subType,
                                           subType1: subType1,
                                           url: url)
-                    message = await saveArticle(article)
-                    title1 = "Save a new article"
-                    isAlertActive.toggle()
                     
+                    ///
+                    /// Sjekk om artikkelen finnes fra før
+                    ///
                     
-                    
+                    if article.url.count > 0 {
+                        var value: (LocalizedStringKey, Bool)
+                        value = await articleExist(article)
+                        if value.0 == "" {
+                            if value.1 == false {
+                                message = await saveArticle(article)
+                                title1 = "Save a new article"
+                                isAlertActive.toggle()
+                            } else {
+                                message = "This article exists i CloudKit" 
+                                title1 = "Save a new article"
+                                isAlertActive.toggle()
+                            }
+                        } else {
+                            message = value.0
+                            title1 = "Save a new article"
+                            isAlertActive.toggle()
+                        }
+                    } else {
+                        message = "The url is empty, must have a value"
+                        title1 = "Save a new article"
+                        isAlertActive.toggle()
+                    }
                 }
            }, label: {
                 HStack {
@@ -109,16 +129,10 @@ struct ArticleNewView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .alert(item: $alertIdentifier) { alert in
-            switch alert.id {
-            case .first:
-                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
-            case .second:
-                return Alert(title: Text(message), message: Text(message1), dismissButton: .cancel())
-            case .delete:
-                return Alert(title: Text(message), message: Text(message1), primaryButton: .cancel(),
-                             secondaryButton: .default(Text("OK"), action: {}))
-            }
+        .alert(title, isPresented: $isAlertActive) {
+            Button("OK", action: {})
+        } message: {
+            Text(message)
         }
         .modifier01()
     } /// var Body
