@@ -33,6 +33,7 @@ struct Articles: View {
     @State private var device: LocalizedStringKey = ""
     @State private var hasConnectionPath = false
     @State private var isShowingNewView : Bool = false
+    @State private var isShowingToDoView: Bool = false
     @State private var isAlertActive = false
     
     let internetMonitor = NWPathMonitor()
@@ -50,20 +51,27 @@ struct Articles: View {
                         }
                     })
                     Spacer()
-                    Button(action: {
-                        Task.init {
-                            await findAllArticles()
+                    Text("_Choose_") /// Italics med _
+                        .foregroundColor(.accentColor)
+                        .contextMenu {
+                            Button {
+                                Task.init {
+                                    await findAllArticles()
+                                }
+                            } label: {
+                                Label("Refresh", systemImage: "square.and.pencil")
+                            }
+                            Button {
+                                isShowingToDoView.toggle()
+                            } label: {
+                                Label("ToDoView", systemImage: "square.and.pencil")
+                            }
                         }
-                    }, label: {
-                        HStack {
-                            Text("Refresh")
-                        }
-                    })
                 }
                 .padding(.top, 5)
-                .padding(.leading, 10)
-                .padding(.trailing, 10)
-                #if os(iOS)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+#if os(iOS)
                 List {
                     ///
                     /// Søker nå i både:
@@ -72,43 +80,43 @@ struct Articles: View {
                     ///     subtype1
                     ///
                     ForEach(articles.filter({ searchFor.isEmpty ||
-                                                $0.title.localizedStandardContains (searchFor) ||
-                                                $0.introduction.localizedStandardContains (searchFor) ||
-                                                $0.subType1.localizedStandardContains (searchFor)    } )) {
-                        article in
-                        if UIDevice.current.model == "iPad" {
-                            NavigationLink(destination: SafariView(url: article.url)) {
-                                ArticleAllView(article: article,
-                                               searchText: searchFor)
+                        $0.title.localizedStandardContains (searchFor) ||
+                        $0.introduction.localizedStandardContains (searchFor) ||
+                        $0.subType1.localizedStandardContains (searchFor)    } )) {
+                            article in
+                            if UIDevice.current.model == "iPad" {
+                                NavigationLink(destination: SafariView(url: article.url)) {
+                                    ArticleAllView(article: article,
+                                                   searchText: searchFor)
+                                }
+                            }
+                            else {
+                                // NavigationLink(destination: SafariViewIPone(url: article.url)) {
+                                ///
+                                /// Nå virker denne
+                                ///
+                                NavigationLink(destination: SafariView(url: article.url)) {
+                                    ArticleAllView(article: article,
+                                                   searchText: searchFor)
+                                }
                             }
                         }
-                        else {
-                            // NavigationLink(destination: SafariViewIPone(url: article.url)) {
-                            ///
-                            /// Nå virker denne
-                            ///
-                            NavigationLink(destination: SafariView(url: article.url)) {
-                                ArticleAllView(article: article,
-                                               searchText: searchFor)
-                            }
-                        }
-                    }
                     
                     
                     /// onDelete finne bare i iOS
-                    .onDelete { (indexSet) in
-                        indexSetDelete = indexSet
-                        selectedRecordId = articles[indexSet.first!].recordID
-                        Task.init {
-                            await message = deleteArticle(selectedRecordId!)
-                            title = "Delete"
-                            isAlertActive.toggle()
+                        .onDelete { (indexSet) in
+                            indexSetDelete = indexSet
+                            selectedRecordId = articles[indexSet.first!].recordID
+                            Task.init {
+                                await message = deleteArticle(selectedRecordId!)
+                                title = "Delete"
+                                isAlertActive.toggle()
+                            }
                         }
-                    }
                 }
                 /// navigationBarHidden kan kun brukes i iOS
                 .navigationBarHidden(false)
-                #elseif os(macOS)
+#elseif os(macOS)
                 List {
                     ///
                     /// Søker nå i både:
@@ -117,17 +125,17 @@ struct Articles: View {
                     ///     subtype1
                     ///
                     ForEach(articles.filter({ searchFor.isEmpty ||
-                                                $0.title.localizedStandardContains (searchFor) ||
-                                                $0.introduction.localizedStandardContains (searchFor) ||
-                                                $0.subType1.localizedStandardContains (searchFor)    } )) {
-                        article in
-                        NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
-                            VStack (alignment: .leading) {
-                                ArticleAllView(article: article,
-                                               searchText: searchFor)
+                        $0.title.localizedStandardContains (searchFor) ||
+                        $0.introduction.localizedStandardContains (searchFor) ||
+                        $0.subType1.localizedStandardContains (searchFor)    } )) {
+                            article in
+                            NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
+                                VStack (alignment: .leading) {
+                                    ArticleAllView(article: article,
+                                                   searchText: searchFor)
+                                }
                             }
                         }
-                    }
                 }
                 .listStyle(SidebarListStyle())
                 /// onDelete finne bare i macOS
@@ -138,12 +146,11 @@ struct Articles: View {
                         isAlertActive.toggle()
                     }
                 }
-                #endif
+#endif
             } // VStack
             .navigationTitle("Articles")
-            .searchable(text: $searchFor, placement: .automatic, prompt: "Search...")
-
-        }
+            .searchable(text: $searchFor, placement: .automatic, prompt: "Search..."
+            )}
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             /// Sjekker internett forbindelse
@@ -151,18 +158,22 @@ struct Articles: View {
             /// Henter alle artiklene på nytt
             await findAllArticles()
         }
-
+        
         .sheet(isPresented: $isShowingNewView) {
             ArticleNewView()
-        } // NavigationView
+        }
+        
+        .sheet(isPresented: $isShowingToDoView) {
+            toDoView()
+        }
         
         .alert(title, isPresented: $isAlertActive) {
             Button("OK", action: {})
         } message: {
             Text(message)
         }
-
-      
+        
+        
     } /// var body
     
     func findAllArticles() async {
@@ -177,7 +188,7 @@ struct Articles: View {
         } else {
             articles = value.1
         }
-
+        
     }
     
     func startInternetTracking() {
@@ -193,7 +204,7 @@ struct Articles: View {
             }
         }
         internetMonitor.start(queue: internetQueue)
-        #if os(iOS)
+#if os(iOS)
         /// Legger inn en forsinkelse på 1 sekund
         /// Uten denne, kan det komme melding selv om Internett er tilhjengelig
         sleep(1)
@@ -207,7 +218,7 @@ struct Articles: View {
             message = "No Internet connection for this device."
             isAlertActive.toggle()
         }
-        #endif
+#endif
         
     }
     
