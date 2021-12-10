@@ -18,9 +18,9 @@ struct toDoView: View {
       2. 🟢 Ny Search bar iOS 15.
       3. 🟢 Tastaturet skjuler ikke feltet lenger.
       4. 🟢 Etter å ha valgt en post blir **alle** postene i viewet valgt.
-      5. 🔴 Rett sletting på macOS
-      6. 🔴 Sjekk lagring og lagre når posten allere finnes.
-      7. 🔴 .
+      5. 🟢 Rett sletting på macOS
+      6. 🟢 Sjekk lagring og lagre kun når posten ikke finnes fra før.
+      7. 🔴 Legge inn ToDoView i menyen 
 
     
     """
