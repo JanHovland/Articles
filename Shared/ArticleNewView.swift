@@ -48,7 +48,10 @@ struct ArticleNewView: View {
                     /// Sjekk om artikkelen finnes fra før
                     ///
                     
-                    if article.url.count > 0 {
+                    if article.url.count > 0,
+                       article.url.contains("https") || article.url.contains("http"),
+                       article.url.contains("://") || article.url.contains(".") {
+                                
                         var value: (LocalizedStringKey, Bool)
                         value = await articleExist(article)
                         if value.0 == "" {
@@ -67,7 +70,7 @@ struct ArticleNewView: View {
                             isAlertActive.toggle()
                         }
                     } else {
-                        message = "The url is empty, must have a value"
+                        message = "The url is empty or has an illegal format"
                         title1 = "Save a new article"
                         isAlertActive.toggle()
                     }
@@ -129,7 +132,7 @@ struct ArticleNewView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .alert(title, isPresented: $isAlertActive) {
+        .alert(title1, isPresented: $isAlertActive) {
             Button("OK", action: {})
         } message: {
             Text(message)

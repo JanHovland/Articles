@@ -38,14 +38,23 @@
 "Search" = "Søk";
 
 /* No comment provided by engineer. */
-"Article" = "Artikkel";
+"Articles" = "Artikler";
 
 /* No comment provided by engineer. */
-"Save a new article" = "Lagre en ny artikkel";
+"Save a new article" = "Lagre";
 
 /* No comment provided by engineer. */
-"This article exists i CloudKit" = "Denne artikkelen finnes allerede i CloudKit";
+"This article exists i CloudKit" = "Denne artikkelen finnes allerede i CloudKit.";
 
 /* No comment provided by engineer. */
-"The url is empty, must have a value" = "Url adressen er tom, må ha verdi";
+"The article has been saved in CloudKit" = "Artikkelen er lagret i CloudKit.";
+
+/* No comment provided by engineer. */
+"Delete" = "Slett";
+
+/* No comment provided by engineer. */
+"The article has been deleted" = "Artikkelen er slettet.";
+
+/* No comment provided by engineer. */
+"The url is empty or has an illegal format" = "Url adressen er tom, eller har et ulovlig format.";
 
