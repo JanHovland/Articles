@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import CloudKit
 
 struct ArticleEditView: View {
     var article: Article
     
+    @Environment(\.presentationMode) var presentationMode
+
     @State private var title = ""
     @State private var mainType = 0
     @State private var subType = 0
@@ -21,8 +24,6 @@ struct ArticleEditView: View {
     @State private var title1: LocalizedStringKey = ""
     
     @State private var isAlertActive = false
-    
-    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         HStack {
@@ -39,34 +40,15 @@ struct ArticleEditView: View {
             Spacer()
             Button(action: {
                 Task.init {
-                    print(title)
+                   let article = Article(recordID: article.recordID,
+                                         title: title,
+                                         introduction: introduction,
+                                         mainType: mainType,
+                                         subType: subType,
+                                         subType1: subType1,
+                                         url: url)
                     
-                /*
-                CoreData: CloudKit: CoreData+CloudKit: -[NSCloudKitMirroringDelegate checkAndExecuteNextRequest]_block_invoke(2856): <NSCloudKitMirroringDelegate: 0x600000340340>: No more requests to execute.
-                qqqq Create a macOS Menu Bar Application Using SwiftUI
-                (lldb) po article
-                ▿ Article
-                  ▿ id : D2858262-85F9-443E-8C14-7D9923EE840E
-                    - uuid : "D2858262-85F9-443E-8C14-7D9923EE840E"
-                  ▿ recordID : Optional<CKRecordID>
-                    - some : <CKRecordID: 0x6000038f4440; recordName=F0B22491-B6F0-4102-AE78-BE61EEE0BA6B, zoneID=_defaultZone:__defaultOwner__>
-                  - title : "Create a macOS Menu Bar Application Using SwiftUI"
-                  - introduction : "Learn how to create a menu bar application using SwiftUI"
-                  - mainType : 0
-                  - subType : 0
-                  - subType1 : ""
-                  - url : "https://medium.com/@acwrightdesign/creating-a-macos-menu-bar-application-using-swiftui-54572a5d5f87"
-                  */
-                    
-                    let artic  = Article(title: title,
-                                          introduction: introduction,
-                                          mainType: mainType,
-                                          subType: subType,
-                                          subType1: subType1,
-                                          url: url)
-                    
-                    
-                    message = await modifyArticle(artic)
+                    message = await modifyArticle(article)
                     title1 = "Update an article"
                     isAlertActive.toggle()
                 }

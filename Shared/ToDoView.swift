@@ -23,7 +23,7 @@ struct toDoView: View {
       7. 🟢 Lage meny med:
             . 🟢 Friskopp
             . 🟢 Oppgaver
-      8. 🔴 Sjekk oppdatering.
+      8. 🟢 Oppdatering får nå med seg endringene. 
       9. 🔴 .
 
     
