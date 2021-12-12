@@ -86,7 +86,7 @@ func articleRecordID(_ predicate: NSPredicate, _ article: Article) async -> (err
     return (err, id)
 }
 
-func deleteAllArticless(_ predicate: NSPredicate,_ recID: CKRecord.ID) async -> LocalizedStringKey {
+func deleteAllArticles(_ predicate: NSPredicate,_ recID: CKRecord.ID) async -> LocalizedStringKey {
     var message: LocalizedStringKey = ""
     do {
         try await CloudKitArticle().deleteAllArticles(predicate, recID)
