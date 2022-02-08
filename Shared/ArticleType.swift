@@ -8,13 +8,15 @@
 import SwiftUI
 
 var mainTypes = [
-    "iOS",
-    "MacOS"
+    NSLocalizedString("iOS", comment: ""),
+    NSLocalizedString("MacOS", comment: ""),
+    NSLocalizedString("Other", comment: "")
 ]
 
 var subTypes = [
-    "SwiftUI",
-    "Swift"
+    NSLocalizedString("SwiftUI", comment: ""),
+    NSLocalizedString("Swift", comment: ""),
+    ""
 ]
 
 

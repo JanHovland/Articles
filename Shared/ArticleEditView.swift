@@ -68,47 +68,45 @@ struct ArticleEditView: View {
             VStack {
                 
 #if os(iOS)
-                InputMainType(heading: "MainType",
+                InputMainType(heading: NSLocalizedString("MainType", comment:  ""),
                               mainTypes: mainTypes,
                               spacing: 20,
                               value: $mainType)
-                InputSubType(heading: "SubType",
+                InputSubType(heading: NSLocalizedString("SubType", comment:  ""),
                              subTypes: subTypes,
                              spacing: 20,
                              value: $subType)
-                
-                InputTextField(heading: "SubTitle1",
+                InputTextField(heading: NSLocalizedString("SubTitle1", comment:  ""),
                                space: 12,
                                value: $subType1)
-                InputTextField(heading: "Title",
+                InputTextField(heading: NSLocalizedString("Title", comment:  ""),
                                space: 43,
                                value: $title)
-                InputTextField(heading: "Introduction",
+                InputTextField(heading: NSLocalizedString("Introduction", comment:  ""),
                                space: 11,
                                value: $introduction)
-                InputTextFieldURL(heading: "Url",
+                InputTextFieldURL(heading: NSLocalizedString("Url", comment:  ""),
                                   space: 62,
                                   value: $url)
 #elseif os(macOS)
-                InputMainType(heading:  "MainType",
+                InputMainType(heading: NSLocalizedString("MainType", comment:  ""),
                               mainTypes: mainTypes,
                               spacing: 5,
                               value: $mainType)
-                InputSubType(heading:   "SubType",
+                InputSubType(heading: NSLocalizedString("SubType", comment:  ""),
                              subTypes: subTypes,
                              spacing: 10,
                              value: $subType)
-                
-                InputTextField(heading: "SubTitle1",
+                InputTextField(heading: NSLocalizedString("SubTitle1", comment:  ""),
                                spacing: 10,
                                value: $subType1)
-                InputTextField(heading: "Title",
+                InputTextField(heading: NSLocalizedString("Title", comment:  ""),
                                spacing: 57,
                                value: $title)
-                InputTextField(heading: "Introduction",
+                InputTextField(heading: NSLocalizedString("Introduction", comment:  ""),
                                spacing: 11,
                                value: $introduction)
-                InputTextField(heading: "Url",
+                InputTextField(heading: NSLocalizedString("Url", comment:  ""),
                                spacing: 71,
                                value: $url)
 #endif

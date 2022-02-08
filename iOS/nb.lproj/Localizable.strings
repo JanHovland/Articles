@@ -1,4 +1,7 @@
 /* No comment provided by engineer. */
+"_Choose_" = "Velg";
+
+/* No comment provided by engineer. */
 "Cancel" = "Avbryt";
 
 /* No comment provided by engineer. */
@@ -8,16 +11,19 @@
 "Enter a new article" = "Legg inn en ny artikkel";
 
 /* No comment provided by engineer. */
-"New Article" = "Ny artikkel";
+"Introduction" = "Introduksjon";
 
 /* No comment provided by engineer. */
-"OK" = "OK";
+"MainType" = "Hovedtype";
+
+/* No comment provided by engineer. */
+"New Article" = "Ny artikkel";
 
 /* No comment provided by engineer. */
 "On the iPhone (due to a software faulure?), you must press the \"Return\" key in order to go back to the overview." = "På iPhone (på grunn av programvarefeil?) må du trykke på \"Return\" -tasten for å gå tilbake til oversikten.";
 
 /* No comment provided by engineer. */
-"Refresh" = "Frisk opp";
+"Other" = "Annet";
 
 /* No comment provided by engineer. */
 "Return" = "Tilbake";
@@ -29,44 +35,17 @@
 "Save article" = "Lagre";
 
 /* No comment provided by engineer. */
-"Update article" = "Oppdater";
+"SubTitle1" = "Undertype 1";
 
 /* No comment provided by engineer. */
-"Search..." = "Søk...";
+"SubType" = "Undertype";
 
 /* No comment provided by engineer. */
-"Articles" = "Artikler";
-
-/* No comment provided by engineer. */
-"Save a new article" = "Lagre";
-
-/* No comment provided by engineer. */
-"This article exists i CloudKit" = "Denne artikkelen finnes allerede i CloudKit.";
-
-/* No comment provided by engineer. */
-"The article has been saved in CloudKit" = "Artikkelen er lagret i CloudKit.";
-
-/* No comment provided by engineer. */
-"Delete" = "Slett";
-
-/* No comment provided by engineer. */
-"The article has been deleted" = "Artikkelen er slettet.";
-
-/* No comment provided by engineer. */
-"The url is empty or has an illegal format" = "Url adressen er tom, eller har et ulovlig format.";
-
-/* No comment provided by engineer. */
-"_Choose_" = "Velg";
-
-/* No comment provided by engineer. */
-"ToDoView" = "Oppgaver";
+"Title" = "Tittel";
 
 /* No comment provided by engineer. */
 "ToDo" = "Oppgaver";
 
 /* No comment provided by engineer. */
-"Update an article" = "Oppdater en artikkel";
-
-/* No comment provided by engineer. */
-"The article has been modified in CloudKit" = "Atikkelen er oppdatert i CloudKit.";
+"Update article" = "Oppdater";
 

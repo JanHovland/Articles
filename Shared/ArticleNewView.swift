@@ -195,7 +195,7 @@ struct InputMainType: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
-            Text(heading)
+            Text(NSLocalizedString(heading, comment: ""))
             Spacer()
             Picker(selection: $value, label: Text(mainTypes[value])) {
                 ForEach(0 ..< mainTypes.count) { index in
@@ -227,7 +227,7 @@ struct InputSubType: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
-            Text(heading)
+            Text(NSLocalizedString(heading, comment: ""))
             Spacer()
             Picker(selection: $value, label: Text(subTypes[value])) {
                 ForEach(0 ..< subTypes.count) { index in
@@ -259,7 +259,7 @@ struct InputTextField: View {
     @Binding var value: String
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing*1.00)) {
-            Text(heading)
+            Text(NSLocalizedString(heading, comment: ""))
             TextEditor(text: $value)
                 .lineSpacing(5)
                 .lineLimit(nil)
@@ -278,7 +278,7 @@ struct InputMainType: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
-            Text(heading)
+            Text(NSLocalizedString(heading, comment: ""))
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<mainTypes.count) { index in
                     Text(self.mainTypes[index]).tag(index)
@@ -297,7 +297,7 @@ struct InputSubType: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
-            Text(heading)
+            Text(NSLocalizedString(heading, comment: ""))
             Picker(selection: $value, label: Text("")) {
                 ForEach(0..<subTypes.count) { index in
                     Text(self.subTypes[index]).tag(index)
