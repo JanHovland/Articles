@@ -193,12 +193,16 @@ struct InputMainType: View {
     var spacing: Int
     @Binding var value: Int
     
+    
     var body: some View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(NSLocalizedString(heading, comment: ""))
             Spacer()
             Picker(selection: $value, label: Text(mainTypes[value])) {
-                ForEach(0 ..< mainTypes.count) { index in
+                
+                /// When using ForEach in #SwiftUI with a non-constant range, remember to pass it an id. Your project will build without but your app will behave weird and you will be getting a warning "ForEach(_:content:) should only be used for *constant* data."
+                
+                ForEach(0 ..< mainTypes.count, id: \.self) { index in
                     SelectedItemView(item: mainTypes[index])
                 }
             }
@@ -230,7 +234,10 @@ struct InputSubType: View {
             Text(NSLocalizedString(heading, comment: ""))
             Spacer()
             Picker(selection: $value, label: Text(subTypes[value])) {
-                ForEach(0 ..< subTypes.count) { index in
+                
+                /// When using ForEach in #SwiftUI with a non-constant range, remember to pass it an id. Your project will build without but your app will behave weird and you will be getting a warning "ForEach(_:content:) should only be used for *constant* data."
+                
+                ForEach(0 ..< subTypes.count, id: \.self) { index in
                     SelectedItemView(item: subTypes[index])
                 }
             }
