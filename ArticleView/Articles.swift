@@ -148,7 +148,7 @@ struct Articles: View {
                 }
 #endif
             } // VStack
-            .navigationTitle("Articles")
+            .navigationTitle(NSLocalizedString("Articles", comment: ""))
             .searchable(text: $searchFor, placement: .automatic, prompt: "Search..."
             )}
         .frame(maxWidth: .infinity, maxHeight: .infinity)

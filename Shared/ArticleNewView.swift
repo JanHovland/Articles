@@ -287,7 +287,7 @@ struct InputMainType: View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(NSLocalizedString(heading, comment: ""))
             Picker(selection: $value, label: Text("")) {
-                ForEach(0..<mainTypes.count) { index in
+                ForEach(0..<mainTypes.count, id: \.self) { index in
                     Text(self.mainTypes[index]).tag(index)
                 }
             }
@@ -306,7 +306,7 @@ struct InputSubType: View {
         HStack(alignment: .center, spacing: CGFloat(spacing)) {
             Text(NSLocalizedString(heading, comment: ""))
             Picker(selection: $value, label: Text("")) {
-                ForEach(0..<subTypes.count) { index in
+                ForEach(0..<subTypes.count, id: \.self) { index in
                     Text(self.subTypes[index]).tag(index)
                 }
             }
