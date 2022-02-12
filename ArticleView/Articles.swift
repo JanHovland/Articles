@@ -109,7 +109,8 @@ struct Articles: View {
                             selectedRecordId = articles[indexSet.first!].recordID
                             Task.init {
                                 await message = deleteArticle(selectedRecordId!)
-                                title = "Delete"
+                                let msg = "Delete"
+                                title = LocalizedStringKey(NSLocalizedString(msg, comment: ""))
                                 isAlertActive.toggle()
                             }
                         }
@@ -142,15 +143,15 @@ struct Articles: View {
                 .onDeleteCommand {
                     Task.init {
                         await message = deleteArticle(selectedRecordId!)
-                        title = "Delete"
+                        title = LocalizedStringKey(NSLocalizedString("Delete", comment: ""))
                         isAlertActive.toggle()
                     }
                 }
 #endif
             } // VStack
             .navigationTitle(NSLocalizedString("Articles", comment: ""))
-            .searchable(text: $searchFor, placement: .automatic, prompt: "Search..."
-            )}
+            .searchable(text: $searchFor, placement: .automatic, prompt:  NSLocalizedString("Search...", comment: ""))  
+        }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             /// Sjekker internett forbindelse

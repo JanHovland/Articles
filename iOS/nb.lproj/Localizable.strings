@@ -2,10 +2,19 @@
 "_Choose_" = "Velg";
 
 /* No comment provided by engineer. */
+"All articles have been deleted" = "Alle artiklene er nå slettet.";
+
+/* No comment provided by engineer. */
+"All fields except the url, must have a value" = "Alle feltene bortsett fra url, må ha en verdi.";
+
+/* No comment provided by engineer. */
 "Articles" = "Artikler";
 
 /* No comment provided by engineer. */
 "Cancel" = "Avbryt";
+
+/* No comment provided by engineer. */
+"Delete" = "Sletting";
 
 /* No comment provided by engineer. */
 "Edit an article" = "Oppdatere artikkel";
@@ -26,7 +35,7 @@
 "On the iPhone (due to a software faulure?), you must press the \"Return\" key in order to go back to the overview." = "På iPhone (på grunn av programvarefeil?) må du trykke på \"Return\" -tasten for å gå tilbake til oversikten.";
 
 /* No comment provided by engineer. */
-"Other" = "Annet";
+"Other" = "Tips";
 
 /* No comment provided by engineer. */
 "Return" = "Tilbake";
@@ -35,7 +44,13 @@
 "Safari View" = "Safari";
 
 /* No comment provided by engineer. */
+"Save a new article" = "Lagre en ny artikkel";
+
+/* No comment provided by engineer. */
 "Save article" = "Lagre";
+
+/* No comment provided by engineer. */
+"Search..." = "Søk...";
 
 /* No comment provided by engineer. */
 "SubTitle1" = "Undertype 1";
@@ -44,11 +59,26 @@
 "SubType" = "Undertype";
 
 /* No comment provided by engineer. */
+"The article has been deleted" = "Artikkelen er slettet.";
+
+/* No comment provided by engineer. */
+"The article has been modified in CloudKit" = "Artikkelen er oppdatert i CloudKit.";
+
+/* No comment provided by engineer. */
+"The article has been saved in CloudKit" = "Artikkelen er lageret i CloudKit.";
+
+/* No comment provided by engineer. */
+"The url is empty or has an illegal format" = "Url er tom, eller har ulovlig format.";
+
+/* No comment provided by engineer. */
+"This article exists i CloudKit" = "Artikkelen finnes allerede i CloudKit.";
+
+/* No comment provided by engineer. */
 "Title" = "Tittel";
 
 /* No comment provided by engineer. */
 "ToDo" = "Oppgaver";
 
 /* No comment provided by engineer. */
-"Update article" = "Oppdater";
+"Update article" = " Oppdater artikkel";
 

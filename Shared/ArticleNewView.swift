@@ -37,6 +37,7 @@ struct ArticleNewView: View {
             Spacer()
             Button(action: {
                 Task.init {
+                    print("mainType = \(mainType)")
                     let article = Article(title: title,
                                           introduction: introduction,
                                           mainType: mainType,
@@ -48,31 +49,57 @@ struct ArticleNewView: View {
                     /// Sjekk om artikkelen finnes fra før
                     ///
                     
-                    if article.url.count > 0,
+                    /// mainType 2 == Tips
+                    ///
+                     
+                    var saving = false
+                    
+                    if mainType != 2,
+                       article.url.count > 0,
                        article.url.contains("https") || article.url.contains("http"),
                        article.url.contains("://") || article.url.contains(".") {
-                                
+                        saving = true
+                    }
+                    
+                    if mainType == 2,
+                       article.subType1.count > 0,
+                       article.title.count > 0,
+                       article.introduction.count > 0 {
+                        saving = true
+                    }
+                    
+                    if saving {
                         var value: (LocalizedStringKey, Bool)
                         value = await articleExist(article)
                         if value.0 == "" {
                             if value.1 == false {
                                 message = await saveArticle(article)
-                                title1 = "Save a new article"
+                                title1 = LocalizedStringKey(NSLocalizedString("Save a new article", comment: ""))
                                 isAlertActive.toggle()
                             } else {
-                                message = "This article exists i CloudKit" 
-                                title1 = "Save a new article"
+                                message = LocalizedStringKey(NSLocalizedString("This article exists i CloudKit", comment: ""))
+                                title1 = LocalizedStringKey(NSLocalizedString("Save a new article", comment: ""))
                                 isAlertActive.toggle()
                             }
                         } else {
                             message = value.0
-                            title1 = "Save a new article"
+                            title1 = LocalizedStringKey(NSLocalizedString("Save a new article", comment: ""))
                             isAlertActive.toggle()
                         }
                     } else {
-                        message = "The url is empty or has an illegal format"
-                        title1 = "Save a new article"
-                        isAlertActive.toggle()
+                        
+                        if mainType != 2 {
+                            message = LocalizedStringKey(NSLocalizedString("The url is empty or has an illegal format", comment: ""))
+                            title1 = LocalizedStringKey(NSLocalizedString("Save a new article", comment: ""))
+                            isAlertActive.toggle()
+                        }
+                        
+                        if mainType == 2 {
+                            message = LocalizedStringKey(NSLocalizedString("All fields except the url, must have a value", comment: ""))
+                            title1 = LocalizedStringKey(NSLocalizedString("Save a new article", comment: ""))
+                            isAlertActive.toggle()
+
+                        }
                     }
                 }
            }, label: {
@@ -187,6 +214,7 @@ struct InputTextFieldURL: View {
 ///
 /// https://www.hackingwithswift.com/forums/swiftui/menupickerstyle-looks-disabled/4782
 ///
+
 struct InputMainType: View {
     var heading: String
     var mainTypes: [String]

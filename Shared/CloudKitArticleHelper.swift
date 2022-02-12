@@ -12,7 +12,7 @@ func saveArticle(_ article: Article) async -> LocalizedStringKey {
     var message: LocalizedStringKey = ""
     do {
         try await CloudKitArticle.saveArticle(article)
-        message = "The article has been saved in CloudKit"
+        message = LocalizedStringKey(NSLocalizedString("The article has been saved in CloudKit", comment: ""))
         return message
     } catch {
         message = LocalizedStringKey(error.localizedDescription)
@@ -24,7 +24,7 @@ func modifyArticle(_ article: Article) async -> LocalizedStringKey {
     var message: LocalizedStringKey = ""
     do {
         try await CloudKitArticle.modifyArticle(article)
-        message = "The article has been modified in CloudKit"
+        message = LocalizedStringKey(NSLocalizedString("The article has been modified in CloudKit", comment: ""))
         return message
     } catch {
         message = LocalizedStringKey(error.localizedDescription)
@@ -64,7 +64,7 @@ func deleteArticle(_ recID: CKRecord.ID) async -> LocalizedStringKey {
     var message: LocalizedStringKey = ""
     do {
         try await CloudKitArticle.deleteOneArticle(recID)
-        message = "The article has been deleted"
+        message = LocalizedStringKey(NSLocalizedString("The article has been deleted", comment: ""))
         return message
     } catch {
         message = LocalizedStringKey(error.localizedDescription)
@@ -90,7 +90,7 @@ func deleteAllArticles(_ predicate: NSPredicate,_ recID: CKRecord.ID) async -> L
     var message: LocalizedStringKey = ""
     do {
         try await CloudKitArticle().deleteAllArticles(predicate, recID)
-        message = "All articles have been deleted"
+        message = LocalizedStringKey(NSLocalizedString("All articles have been deleted", comment: ""))
         return message
     } catch {
         message = LocalizedStringKey(error.localizedDescription)

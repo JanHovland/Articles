@@ -49,7 +49,7 @@ struct ArticleEditView: View {
                                          url: url)
                     
                     message = await modifyArticle(article)
-                    title1 = "Update an article"
+                    title1 = LocalizedStringKey(NSLocalizedString("Update article", comment: "")) 
                     isAlertActive.toggle()
                 }
             }, label: {
