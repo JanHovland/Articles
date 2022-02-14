@@ -97,7 +97,7 @@ struct ArticleAllView: View {
                         .font(.system(size: 11, weight: .light))
                         .foregroundColor(.gray)
                         .lineLimit(nil)
-                    #endif
+                     #endif
                 }
             }
         }
