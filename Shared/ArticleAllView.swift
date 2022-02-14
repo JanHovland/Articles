@@ -47,8 +47,19 @@ struct ArticleAllView: View {
                     HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
-                    HilightedText(str: article.introduction,
-                                  search: searchText)
+                    if article.mainType == 2 {
+                        let startIndex = article.introduction.index(article.introduction.startIndex, offsetBy: 80)
+                        let introduction = article.introduction[..<startIndex]
+                        HilightedText(str: String(introduction),
+                                      search: searchText)
+                        .font(.system(size: 11, weight: .light))
+                        .lineLimit(nil)
+                    } else {
+                        HilightedText(str: article.introduction,
+                                      search: searchText)
+                        .font(.system(size: 11, weight: .light))
+                        .lineLimit(nil)
+                    }
                     Text(article.url)
                         .font(.system(size: 13, weight: .light))
                         .foregroundColor(.gray)
@@ -69,10 +80,19 @@ struct ArticleAllView: View {
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .lineLimit(nil)
-                    HilightedText(str: article.introduction,
-                                  search: searchText)
+                    if article.mainType == 2 {
+                        let startIndex = article.introduction.index(article.introduction.startIndex, offsetBy: 80)
+                        let introduction = article.introduction[..<startIndex]
+                        HilightedText(str: String(introduction),
+                                      search: searchText)
                         .font(.system(size: 11, weight: .light))
                         .lineLimit(nil)
+                    } else {
+                        HilightedText(str: article.introduction,
+                                      search: searchText)
+                        .font(.system(size: 11, weight: .light))
+                        .lineLimit(nil)
+                    }
                     Text(article.url)
                         .font(.system(size: 11, weight: .light))
                         .foregroundColor(.gray)

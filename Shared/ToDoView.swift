@@ -24,8 +24,9 @@ struct toDoView: View {
             . 🟢 Friskopp
             . 🟢 Oppgaver
       8. 🟢 Oppdatering får nå med seg endringene. 
-      9. 🔴 .
-
+      9. 🟢 Finne "Tips" i Søk...
+     10. 🔴 Åpne tipset
+     11. 🔴
     
     """
     

@@ -77,24 +77,22 @@ struct Articles: View {
                     /// Søker nå i både:
                     ///     title
                     ///     introduction
+                    ///     mainType
                     ///     subtype1
                     ///
                     ForEach(articles.filter({ searchFor.isEmpty ||
+                        $0.mainType == 2 ||
+                        $0.subType1.localizedStandardContains (searchFor) ||
                         $0.title.localizedStandardContains (searchFor) ||
                         $0.introduction.localizedStandardContains (searchFor) ||
                         $0.subType1.localizedStandardContains (searchFor)    } )) {
                             article in
-                            if UIDevice.current.model == "iPad" {
-                                NavigationLink(destination: SafariView(url: article.url)) {
+                            if article.mainType == 2 {
+                                NavigationLink(destination: ArticleTipsView(article: article)) {
                                     ArticleAllView(article: article,
                                                    searchText: searchFor)
                                 }
-                            }
-                            else {
-                                // NavigationLink(destination: SafariViewIPone(url: article.url)) {
-                                ///
-                                /// Nå virker denne
-                                ///
+                            } else {
                                 NavigationLink(destination: SafariView(url: article.url)) {
                                     ArticleAllView(article: article,
                                                    searchText: searchFor)
@@ -123,15 +121,23 @@ struct Articles: View {
                     /// Søker nå i både:
                     ///     title
                     ///     introduction
+                    ///     mainType
                     ///     subtype1
                     ///
                     ForEach(articles.filter({ searchFor.isEmpty ||
+                        $0.mainType == 2 ||
+                        $0.subType1.localizedStandardContains (searchFor) ||
                         $0.title.localizedStandardContains (searchFor) ||
                         $0.introduction.localizedStandardContains (searchFor) ||
                         $0.subType1.localizedStandardContains (searchFor)    } )) {
                             article in
-                            NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
-                                VStack (alignment: .leading) {
+                            if article.mainType == 2 {
+                                NavigationLink(destination: ArticleTipsView(article: article)) {
+                                    ArticleAllView(article: article,
+                                                   searchText: searchFor)
+                                }
+                            } else {
+                                NavigationLink(destination: SafariView(url: article.url)) {
                                     ArticleAllView(article: article,
                                                    searchText: searchFor)
                                 }
@@ -231,3 +237,18 @@ struct Articles: View {
     
 }
 
+struct ArticleTipsView: View {
+    var article: Article
+    var body: some View {
+        
+        VStack (alignment: .leading, spacing: 10) {
+            Text(mainTypes[article.mainType])
+                .bold().foregroundColor(.red)
+            Text(subTypes[article.subType])
+                .bold().foregroundColor(.red)
+            Text(article.introduction)
+            Spacer()
+        }
+        .textSelection(.enabled)
+    }
+}
