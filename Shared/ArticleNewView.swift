@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CloudKit
+import Foundation
 
 struct ArticleNewView: View {
     
@@ -344,3 +345,85 @@ struct InputSubType: View {
 }
 
 #endif
+
+///// https://github.com/JohnHeitmann/SwiftUI-Rich-Text-Demo/blob/master/README.md
+
+func setForgroundColor(str: String) -> Color {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    var color = Color(colorScheme == .light ? .white : .black)
+    
+    if str.contains("HStack") ||
+        str.contains("VStack") {
+        color = Color(red: 218/255, green: 186/255, blue: 255/255)
+    }
+
+    if str.contains("alignment") ||
+        str.contains(".font") ||
+        str.contains(".regular") ||
+        str.contains("size") ||
+        str.contains("spacing") ||
+        str.contains(".system") ||
+        str.contains("weight") ||
+        str.capitalizingFirstLetter() == "Font" {
+        color = Color(red: 178/255, green: 130/255, blue: 235/255)
+    }
+    
+    return color
+}
+
+struct SetAttributedString: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+
+    var str: String
+    var body: some View {
+        Text(makeAttributedString(str))
+    }
+    
+    func makeAttributedString(_ str: String) -> AttributedString {
+        var string = AttributedString()
+        var str0 = AttributedString()
+        var str1 = AttributedString()
+        var color : Color
+
+        let value = values(fromCSVString: str)
+        let strCount = value.count
+        
+        for i in 0..<strCount {
+            color = setForgroundColor(str: value[i])
+            str0 = AttributedString(value[i])
+            str0.foregroundColor = color
+                
+            if i < strCount - 1 {
+                str1 = "("
+                string = string + str0 + str1
+            } else {
+                string = string + str0
+            }
+        }
+        
+        let characterView = string.characters
+
+        for i in characterView.indices where characterView[i].isNumber {
+            string[i..<characterView.index(after: i)].foregroundColor = .yellow
+        }
+        
+        for i in characterView.indices where characterView[i] == ")" {
+            if colorScheme == .dark {
+                string[i..<characterView.index(after: i)].foregroundColor = .white
+            } else {
+                string[i..<characterView.index(after: i)].foregroundColor = .black
+            }
+        }
+        
+        return string
+    }
+}
+
+func values(fromCSVString str: String) -> [String] {
+    let separators = CharacterSet(charactersIn: "(,")
+    return str.components(separatedBy: separators)
+}
+

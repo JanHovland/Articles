@@ -10,6 +10,8 @@ import CloudKit
 
 struct ArticleAllView: View {
     
+    @State var preferredColorScheme: ColorScheme? = nil
+    
     var article: Article
     var searchText: String
 
@@ -18,6 +20,13 @@ struct ArticleAllView: View {
     var body: some View {
         VStack {
             HStack {
+                
+                ///
+                ///// Testing av SetAttributedString() attributed string
+                ///
+                
+                SetAttributedString(str: ".font(.system(size: 15, weight: .regular))")
+                
                 Image(systemName: "square.and.pencil")
                     .resizable()
                     .frame(width: 12, height: 12, alignment: .center)
@@ -97,7 +106,7 @@ struct ArticleAllView: View {
                         .font(.system(size: 11, weight: .light))
                         .foregroundColor(.gray)
                         .lineLimit(nil)
-                     #endif
+                    #endif
                 }
             }
         }
