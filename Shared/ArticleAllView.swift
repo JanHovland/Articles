@@ -81,9 +81,7 @@ struct ArticleAllView: View {
                         .font(.system(size: 15, weight: .regular))
                         .lineLimit(nil)
                     if article.mainType == 2 {
-                        let startIndex = article.introduction.index(article.introduction.startIndex, offsetBy: 80)
-                        let introduction = article.introduction[..<startIndex]
-                        HilightedText(str: String(introduction),
+                        HilightedText(str: article.introduction,
                                       search: searchText)
                         .font(.system(size: 11, weight: .light))
                         .lineLimit(nil)
