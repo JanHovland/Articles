@@ -20,13 +20,6 @@ struct ArticleAllView: View {
     var body: some View {
         VStack {
             HStack {
-                
-                ///
-                ///// Testing av SetAttributedString() attributed string
-                ///
-                
-                SetAttributedString(str: ".font(.system(size: 15, weight: .regular))")
-                
                 Image(systemName: "square.and.pencil")
                     .resizable()
                     .frame(width: 12, height: 12, alignment: .center)
@@ -57,9 +50,7 @@ struct ArticleAllView: View {
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                     if article.mainType == 2 {
-                        let startIndex = article.introduction.index(article.introduction.startIndex, offsetBy: 80)
-                        let introduction = article.introduction[..<startIndex]
-                        HilightedText(str: String(introduction),
+                        HilightedText(str: article.introduction,
                                       search: searchText)
                         .font(.system(size: 11, weight: .light))
                         .lineLimit(nil)

@@ -88,7 +88,7 @@ struct Articles: View {
                         $0.subType1.localizedStandardContains (searchFor)    } )) {
                             article in
                             if article.mainType == 2 {
-                                NavigationLink(destination: ArticleTipsView(article: article)) {
+                                NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
                                     ArticleAllView(article: article,
                                                    searchText: searchFor)
                                 }
@@ -132,7 +132,7 @@ struct Articles: View {
                         $0.subType1.localizedStandardContains (searchFor)    } )) {
                             article in
                             if article.mainType == 2 {
-                                NavigationLink(destination: ArticleTipsView(article: article)) {
+                                NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
                                     ArticleAllView(article: article,
                                                    searchText: searchFor)
                                 }

@@ -378,9 +378,21 @@ struct SetAttributedString: View {
     @Environment(\.colorScheme) var colorScheme
 
     var str: String
+    var article: Article
+    
     var body: some View {
-        Text(makeAttributedString(str))
-    }
+        
+        VStack (alignment: .leading, spacing: 10) {
+            Text(mainTypes[article.mainType])
+                .bold().foregroundColor(.red)
+            Text(subTypes[article.subType])
+                .bold().foregroundColor(.red)
+            Text(makeAttributedString(str))
+            Spacer()
+        }
+        .textSelection(.enabled)
+        .font(.subheadline)
+     }
     
     func makeAttributedString(_ str: String) -> AttributedString {
         var string = AttributedString()
