@@ -346,7 +346,7 @@ struct InputSubType: View {
 
 #endif
 
-///// https://github.com/JohnHeitmann/SwiftUI-Rich-Text-Demo/blob/master/README.md
+///  https://betterprogramming.pub/ios-15-attributed-strings-in-swiftui-markdown-271204bec5c1
 
 func setForgroundColorAttributedString(str: String) -> AttributedString {
     
@@ -356,79 +356,40 @@ func setForgroundColorAttributedString(str: String) -> AttributedString {
         string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
     }
     
+    if let range = string.range(of: ".title") {
+        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
+    }
+    
+    if let range = string.range(of: ".weight") {
+        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
+    }
+    
+    if let range = string.range(of: ".heavy") {
+        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
+    }
+    
+    if let range = string.range(of: ".bold") {
+        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
+    }
+    
+    if let range = string.range(of: ".foregroundColor") {
+        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
+    }
+    
+    if let range = string.range(of: ".red") {
+        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
+    }
+    
     if let range = string.range(of: "Font") {
         string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
     }
     
+    if let range = string.range(of: "Text") {
+        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
+    }
+
     return string
     
-}
-
-func setForgroundColor(str: String) -> Color {
-    
-    @Environment(\.colorScheme) var colorScheme
-    
-    let color = Color(colorScheme == .light ? .white : .black)
-    
-//  0: .font(Font.title.weight(.heavy))
-//  1: Text(article.url)
-    
-    
-//  0: .font(Font.title.weight(.heavy))
-    
-    /// Splitte 0: opp i:
-    /// .font
-    /// Font
-    /// title
-    /// weight
-    /// .heavy
-    ///
-    ///  https://betterprogramming.pub/ios-15-attributed-strings-in-swiftui-markdown-271204bec5c1
-    /*
-     func makeAttributedString() -> AttributedString {
-        var string = AttributedString("Some Attributed String")
-        string.foregroundColor = .blue
-     
-        /// Her settes "Attributed" til .red
-        /// Men: Bare på første treff, men er det flere blir de påfølgende oversett!
-    
-        if let range = string.range(of: "Attributed") { /// here!
-            string[range].foregroundColor = .red
-        }
-        return string
-     }
-    */
-
-//    if str.range(of: "Font") != nil {
-//        color = .red
-//    }
-
-//    if str.contains("HStack") ||
-//        str.contains("VStack") {
-//        color = Color(red: 218/255, green: 186/255, blue: 255/255)
-//    }
-//
-//    if str.contains("alignment") ||
-//        str.contains(".font") ||
-//        str.contains(".heavy") ||
-//        str.contains(".regular") ||
-//        str.contains("size") ||
-//        str.contains("spacing") ||
-//        str.contains(".system") ||
-//        str.contains("weight") {
-//        color = Color(red: 178/255, green: 130/255, blue: 235/255)
-//    }
-//
-//    //    if str.capitalizingFirstLetter().contains("Font") {
-//    //        color = Color(red: 186/255, green: 160/255, blue: 217/255)
-//    //    }
-//
-//
-//    if str.capitalizingFirstLetter().contains("Text") {
-//        color = Color(red: 217/255, green: 185/255, blue: 253/255)
-//    }
-    
-    return color
 }
 
 struct SetAttributedString: View {
@@ -454,54 +415,12 @@ struct SetAttributedString: View {
     
     func makeAttributedString(_ str: String) -> AttributedString {
         var string = AttributedString()
-        var str0 = AttributedString()
-//        var str1 = AttributedString()
-//        var color : Color
-
         let value = values(fromCSVString: str)
         let strCount = value.count
         
         for i in 0..<strCount {
-//            color = setForgroundColor(str: value[i])
-            /// må returnere en "AttributedString" med "foregroundColor"
-            str0 = setForgroundColorAttributedString(str: value[i])
-            ///
-            string = string + str0
-            ///
-            ///
-            
-//            str0 = AttributedString(value[i])
-//            str0.foregroundColor = color
-                
-            //            if i < strCount - 1 {
-            //                str1 = "("
-            //                string = string + str0 + str1
-            //            } else {
-//                string = string + str0
-            //            }
+            string = string + setForgroundColorAttributedString(str: value[i])
         }
-        
-//        let characterView = string.characters
-//
-//        for i in characterView.indices where characterView[i].isNumber {
-//            string[i..<characterView.index(after: i)].foregroundColor = .yellow
-//        }
-//
-//        for i in characterView.indices where characterView[i] == "(" {
-//            if colorScheme == .dark {
-//                string[i..<characterView.index(after: i)].foregroundColor = .white
-//            } else {
-//                string[i..<characterView.index(after: i)].foregroundColor = .black
-//            }
-//        }
-//
-//        for i in characterView.indices where characterView[i] == ")" {
-//            if colorScheme == .dark {
-//                string[i..<characterView.index(after: i)].foregroundColor = .white
-//            } else {
-//                string[i..<characterView.index(after: i)].foregroundColor = .black
-//            }
-//        }
         
         return string
     }
