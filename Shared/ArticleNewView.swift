@@ -388,6 +388,53 @@ func setForgroundColorAttributedString(str: String) -> AttributedString {
         string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
     }
 
+    if let range = string.range(of: "Color") {
+        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
+    }
+
+    if let range = string.range(of: "red") {
+        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
+    }
+
+    if let range = string.range(of: "green") {
+        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
+    }
+
+    if let range = string.range(of: "blue") {
+        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
+    }
+
+    ///
+    ///Endre func til func + ""
+    ///
+    
+    if let range = string.range(of: "func") {
+        string[range].foregroundColor =  Color(red: 234/255, green: 114/255, blue: 164/255)
+        string.characters.replaceSubrange(range, with: "func ")
+    }
+
+    if let range = string.range(of: "->") {
+        string.characters.replaceSubrange(range, with: " -> ")
+    }
+
+    if let range = string.range(of: "{") {
+        string.characters.replaceSubrange(range, with: " { ")
+    }
+
+    if let range = string.range(of: ":") {
+        string.characters.replaceSubrange(range, with: ": ")
+    }
+
+    ///
+    /// Alle tall settes til yellow
+    ///
+    
+    let characterView = string.characters
+    
+    for i in characterView.indices where characterView[i].isNumber {
+        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 216/255, green: 200/255, blue: 123/255)
+    }
+   
     return string
     
 }
