@@ -27,6 +27,8 @@
 		DB507D052761415000AA6C31 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D032761415000AA6C31 /* ToDoView.swift */; };
 		DB6FA61D25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
 		DB6FA61E25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
+		DB9A7F7127C7E1D800CA86BC /* Extension Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A7F7027C7E1D800CA86BC /* Extension Text.swift */; };
+		DB9A7F7227C7E1D800CA86BC /* Extension Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A7F7027C7E1D800CA86BC /* Extension Text.swift */; };
 		DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */; };
 		DBB20C1C25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */; };
 		DBB20C1D25D9250F007CAF2B /* ArticlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */; };
@@ -69,6 +71,7 @@
 		DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitArticleHelper.swift; sourceTree = "<group>"; };
 		DB507D032761415000AA6C31 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
 		DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Create iOS Icons.jsx"; sourceTree = "<group>"; };
+		DB9A7F7027C7E1D800CA86BC /* Extension Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Text.swift"; sourceTree = "<group>"; };
 		DBB20C0625D9250D007CAF2B /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesApp.swift; sourceTree = "<group>"; };
 		DBB20C0825D9250D007CAF2B /* Articles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 				DBE670EA25D92E8D00AB15B6 /* SafariView.swift */,
 				DB0089AB25DDA7440071E25E /* SwiftUIViewModifer.swift */,
 				DB507D032761415000AA6C31 /* ToDoView.swift */,
+				DB9A7F7027C7E1D800CA86BC /* Extension Text.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -321,6 +325,7 @@
 				DBB20C3525D92849007CAF2B /* ArticleAllView.swift in Sources */,
 				DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */,
 				DB507D012761141700AA6C31 /* CloudKitArticleHelper.swift in Sources */,
+				DB9A7F7127C7E1D800CA86BC /* Extension Text.swift in Sources */,
 				DBB20C1F25D9250F007CAF2B /* Articles.swift in Sources */,
 				DB0089AC25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */,
 			);
@@ -347,6 +352,7 @@
 				DBB20C3625D92849007CAF2B /* ArticleAllView.swift in Sources */,
 				DBB20C1C25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */,
 				DB507D022761141700AA6C31 /* CloudKitArticleHelper.swift in Sources */,
+				DB9A7F7227C7E1D800CA86BC /* Extension Text.swift in Sources */,
 				DBB20C2025D9250F007CAF2B /* Articles.swift in Sources */,
 				DB0089AD25DDA7440071E25E /* SwiftUIViewModifer.swift in Sources */,
 			);

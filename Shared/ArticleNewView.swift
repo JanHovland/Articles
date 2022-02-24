@@ -352,6 +352,10 @@ func setForgroundColorAttributedString(str: String) -> AttributedString {
     
     var string  = AttributedString(str)
     
+    ///
+    ///// Finner kun den første tilfellet av f.eks ".font"  !!!!!!!!!
+    ///
+    
     if let range = string.range(of: ".font") {
         string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
     }
@@ -389,6 +393,9 @@ func setForgroundColorAttributedString(str: String) -> AttributedString {
     }
 
     if let range = string.range(of: "Color") {
+        ///
+        ///Endrer også Color i ".foregroundColor"
+        ///
         string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
     }
 
@@ -405,7 +412,7 @@ func setForgroundColorAttributedString(str: String) -> AttributedString {
     }
 
     ///
-    ///Endre func til func + ""
+    ///Legger til aktuelle mellomrom
     ///
     
     if let range = string.range(of: "func") {
@@ -423,6 +430,10 @@ func setForgroundColorAttributedString(str: String) -> AttributedString {
 
     if let range = string.range(of: ":") {
         string.characters.replaceSubrange(range, with: ": ")
+    }
+
+    if let range = string.range(of: "=") {
+        string.characters.replaceSubrange(range, with: " = ")
     }
 
     ///
@@ -459,18 +470,18 @@ struct SetAttributedString: View {
         .textSelection(.enabled)
         .font(.subheadline)
      }
+}
+
+func makeAttributedString(_ str: String) -> AttributedString {
+    var string = AttributedString()
+    let value = values(fromCSVString: str)
+    let strCount = value.count
     
-    func makeAttributedString(_ str: String) -> AttributedString {
-        var string = AttributedString()
-        let value = values(fromCSVString: str)
-        let strCount = value.count
-        
-        for i in 0..<strCount {
-            string = string + setForgroundColorAttributedString(str: value[i])
-        }
-        
-        return string
+    for i in 0..<strCount {
+        string = string + setForgroundColorAttributedString(str: value[i])
     }
+    
+    return string
 }
 
 func values(fromCSVString str: String) -> [String] {
