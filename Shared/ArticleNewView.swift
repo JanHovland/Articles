@@ -468,7 +468,7 @@ struct SetAttributedString: View {
             Spacer()
         }
         .textSelection(.enabled)
-        .font(.subheadline)
+          .font(.subheadline)
      }
 }
 
