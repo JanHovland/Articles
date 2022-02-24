@@ -478,7 +478,7 @@ func makeAttributedString(_ str: String) -> AttributedString {
     let strCount = value.count
     
     for i in 0..<strCount {
-        string = string + setForgroundColorAttributedString(str: value[i])
+         string = string + setForgroundColorAttributedString(str: value[i])
     }
     
     return string
