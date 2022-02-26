@@ -7,62 +7,71 @@
 
 import SwiftUI
 
-extension String {
-    subscript(_ range: CountableRange<Int>) -> String {
-        let start = index(startIndex, offsetBy: max(0, range.lowerBound))
-        let end = index(start, offsetBy: min(self.count - range.lowerBound,
-                                             range.upperBound - range.lowerBound))
-        return String(self[start..<end])
-    }
-    
-    subscript(_ range: CountablePartialRangeFrom<Int>) -> String {
-        let start = index(startIndex, offsetBy: max(0, range.lowerBound))
-        return String(self[start...])
-    }
-}
-
-extension String {
-    func indicesOf(string: String) -> [Int] {
-        var indices = [Int]()
-        var searchStartIndex = self.startIndex
-        
-        while searchStartIndex < self.endIndex,
-              let range = self.range(of: string, range: searchStartIndex..<self.endIndex),
-              !range.isEmpty
-        {
-            let index = distance(from: self.startIndex, to: range.lowerBound)
-            indices.append(index)
-            searchStartIndex = range.upperBound
+func attributedString(_ str: String) -> AttributedString {
+    var string = AttributedString()
+    var string1 = AttributedString()
+    let q : [String] =  [".",
+                         "font",
+                         "(",
+                         "Font",
+                         ".",
+                         "title",
+                         ".",
+                         "weight",
+                         "(",
+                         ".",
+                         "heavy",
+                         ")",
+                         ")"]
+    let s = ".font(Font.title.weight(.heavy))"
+    let count = s.count
+    var value = ""
+    for i in 0..<count {
+        let t = s[i]
+        if t == "." ||
+            t == "(" ||
+            t == ")" {
+            print(".()")
+        } else {
+            print("ASCII")
+            value = value + String(t)
         }
-        
-        return indices
+        print(value)
     }
+    
+    for i in 0...12 {
+        string1 = AttributedString(q[i])
+        if string1 == "font" {
+            string1.foregroundColor = Color(.yellow)
+        }
+        if string1 == "Font" {
+            string1.foregroundColor = Color(.green)
+        }
+        string = string + string1
+    }
+
+    return string
 }
 
-func attribute(str: String, search: String) -> AttributedString {
-    var attr: AttributedString = ""
-    let a = "let range = self.range(of: string, range:"
-    attr = AttributedString(a)
+extension String {
+
+  //Allow string[Int] subscripting
+  subscript(index: Int) -> Character {
+    return self[self.index(self.startIndex, offsetBy: index)]
+  }
+
+  //Allow open ranges like `string[0..<n]`
+  subscript(range: Range<Int>) -> Substring {
+    let start = self.index(self.startIndex, offsetBy: range.lowerBound)
+    let end = self.index(self.startIndex, offsetBy: range.upperBound)
+    return self[start..<end]
+  }
+
+  //Allow closed integer range subscripting like `string[0...n]`
+  subscript(range: ClosedRange<Int>) -> Substring {
+    let start = self.index(self.startIndex, offsetBy: range.lowerBound)
+    let end = self.index(self.startIndex, offsetBy: range.upperBound)
+    return self[start...end]
+  }
     
-    let indicies = str.indicesOf(string: "range")
-    
-    
-    return attr
 }
-
-/*
- let keyword = "range"
- //                    1111111111222222222233333333334
- //          01234567890123456789012345678901234567890
- let html = "let range = self.range(of: string, range:"
- let indicies = html.indicesOf(string: keyword)
- print(indicies)
-
- for i in 0..<indicies.count {
-     let value = indicies[i]
-     let end = value + keyword.count
-     print(html[value..<end])
- }
-
-
- */

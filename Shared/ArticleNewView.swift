@@ -464,8 +464,9 @@ struct SetAttributedString: View {
                 .bold().foregroundColor(.red)
             Text(subTypes[article.subType])
                 .bold().foregroundColor(.red)
-            Text(makeAttributedString(str))
-            Spacer()
+//            Text(makeAttributedString(str))
+             Text(attributedString(str))
+             Spacer()
         }
         .textSelection(.enabled)
         .font(.subheadline)
