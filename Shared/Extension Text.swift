@@ -10,42 +10,46 @@ import SwiftUI
 func attributedString(_ str: String) -> AttributedString {
     var string = AttributedString()
     var string1 = AttributedString()
-    let q : [String] =  [".",
-                         "font",
-                         "(",
-                         "Font",
-                         ".",
-                         "title",
-                         ".",
-                         "weight",
-                         "(",
-                         ".",
-                         "heavy",
-                         ")",
-                         ")"]
-    let s = ".font(Font.title.weight(.heavy))"
-    let count = s.count
+    var strArray = [String]()
+    let count = str.count
     var value = ""
+    
     for i in 0..<count {
-        let t = s[i]
+        let t = str[i]
         if t == "." ||
+            t == " " ||
+            t == "=" ||
+            t == "[" ||
+            t == "]" ||
             t == "(" ||
+            t == "\n" ||
+            t == "/" ||
+            t == "$" ||
             t == ")" {
-            print(".()")
+            if value.count > 0 {
+                strArray.append(value)
+                value = ""
+            }
+            strArray.append(String(t))
         } else {
-            print("ASCII")
-            value = value + String(t)
+            value.append(String(t))
         }
-        print(value)
     }
     
-    for i in 0...12 {
-        string1 = AttributedString(q[i])
+    let teller = strArray.count
+    for i in 0..<teller {
+        string1 = AttributedString(strArray[i])
         if string1 == "font" {
             string1.foregroundColor = Color(.yellow)
         }
         if string1 == "Font" {
             string1.foregroundColor = Color(.green)
+        }
+        if string1 == "foregroundColor" {
+            string1.foregroundColor = Color(.red)
+        }
+        if string1 == "func" {
+            string1.foregroundColor = Color(.blue)
         }
         string = string + string1
     }
