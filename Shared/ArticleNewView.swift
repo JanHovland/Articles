@@ -346,147 +346,24 @@ struct InputSubType: View {
 
 #endif
 
-///  https://betterprogramming.pub/ios-15-attributed-strings-in-swiftui-markdown-271204bec5c1
-
-func setForgroundColorAttributedString(str: String) -> AttributedString {
-    
-    var string  = AttributedString(str)
-    
-    ///
-    ///// Finner kun den første tilfellet av f.eks ".font"  !!!!!!!!!
-    ///
-    
-    if let range = string.range(of: ".font") {
-        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
-    }
-    
-    if let range = string.range(of: ".title") {
-        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
-    }
-    
-    if let range = string.range(of: ".weight") {
-        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
-    }
-    
-    if let range = string.range(of: ".heavy") {
-        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
-    }
-    
-    if let range = string.range(of: ".bold") {
-        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
-    }
-    
-    if let range = string.range(of: ".foregroundColor") {
-        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
-    }
-    
-    if let range = string.range(of: ".red") {
-        string[range].foregroundColor =  Color(red: 178/255, green: 130/255, blue: 235/255)
-    }
-    
-    if let range = string.range(of: "Font") {
-        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
-    }
-    
-    if let range = string.range(of: "Text") {
-        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
-    }
-
-    if let range = string.range(of: "Color") {
-        ///
-        ///Endrer også Color i ".foregroundColor"
-        ///
-        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
-    }
-
-    if let range = string.range(of: "red") {
-        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
-    }
-
-    if let range = string.range(of: "green") {
-        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
-    }
-
-    if let range = string.range(of: "blue") {
-        string[range].foregroundColor =  Color(red: 186/255, green: 160/255, blue: 217/255)
-    }
-
-    ///
-    ///Legger til aktuelle mellomrom
-    ///
-    
-    if let range = string.range(of: "func") {
-        string[range].foregroundColor =  Color(red: 234/255, green: 114/255, blue: 164/255)
-        string.characters.replaceSubrange(range, with: "func ")
-    }
-
-    if let range = string.range(of: "->") {
-        string.characters.replaceSubrange(range, with: " -> ")
-    }
-
-    if let range = string.range(of: "{") {
-        string.characters.replaceSubrange(range, with: " { ")
-    }
-
-    if let range = string.range(of: ":") {
-        string.characters.replaceSubrange(range, with: ": ")
-    }
-
-    if let range = string.range(of: "=") {
-        string.characters.replaceSubrange(range, with: " = ")
-    }
-
-    ///
-    /// Alle tall settes til yellow
-    ///
-    
-    let characterView = string.characters
-    
-    for i in characterView.indices where characterView[i].isNumber {
-        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 216/255, green: 200/255, blue: 123/255)
-    }
-   
-    return string
-    
-}
-
 struct SetAttributedString: View {
     
     @Environment(\.colorScheme) var colorScheme
-
+    
     var str: String
     var article: Article
     
     var body: some View {
         
-        VStack (alignment: .leading, spacing: 10) {
+        VStack (alignment: .leading) {
             Text(mainTypes[article.mainType])
                 .bold().foregroundColor(.red)
             Text(subTypes[article.subType])
                 .bold().foregroundColor(.red)
-//            Text(makeAttributedString(str))
-             Text(attributedString(str))
-             Spacer()
+            Text(attributedString(str))
+            Spacer()
         }
         .textSelection(.enabled)
         .font(.subheadline)
-     }
-}
-
-func makeAttributedString(_ str: String) -> AttributedString {
-    var string = AttributedString()
-    let value = values(fromCSVString: str)
-    let strCount = value.count
-    
-    for i in 0..<strCount {
-         string = string + setForgroundColorAttributedString(str: value[i])
     }
-    
-    return string
 }
-
-func values(fromCSVString str: String) -> [String] {
-    let separators = CharacterSet(charactersIn: " ")
-    return str.components(separatedBy: separators)
-}
-
