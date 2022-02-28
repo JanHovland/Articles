@@ -13,7 +13,7 @@ func attributedString(_ str: String) -> AttributedString {
     var wordArray = [String]()
     var word = ""
     
-    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":"]
+    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":", "/", "{", "}", "#"]
     
     let count = str.count
     for i in 0..<count {
@@ -29,8 +29,11 @@ func attributedString(_ str: String) -> AttributedString {
         }
     }
     
-    let wordArray1 = ["font", "foregroundColor", "resizable", "frame", "title", "weight", "width", "heavy", "height", "alignment", "center", "yellow", "gesture", "toggle"]
-    let wordArray2 = ["Image", "Font", "systemName", "TapGesture", "onEnded"]
+    let wordArray1 = ["font", "foregroundColor", "resizable", "frame", "title", "weight", "width", "heavy", "height", "alignment", "center", "yellow", "gesture", "toggle", "leading", "spacing"]
+    
+    let wordArray2 = ["Image", "Font", "systemName", "TapGesture", "onEnded","VStack", "HStack"]
+
+    let wordArray3 = ["in"]
 
     let teller = wordArray.count
     for i in 0..<teller {
@@ -42,6 +45,10 @@ func attributedString(_ str: String) -> AttributedString {
         } else if wordArray2.contains(t) {
             s = AttributedString(t)
             s.foregroundColor = Color(red: 209/255, green: 179/255, blue: 245/255)
+            string = string + s
+        } else if wordArray3.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(red: 255/255, green: 122/255, blue: 178/255)
             string = string + s
         } else {
             string = string + AttributedString(t)
@@ -55,6 +62,18 @@ func attributedString(_ str: String) -> AttributedString {
         string[i..<characterView.index(after: i)].foregroundColor = Color(red: 216/255, green: 200/255, blue: 123/255)
     }
     
+    for i in characterView.indices where characterView[i] == "\"" {
+        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 248/255, green: 127/255, blue: 110/255)
+    }
+    
+    for i in characterView.indices where characterView[i] == "/" {
+        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 127/255, green: 140/255, blue: 152/255)
+    }
+  
+    for i in characterView.indices where characterView[i] == "#" {
+        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 255/255, green: 161/255, blue: 79/255)
+    }
+  
     return string
 }
 
