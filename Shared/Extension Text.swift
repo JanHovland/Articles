@@ -9,51 +9,52 @@ import SwiftUI
 
 func attributedString(_ str: String) -> AttributedString {
     var string = AttributedString()
-    var string1 = AttributedString()
-    var strArray = [String]()
+    var s = AttributedString()
+    var wordArray = [String]()
+    var word = ""
+    
+    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":"]
+    
     let count = str.count
-    var value = ""
-    
     for i in 0..<count {
-        let t = str[i]
-        if t == "." ||
-            t == " " ||
-            t == "=" ||
-            t == "[" ||
-            t == "]" ||
-            t == "(" ||
-            t == "\n" ||
-            t == "/" ||
-            t == "$" ||
-            t == ")" {
-            if value.count > 0 {
-                strArray.append(value)
-                value = ""
+        let char = str[i]
+        if punctuation.contains(String(char)) {
+            if word.count > 0 {
+                wordArray.append(word)
+                word = ""
             }
-            strArray.append(String(t))
+            wordArray.append(String(char))
         } else {
-            value.append(String(t))
+            word.append(String(char))
         }
     }
     
-    let teller = strArray.count
-    for i in 0..<teller {
-        string1 = AttributedString(strArray[i])
-        if string1 == "font" {
-            string1.foregroundColor = Color(.yellow)
-        }
-        if string1 == "Font" {
-            string1.foregroundColor = Color(.green)
-        }
-        if string1 == "foregroundColor" {
-            string1.foregroundColor = Color(.red)
-        }
-        if string1 == "func" {
-            string1.foregroundColor = Color(.blue)
-        }
-        string = string + string1
-    }
+    let wordArray1 = ["font", "foregroundColor", "resizable", "frame", "title", "weight", "width", "heavy", "height", "alignment", "center", "yellow", "gesture", "toggle"]
+    let wordArray2 = ["Image", "Font", "systemName", "TapGesture", "onEnded"]
 
+    let teller = wordArray.count
+    for i in 0..<teller {
+        let t = wordArray[i]
+        if wordArray1.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(red: 178/255, green: 130/255, blue: 235/255)
+            string = string + s
+        } else if wordArray2.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(red: 209/255, green: 179/255, blue: 245/255)
+            string = string + s
+        } else {
+            string = string + AttributedString(t)
+        }
+    }
+    
+    /// alle tall settes til gul
+    let characterView = string.characters
+    
+    for i in characterView.indices where characterView[i].isNumber {
+        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 216/255, green: 200/255, blue: 123/255)
+    }
+    
     return string
 }
 
