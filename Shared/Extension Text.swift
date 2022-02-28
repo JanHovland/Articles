@@ -13,7 +13,7 @@ func attributedString(_ str: String) -> AttributedString {
     var wordArray = [String]()
     var word = ""
     
-    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":", "/", "{", "}", "#"]
+    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":", "/", "{", "}", "#", "@"]
     
     let count = str.count
     for i in 0..<count {
@@ -29,11 +29,16 @@ func attributedString(_ str: String) -> AttributedString {
         }
     }
     
-    let wordArray1 = ["font", "foregroundColor", "resizable", "frame", "title", "weight", "width", "heavy", "height", "alignment", "center", "yellow", "gesture", "toggle", "leading", "spacing"]
+    let wordArray1 = ["font", "foregroundColor", "resizable", "frame", "title", "weight", "width", "heavy", "height", "alignment", "center", "yellow", "gesture", "toggle", "leading", "spacing", "Environment", "bold", "red", "textSelection", "enabled", "subheadline"
+    ]
     
-    let wordArray2 = ["Image", "Font", "systemName", "TapGesture", "onEnded","VStack", "HStack"]
+    let wordArray2 = ["Image", "Font", "systemName", "TapGesture", "onEnded","VStack", "HStack", "Text", "Spacer"]
 
-    let wordArray3 = ["in"]
+    let wordArray3 = ["in", "var", "struct", "some"]
+
+    let wordArray4 = ["String", "View"]
+    
+    let wordArray5 = ["attributedString"]
 
     let teller = wordArray.count
     for i in 0..<teller {
@@ -49,6 +54,14 @@ func attributedString(_ str: String) -> AttributedString {
         } else if wordArray3.contains(t) {
             s = AttributedString(t)
             s.foregroundColor = Color(red: 255/255, green: 122/255, blue: 178/255)
+            string = string + s
+        } else if wordArray4.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(red: 218/255, green: 186/255, blue: 255/255)
+            string = string + s
+        } else if wordArray5.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(red: 120/255, green: 194/255, blue: 180/255)
             string = string + s
         } else {
             string = string + AttributedString(t)
@@ -72,6 +85,10 @@ func attributedString(_ str: String) -> AttributedString {
   
     for i in characterView.indices where characterView[i] == "#" {
         string[i..<characterView.index(after: i)].foregroundColor = Color(red: 255/255, green: 161/255, blue: 79/255)
+    }
+  
+    for i in characterView.indices where characterView[i] == "@" {
+        string[i..<characterView.index(after: i)].foregroundColor =  Color(red: 255/255, green: 122/255, blue: 178/255)
     }
   
     return string
