@@ -354,22 +354,23 @@ struct SetAttributedString: View {
     var article: Article
     
     var body: some View {
-        
-        VStack (alignment: .leading) {
-            HStack {
-                Spacer()
-                Text(mainTypes[article.mainType])
-                    .bold().foregroundColor(.red)
-                Text(subTypes[article.subType])
-                    .bold().foregroundColor(.red)
+        ScrollView {
+            VStack (alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Text(mainTypes[article.mainType])
+                        .bold().foregroundColor(.red)
+                    Text(subTypes[article.subType])
+                        .bold().foregroundColor(.red)
+                    Spacer()
+                }
+                .padding(.bottom, 10)
+                Text(attributedString(str))
                 Spacer()
             }
-            .padding(.bottom, 10)
-            Text(attributedString(str))
-            Spacer()
+            .padding(.leading, 5)
+            .textSelection(.enabled)
+            .font(.subheadline)
         }
-        .padding(.leading, 5)
-        .textSelection(.enabled)
-        .font(.subheadline)
     }
 }

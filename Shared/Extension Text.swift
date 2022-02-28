@@ -13,7 +13,7 @@ func attributedString(_ str: String) -> AttributedString {
     var wordArray = [String]()
     var word = ""
     
-    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":", "/", "{", "}", "#", "@"]
+    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":", "/", "{", "}", "@"]
     
     let count = str.count
     for i in 0..<count {
@@ -29,39 +29,144 @@ func attributedString(_ str: String) -> AttributedString {
         }
     }
     
-    let wordArray1 = ["font", "foregroundColor", "resizable", "frame", "title", "weight", "width", "heavy", "height", "alignment", "center", "yellow", "gesture", "toggle", "leading", "spacing", "Environment", "bold", "red", "textSelection", "enabled", "subheadline"
+    let wordArray1 = [
+        "Environment",
+        "action",
+        "alignment",
+        "bold",
+        "center",
+        "cornerRadius",
+        "edge",
+        "enabled",
+        "font",
+        "foregroundColor",
+        "frame",
+        "gesture",
+        "gray",
+        "heavy",
+        "height",
+        "infinity",
+        "leading",
+        "maxWidth",
+        "minHeight",
+        "minWidth",
+        "move",
+        "none",
+        "onTapGesture",
+        "overlay",
+        "padding",
+        "red",
+        "resizable",
+        "spacing",
+        "subheadline",
+        "textSelection",
+        "title",
+        "toggle",
+        "trailing",
+        "transition",
+        "weight",
+        "width",
+        "yellow"
     ]
     
-    let wordArray2 = ["Image", "Font", "systemName", "TapGesture", "onEnded","VStack", "HStack", "Text", "Spacer"]
+    let wordArray2 = [
+        "Button",
+        "Font",
+        "HStack",
+        "Image",
+        "LocalizedStringKey",
+        "NSLocalizedString",
+        "Spacer",
+        "TapGesture",
+        "Text",
+        "TextField",
+        "VStack",
+        "compactMap",
+        "endEditing",
+        "filter",
+        "first",
+        "isKeyWindow",
+        "map",
+        "onEnded",
+        "systemName",
+        "windows"
+    ]
 
-    let wordArray3 = ["in", "var", "struct", "some"]
+    let wordArray3 = [
+        "async",
+        "await",
+        "catch",
+        "comment",
+        "do",
+        "error",
+        "false",
+        "func",
+        "if",
+        "import",
+        "in",
+        "private",
+        "return",
+        "some",
+        "struct",
+        "true",
+        "try",
+        "var"
+    ]
 
-    let wordArray4 = ["String", "View"]
+    let wordArray4 = [
+        "Binding",
+        "State",
+        "String",
+        "View"
+    ]
     
-    let wordArray5 = ["attributedString"]
+    let wordArray5 = [
+        "attributedString"
+    ]
+
+    let wordArray6 = [
+        "iOS",
+        "macOS",
+        "os"
+    ]
+
+    let wordArray7 = [
+        "UIWindowScene",
+        "body",
+        "content",
+        "shared"
+    ]
 
     let teller = wordArray.count
     for i in 0..<teller {
         let t = wordArray[i]
         if wordArray1.contains(t) {
             s = AttributedString(t)
-            s.foregroundColor = Color(red: 178/255, green: 130/255, blue: 235/255)
+            s.foregroundColor = Color(178, 130, 235)
             string = string + s
         } else if wordArray2.contains(t) {
             s = AttributedString(t)
-            s.foregroundColor = Color(red: 209/255, green: 179/255, blue: 245/255)
+            s.foregroundColor = Color(209, 179, 245)
             string = string + s
         } else if wordArray3.contains(t) {
             s = AttributedString(t)
-            s.foregroundColor = Color(red: 255/255, green: 122/255, blue: 178/255)
+            s.foregroundColor = Color(255, 122, 178)
             string = string + s
         } else if wordArray4.contains(t) {
             s = AttributedString(t)
-            s.foregroundColor = Color(red: 218/255, green: 186/255, blue: 255/255)
+            s.foregroundColor = Color(218, 186, 255)
             string = string + s
         } else if wordArray5.contains(t) {
             s = AttributedString(t)
-            s.foregroundColor = Color(red: 120/255, green: 194/255, blue: 180/255)
+            s.foregroundColor = Color(120, 194, 180)
+            string = string + s
+        } else if wordArray6.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(255, 161,  79)
+            string = string + s
+        } else if wordArray7.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(120, 194, 179)
             string = string + s
         } else {
             string = string + AttributedString(t)
@@ -72,27 +177,42 @@ func attributedString(_ str: String) -> AttributedString {
     let characterView = string.characters
     
     for i in characterView.indices where characterView[i].isNumber {
-        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 216/255, green: 200/255, blue: 123/255)
+        string[i..<characterView.index(after: i)].foregroundColor = Color(216, 200, 123)
     }
     
     for i in characterView.indices where characterView[i] == "\"" {
-        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 248/255, green: 127/255, blue: 110/255)
+        string[i..<characterView.index(after: i)].foregroundColor = Color(248, 127, 110)
     }
     
     for i in characterView.indices where characterView[i] == "/" {
-        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 127/255, green: 140/255, blue: 152/255)
+        string[i..<characterView.index(after: i)].foregroundColor = Color(127, 140, 152)
     }
   
     for i in characterView.indices where characterView[i] == "#" {
-        string[i..<characterView.index(after: i)].foregroundColor = Color(red: 255/255, green: 161/255, blue: 79/255)
+        string[i..<characterView.index(after: i)].foregroundColor = Color(255, 161,  79)
     }
   
     for i in characterView.indices where characterView[i] == "@" {
-        string[i..<characterView.index(after: i)].foregroundColor =  Color(red: 255/255, green: 122/255, blue: 178/255)
+        string[i..<characterView.index(after: i)].foregroundColor =  Color(218, 186, 255)
+    }
+  
+    for i in characterView.indices where characterView[i] == "$" {
+        string[i..<characterView.index(after: i)].foregroundColor =  Color(120, 194, 179)
     }
   
     return string
 }
+
+extension Color {
+    init(_ red: Int, _ green: Int, _ blue: Int) {
+        let redValue = CGFloat(red) / 255.0
+        let greenValue = CGFloat(green) / 255.0
+        let blueValue = CGFloat(blue) / 255.0
+        self.init(red: redValue, green: greenValue, blue: blueValue)
+    }
+}
+
+
 
 extension String {
 
