@@ -13,7 +13,7 @@ func attributedString(_ str: String) -> AttributedString {
     var wordArray = [String]()
     var word = ""
     
-    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":", "/", "{", "}", "@"]
+    let punctuation = [".", " ", "=", "[", "]", "(", "\n", "/", "$", ")", "_", ",", ":", "/", "{", "}", "@", "!"]
     
     let count = str.count
     for i in 0..<count {
@@ -33,11 +33,13 @@ func attributedString(_ str: String) -> AttributedString {
         "Environment",
         "action",
         "alignment",
+        "assign",
         "bold",
         "bottom",
         "center",
         "contains",
         "cornerRadius",
+        "default",
         "edge",
         "edgesIgnoringSafeArea",
         "enabled",
@@ -55,14 +57,18 @@ func attributedString(_ str: String) -> AttributedString {
         "leading",
         "light",
         "lineLimit",
+        "map",
         "maxWidth",
         "minHeight",
         "minWidth",
         "move",
         "none",
+        "on",
+        "onAppear",
         "onTapGesture",
         "overlay",
         "padding",
+        "perform",
         "publisher",
         "red",
         "regular",
@@ -72,17 +78,21 @@ func attributedString(_ str: String) -> AttributedString {
         "spacing",
         "split",
         "subheadline",
+        "subscribe",
         "textSelection",
         "title",
+        "to",
         "toggle",
         "top",
         "trailing",
         "transition",
         "underline",
         "uppercased",
+        "userInfo",
         "weight",
         "width",
-        "yellow"
+        "yellow",
+        "zero"
     ]
     
     let wordArray2 = [
@@ -92,6 +102,7 @@ func attributedString(_ str: String) -> AttributedString {
         "Image",
         "LocalizedStringKey",
         "NSLocalizedString",
+        "NSPredicate",
         "Spacer",
         "TapGesture",
         "Text",
@@ -102,7 +113,6 @@ func attributedString(_ str: String) -> AttributedString {
         "filter",
         "first",
         "isKeyWindow",
-        "map",
         "onEnded",
         "size",
         "system",
@@ -111,18 +121,22 @@ func attributedString(_ str: String) -> AttributedString {
     ]
 
     let wordArray3 = [
+        "as",
         "async",
         "await",
         "catch",
         "comment",
         "do",
         "error",
+        "extension",
         "false",
         "for",
         "func",
         "if",
         "import",
         "in",
+        "let",
+        "main",
         "mutating",
         "nil",
         "private",
@@ -136,15 +150,24 @@ func attributedString(_ str: String) -> AttributedString {
     ]
 
     let wordArray4 = [
+        "App",
         "Binding",
         "Bool",
         "CGFloat",
+        "CGRect",
+        "Content",
         "Edge",
+        "Merge",
+        "NotificationCenter",
+        "Publishers",
+        "RunLoop",
+        "Scene",
         "Set",
         "State",
         "String",
         "View",
         "ViewModifier",
+        "WindowGroup",
         "prefix",
         "capitalized",
         "dropFirst"
@@ -157,6 +180,9 @@ func attributedString(_ str: String) -> AttributedString {
     let wordArray6 = [
         "iOS",
         "macOS",
+        "#endif",
+        "#elseif",
+        "#if",
         "os"
     ]
 
@@ -164,8 +190,20 @@ func attributedString(_ str: String) -> AttributedString {
         "UIWindowScene",
         "body",
         "content",
-        "Content",
         "shared"
+    ]
+
+    let wordArray8 = [
+        "PersistenceController",
+        "container",
+        "persistenceController"
+    ]
+
+    let wordArray9 = [
+        "environment",
+        "managedObjectContext",
+        "modifier",
+        "viewContext"
     ]
 
     let teller = wordArray.count
@@ -199,6 +237,14 @@ func attributedString(_ str: String) -> AttributedString {
             s = AttributedString(t)
             s.foregroundColor = Color(120, 194, 179)
             string = string + s
+        } else if wordArray8.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(155, 217, 205)
+            string = string + s
+        } else if wordArray9.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(168, 122, 220)
+            string = string + s
         } else {
             string = string + AttributedString(t)
         }
@@ -224,11 +270,7 @@ func attributedString(_ str: String) -> AttributedString {
     }
   
     for i in characterView.indices where characterView[i] == "@" {
-        string[i..<characterView.index(after: i)].foregroundColor =  Color(218, 186, 255)
-    }
-  
-    for i in characterView.indices where characterView[i] == "$" {
-        string[i..<characterView.index(after: i)].foregroundColor =  Color(120, 194, 179)
+        string[i..<characterView.index(after: i)].foregroundColor =  Color(255, 122, 128)
     }
   
     return string

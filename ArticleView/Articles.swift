@@ -36,6 +36,8 @@ struct Articles: View {
     @State private var isShowingToDoView: Bool = false
     @State private var isAlertActive = false
     
+    @State var selection: Set<String> = []
+    
     let internetMonitor = NWPathMonitor()
     let internetQueue = DispatchQueue(label: "InternetMonitor")
     
@@ -101,7 +103,7 @@ struct Articles: View {
                         }
                     
                     
-                    /// onDelete finne bare i iOS
+                        /// onDelete finne bare i iOS
                         .onDelete { (indexSet) in
                             indexSetDelete = indexSet
                             selectedRecordId = articles[indexSet.first!].recordID
@@ -132,6 +134,7 @@ struct Articles: View {
                         $0.subType1.localizedStandardContains (searchFor)    } )) {
                             article in
                             if article.mainType == 2 {
+                                
                                 NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
                                     ArticleAllView(article: article,
                                                    searchText: searchFor)
@@ -145,9 +148,15 @@ struct Articles: View {
                         }
                 }
                 .listStyle(SidebarListStyle())
-                /// onDelete finne bare i macOS
+                /// onDeleteCommand finnes bare i macOS
                 .onDeleteCommand {
                     Task.init {
+                        
+                        ///
+                        ///// selectedRecordId er en global variabel som blir satt i:
+                        /////   SetAttributedString()
+                        ///// 
+                        
                         await message = deleteArticle(selectedRecordId!)
                         title = LocalizedStringKey(NSLocalizedString("Delete", comment: ""))
                         isAlertActive.toggle()

@@ -26,7 +26,8 @@ struct toDoView: View {
       8. 🟢 Oppdatering får nå med seg endringene. 
       9. 🟢 Finne "Tips" i Søk...
      10. 🔴 Åpne tipset
-     11. 🔴
+     11. 🔴 Delete i macOS gir feilmelding (OK i iOS)
+     12. 🔴 .
     
     """
     

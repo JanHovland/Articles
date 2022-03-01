@@ -372,5 +372,8 @@ struct SetAttributedString: View {
             .textSelection(.enabled)
             .font(.subheadline)
         }
+        .task {
+            selectedRecordId = article.recordID
+        }
     }
 }
