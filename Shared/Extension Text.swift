@@ -43,6 +43,7 @@ func attributedString(_ str: String) -> AttributedString {
         "edge",
         "edgesIgnoringSafeArea",
         "enabled",
+        "fatalError",
         "font",
         "for",
         "foregroundColor",
@@ -110,9 +111,12 @@ func attributedString(_ str: String) -> AttributedString {
         "VStack",
         "compactMap",
         "endEditing",
+        "completionHandler",
         "filter",
         "first",
+        "fileURLWithPath",
         "isKeyWindow",
+        "loadPersistentStores",
         "onEnded",
         "size",
         "system",
@@ -127,7 +131,6 @@ func attributedString(_ str: String) -> AttributedString {
         "catch",
         "comment",
         "do",
-        "error",
         "extension",
         "false",
         "for",
@@ -143,6 +146,7 @@ func attributedString(_ str: String) -> AttributedString {
         "return",
         "self",
         "some",
+        "static",
         "struct",
         "true",
         "try",
@@ -158,6 +162,8 @@ func attributedString(_ str: String) -> AttributedString {
         "Content",
         "Edge",
         "Merge",
+        "NSError",
+        "NSPersistentCloudKitContainer",
         "NotificationCenter",
         "Publishers",
         "RunLoop",
@@ -168,6 +174,8 @@ func attributedString(_ str: String) -> AttributedString {
         "View",
         "ViewModifier",
         "WindowGroup",
+        "name",
+        "persistentStoreDescriptions",
         "prefix",
         "capitalized",
         "dropFirst"
@@ -204,6 +212,10 @@ func attributedString(_ str: String) -> AttributedString {
         "managedObjectContext",
         "modifier",
         "viewContext"
+    ]
+
+    let wordArray10 = [
+        "Config"
     ]
 
     let teller = wordArray.count
@@ -244,6 +256,10 @@ func attributedString(_ str: String) -> AttributedString {
         } else if wordArray9.contains(t) {
             s = AttributedString(t)
             s.foregroundColor = Color(168, 122, 220)
+            string = string + s
+        } else if wordArray10.contains(t) {
+            s = AttributedString(t)
+            s.foregroundColor = Color(109, 200, 225)
             string = string + s
         } else {
             string = string + AttributedString(t)
