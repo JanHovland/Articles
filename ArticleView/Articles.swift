@@ -91,8 +91,10 @@ struct Articles: View {
                             article in
                             if article.mainType == 2 {
                                 NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
-                                    ArticleAllView(article: article,
-                                                   searchText: searchFor)
+                                    //  ArticleAllView(article: article,
+                                    //                 searchText: searchFor)
+                                    SetAttributedString(str: article.introduction, article: article)
+                                        .lineLimit(nil)
                                 }
                             } else {
                                 NavigationLink(destination: SafariView(url: article.url)) {
