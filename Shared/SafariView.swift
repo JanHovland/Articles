@@ -47,8 +47,10 @@ struct SafariView : NSViewRepresentable {
     var url: String
     var recordID: CKRecord.ID?
     
+    @EnvironmentObject var deleteRecord: DeleteRecord
+    
     func updateNSView(_ nsView: WKWebView, context: Context) {
-        selectedRecordId = recordID
+        deleteRecord.recordId = recordID
     }
     
     func makeNSView(context: Context) -> WKWebView  {
@@ -112,6 +114,7 @@ struct SafariView: UIViewControllerRepresentable {
     typealias UIViewControllerType = SFSafariViewController
     
     var url: String
+
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
         return SFSafariViewController(url: URL(string: url)!)

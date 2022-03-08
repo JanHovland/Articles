@@ -18,11 +18,11 @@ import SwiftUI
 import Network
 import CloudKit
 
-var selectedRecordId: CKRecord.ID?
-
 @MainActor
 
 struct Articles: View {
+
+    @EnvironmentObject var deleteRecord: DeleteRecord
     
     @State private var articles = [Article]()
     @State private var message: LocalizedStringKey = ""
@@ -108,9 +108,9 @@ struct Articles: View {
                         /// onDelete finne bare i iOS
                         .onDelete { (indexSet) in
                             indexSetDelete = indexSet
-                            selectedRecordId = articles[indexSet.first!].recordID
+                            deleteRecord.recordId = articles[indexSet.first!].recordID
                             Task.init {
-                                await message = deleteArticle(selectedRecordId!)
+                                await message = deleteArticle(deleteRecord.recordId!)
                                 let msg = "Delete"
                                 title = LocalizedStringKey(NSLocalizedString(msg, comment: ""))
                                 isAlertActive.toggle()
@@ -143,7 +143,7 @@ struct Articles: View {
                                         .lineLimit(nil)
                                 }
                             } else {
-                                NavigationLink(destination: SafariView(url: article.url)) {
+                                NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
                                     ArticleAllView(article: article,
                                                    searchText: searchFor)
                                 }
@@ -156,11 +156,10 @@ struct Articles: View {
                     Task.init {
                         
                         ///
-                        ///// selectedRecordId er en global variabel som blir satt i:
-                        /////   SetAttributedString()
-                        ///// 
+                        ///// Bruker nå @EnvironmentObject var deleteRecord: DeleteRecord
+                        ///
                         
-                        await message = deleteArticle(selectedRecordId!)
+                        await message = deleteArticle(deleteRecord.recordId!)
                         title = LocalizedStringKey(NSLocalizedString("Delete", comment: ""))
                         isAlertActive.toggle()
                     }
