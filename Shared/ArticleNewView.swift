@@ -185,9 +185,14 @@ struct ArticleNewView: View {
                                  spacing: 10,
                                  value: $subType)
                 VStack {
-                    TextField("SubTitle1", text: $subType1)
-                        .padding(.bottom,10)
-                        .textFieldStyle(.roundedBorder)
+                    
+                    HStack (spacing: 10)  {
+                        Text("SubTitle1")
+                        TextEditor(text: $subType1)
+                            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
+                            .textFieldStyle(.roundedBorder)
+                            .background(Color(242, 201, 173))
+                    }
                     
                     HStack (spacing: 10)  {
                         Text("Title")
