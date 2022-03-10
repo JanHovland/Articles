@@ -21,13 +21,14 @@ struct toDoView: View {
       5. 🟢 Rett sletting på macOS
       6. 🟢 Sjekk lagring og lagre kun når posten ikke finnes fra før.
       7. 🟢 Lage meny med:
-            . 🟢 Friskopp
+            . 🟢 Frisk opp
             . 🟢 Oppgaver
       8. 🟢 Oppdatering får nå med seg endringene. 
       9. 🟢 Finne "Tips" i Søk...
-     10. 🔴 Åpne tipset
-     11. 🔴 Delete i macOS gir feilmelding (OK i iOS)
-     12. 🔴 .
+     10. 🟢 Kan nå åpne tipset med StringAtributes.
+     11. 🟢 Delete i macOS er nå OK i macOS (OK i iOS)
+     12. 🔴 Vurdere refresh etter delete, slik at jeg ikke trenger å trykke refresh
+     13. 🔴 .
     
     """
     

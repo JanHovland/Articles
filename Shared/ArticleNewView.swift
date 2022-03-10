@@ -23,6 +23,8 @@ struct ArticleNewView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    /// https://stackoverflow.com/questions/62848276/change-background-color-of-texteditor-in-swiftui#62848618
+    
     var body: some View {
         HStack {
             Button(action: {
@@ -120,19 +122,58 @@ struct ArticleNewView: View {
                 
                 #if os(iOS)
                 
-                InputMainType(heading: "MainType",
-                              mainTypes: mainTypes,
-                              spacing: 20,
-                              value: $mainType)
-                InputSubType(heading: "SubType",
-                             subTypes: subTypes,
-                             spacing: 20,
-                             value: $subType)
+                HStack {
+                    InputMainType(heading: "MainType",
+                                  mainTypes: mainTypes,
+                                  spacing: 10,
+                                  value: $mainType)
+                    
+                    InputSubType(heading: "SubType",
+                                 subTypes: subTypes,
+                                 spacing: 10,
+                                 value: $subType)
+                }
+                .font(.system(size: 14, weight: .semibold))
                 
-                TextField("SubTitle1", text: $subType1)
-                TextField("Title", text: $title)
-                TextField("Introduction", text: $introduction)
-                TextField("Url", text: $url)
+                VStack {
+                    
+                    HStack (spacing: 10)  {
+                        Text("SubTitle1")
+                        TextEditor(text: $subType1)
+                            .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
+                            .background(Color(242, 201, 173))
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                        
+                    }
+                    
+                    HStack (spacing: 10)  {
+                        Text("Title")
+                        TextEditor(text: $title)
+                            .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
+                            .background(Color(242, 201, 173))
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
+                    
+                    HStack (spacing: 13)  {
+                        Text("Introduction")
+                        TextEditor(text: $introduction)
+                            .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
+                            .background(Color(242, 201, 173))
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
+                    
+                    HStack (spacing: 24)  {
+                        Text("Url")
+                        TextEditor(text: $url)
+                            .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
+                            .background(Color(242, 201, 173))
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
+                }
                 
                 #elseif os(macOS)
                     InputMainType(heading:  "MainType",
@@ -146,12 +187,29 @@ struct ArticleNewView: View {
                 VStack {
                     TextField("SubTitle1", text: $subType1)
                         .padding(.bottom,10)
-                    TextField("Title", text: $title)
-                        .padding(.bottom,10)
-                    TextField("Introduction", text: $introduction)
-                        .padding(.bottom,10)
-                    TextField("Url", text: $url)
-                        .padding(.bottom,10)
+                        .textFieldStyle(.roundedBorder)
+                    
+                    HStack (spacing: 10)  {
+                        Text("Title")
+                        TextEditor(text: $title)
+                            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
+                            .textFieldStyle(.roundedBorder)
+                    }
+                    
+                    HStack (spacing: 13)  {
+                        Text("Introduction")
+                        TextEditor(text: $introduction)
+                            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
+                            .textFieldStyle(.roundedBorder)
+                    }
+                    
+                    HStack (spacing: 24)  {
+                        Text("Url")
+                        TextEditor(text: $url)
+                            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
+                            .textFieldStyle(.roundedBorder)
+                    }
+                    
                 }
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
@@ -159,7 +217,6 @@ struct ArticleNewView: View {
                 #endif
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .alert(title1, isPresented: $isAlertActive) {
             Button("OK", action: {})
         } message: {
