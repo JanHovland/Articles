@@ -416,6 +416,8 @@ struct SetAttributedString: View {
     var str: String
     var article: Article
     
+    @EnvironmentObject var deleteRecord: DeleteRecord
+    
     var body: some View {
         ScrollView {
             VStack (alignment: .leading) {
@@ -434,6 +436,10 @@ struct SetAttributedString: View {
             .padding(.leading, 5)
             .textSelection(.enabled)
             .font(.subheadline)
+        }
+        .task {
+            
+            deleteRecord.recordId = article.recordID
         }
     }
 }

@@ -42,7 +42,12 @@ struct CloudKitArticle {
     
     // MARK: - check if the article record exists inside CloudKitArticle
     static func existArticle(_ article: Article) async throws -> Bool {
-        let predicate = NSPredicate(format: "url = %@", article.url)
+        var predicate: NSPredicate
+        if article.mainType != 2 {
+            predicate = NSPredicate(format: "url = %@", article.url)
+        } else {
+            predicate = NSPredicate(format: "introduction = %@", article.introduction)
+        }
         let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
         do {
             let result = try await database.records(matching: query)
