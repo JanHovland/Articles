@@ -218,6 +218,7 @@ struct ArticleNewView: View {
                 }
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
+                .frame(width: 400.0, height: 200.0)
                 Spacer()
                 #endif
             }
