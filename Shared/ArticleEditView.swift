@@ -65,9 +65,9 @@ struct ArticleEditView: View {
                 .font(.system(size: 30, weight: .ultraLight, design: .rounded))
         }
         Form {
+#if os(iOS)
             VStack {
                 
-#if os(iOS)
                 InputMainType(heading: NSLocalizedString("MainType", comment:  ""),
                               mainTypes: mainTypes,
                               spacing: 20,
@@ -88,7 +88,10 @@ struct ArticleEditView: View {
                 InputTextFieldURL(heading: NSLocalizedString("Url", comment:  ""),
                                   space: 62,
                                   value: $url)
+            }
+            .padding()
 #elseif os(macOS)
+            VStack {
                 InputMainType(heading: NSLocalizedString("MainType", comment:  ""),
                               mainTypes: mainTypes,
                               spacing: 5,
@@ -109,10 +112,10 @@ struct ArticleEditView: View {
                 InputTextField(heading: NSLocalizedString("Url", comment:  ""),
                                spacing: 71,
                                value: $url)
-#endif
             }
-            .padding()
             .frame(width: 500, height: 400.0)
+            .padding()
+#endif
         }
         .task {
             title = article.title
