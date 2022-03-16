@@ -140,6 +140,7 @@ struct Articles: View {
                 }
                 /// navigationBarHidden kan kun brukes i iOS
                 .navigationBarHidden(false)
+                .listStyle(SidebarListStyle()) 
 #elseif os(macOS)
                 List {
                     ///
