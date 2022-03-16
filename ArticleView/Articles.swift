@@ -41,6 +41,8 @@ struct Articles: View {
     let internetMonitor = NWPathMonitor()
     let internetQueue = DispatchQueue(label: "InternetMonitor")
     
+    @State private var isShowingEditView: Bool = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -93,8 +95,27 @@ struct Articles: View {
                                 NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
                                     //  ArticleAllView(article: article,
                                     //                 searchText: searchFor)
+                                    
+                                    HStack {
+                                    
+                                        Image(systemName: "square.and.pencil")
+                                            .resizable()
+                                            .frame(width: 12, height: 12, alignment: .center)
+                                            .font(Font.title.weight(.heavy))
+                                            .foregroundColor(.yellow)
+                                            .gesture(
+                                                TapGesture()
+                                                    .onEnded({_ in
+                                                        /// Rutine for å editere en artikkel
+                                                        isShowingEditView.toggle()
+                                                    })
+                                            )
                                     SetAttributedString(str: article.introduction, article: article)
                                         .lineLimit(nil)
+                                    }
+                                }
+                                .sheet(isPresented: $isShowingEditView) {
+                                    ArticleEditView(article: article)
                                 }
                             } else {
                                 NavigationLink(destination: SafariView(url: article.url)) {
@@ -139,8 +160,25 @@ struct Articles: View {
                                 NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
                                     //  ArticleAllView(article: article,
                                     //                 searchText: searchFor)
-                                    SetAttributedString(str: article.introduction, article: article)
-                                        .lineLimit(nil)
+                                    HStack {
+                                        Image(systemName: "square.and.pencil")
+                                            .resizable()
+                                            .frame(width: 12, height: 12, alignment: .center)
+                                            .font(Font.title.weight(.heavy))
+                                            .foregroundColor(.yellow)
+                                            .gesture(
+                                                TapGesture()
+                                                    .onEnded({_ in
+                                                        /// Rutine for å editere en artikkel
+                                                        isShowingEditView.toggle()
+                                                    })
+                                            )
+                                        SetAttributedString(str: article.introduction, article: article)
+                                            .lineLimit(nil)
+                                    }
+                                }
+                                .sheet(isPresented: $isShowingEditView) {
+                                    ArticleEditView(article: article)
                                 }
                             } else {
                                 NavigationLink(destination: SafariView(url: article.url, recordID: article.recordID)) {
@@ -149,6 +187,9 @@ struct Articles: View {
                                 }
                             }
                         }
+                    
+
+                    
                 }
                 .listStyle(SidebarListStyle())
                 /// onDeleteCommand finnes bare i macOS
@@ -164,6 +205,8 @@ struct Articles: View {
                         isAlertActive.toggle()
                     }
                 }
+
+
 #endif
             } // VStack
             .navigationTitle(NSLocalizedString("Articles", comment: ""))

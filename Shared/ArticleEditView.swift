@@ -112,8 +112,8 @@ struct ArticleEditView: View {
 #endif
             }
             .padding()
+            .frame(width: 500, height: 400.0)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             title = article.title
             introduction = article.introduction

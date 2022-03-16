@@ -204,7 +204,7 @@ struct ArticleNewView: View {
                     HStack (spacing: 13)  {
                         Text("Introduction")
                         TextEditor(text: $introduction)
-                            .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
+                            .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
                             .textFieldStyle(.roundedBorder)
                     }
                     
@@ -218,7 +218,7 @@ struct ArticleNewView: View {
                 }
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
-                .frame(width: 400.0, height: 200.0)
+                .frame(width: 400.0, height: 300.0)
                 Spacer()
                 #endif
             }
@@ -438,7 +438,6 @@ struct SetAttributedString: View {
             .font(.subheadline)
         }
         .task {
-            
             deleteRecord.recordId = article.recordID
         }
     }
