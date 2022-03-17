@@ -8,10 +8,10 @@
 import SwiftUI
 import CloudKit
 
-func saveArticle(_ article: Article) async -> LocalizedStringKey {
+func saveArticle(_ article: Article, useUrl: Bool) async -> LocalizedStringKey {
     var message: LocalizedStringKey = ""
     do {
-        try await CloudKitArticle.saveArticle(article)
+        try await CloudKitArticle.saveArticle(article, useUrl: useUrl)
         message = LocalizedStringKey(NSLocalizedString("The article has been saved in CloudKit", comment: ""))
         return message
     } catch {

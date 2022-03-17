@@ -25,14 +25,18 @@ struct CloudKitArticle {
     }
     
     /// MARK: - saving to CloudKit inside CloudKitArticle
-    static func saveArticle(_ article: Article) async throws {
+    static func saveArticle(_ article: Article, useUrl: Bool) async throws {
         let articleRecord = CKRecord(recordType: RecordType.Article)
         articleRecord["title"] = article.title
         articleRecord["introduction"] = article.introduction
         articleRecord["mainType"] = article.mainType
         articleRecord["subType"] = article.subType
         articleRecord["subType1"] = article.subType1
-        articleRecord["url"] = article.url
+        if useUrl {
+            articleRecord["url"] = article.url
+        } else {
+            articleRecord["url"] = ""
+        }
         do {
             try await database.save(articleRecord)
         } catch {
@@ -43,7 +47,7 @@ struct CloudKitArticle {
     // MARK: - check if the article record exists inside CloudKitArticle
     static func existArticle(_ article: Article) async throws -> Bool {
         var predicate: NSPredicate
-        if article.mainType != 2 {
+        if article.subType1 == 0 {
             predicate = NSPredicate(format: "url = %@", article.url)
         } else {
             predicate = NSPredicate(format: "introduction = %@", article.introduction)
@@ -84,7 +88,7 @@ struct CloudKitArticle {
                 let introduction = art.value(forKey: "introduction") ?? ""
                 let mainType = art.value(forKey: "mainType") ?? 0
                 let subType = art.value(forKey: "subType") ?? 0
-                let subType1 = art.value(forKey: "subType1") ?? ""
+                let subType1 = art.value(forKey: "subType1") ?? 0
                 let url = art.value(forKey: "url") ?? ""
                 
                 article.recordID = recID
@@ -92,7 +96,7 @@ struct CloudKitArticle {
                 article.introduction = introduction as! String
                 article.mainType = mainType as! Int
                 article.subType = subType as! Int
-                article.subType1 = subType1 as! String
+                article.subType1 = subType1 as! Int
                 article.url = url as! String
  
                 articles.append(article)

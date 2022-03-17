@@ -15,6 +15,6 @@ struct Article: Identifiable {
     var introduction: String = ""
     var mainType: Int = 0
     var subType: Int = 0
-    var subType1: String = ""          
+    var subType1: Int = 0
     var url: String = ""
 }

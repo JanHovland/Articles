@@ -9,14 +9,17 @@ import SwiftUI
 
 var mainTypes = [
     NSLocalizedString("iOS", comment: ""),
-    NSLocalizedString("MacOS", comment: ""),
-    NSLocalizedString("Other", comment: "")
+    NSLocalizedString("MacOS", comment: "")
 ]
 
 var subTypes = [
     NSLocalizedString("SwiftUI", comment: ""),
-    NSLocalizedString("Swift", comment: ""),
-    ""
+    NSLocalizedString("Swift", comment: "")
+]
+
+var subTypes1 = [
+    NSLocalizedString("Article", comment: ""),
+    NSLocalizedString("Tips", comment: "")
 ]
 
 

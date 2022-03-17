@@ -85,13 +85,10 @@ struct Articles: View {
                     ///     subtype1
                     ///
                     ForEach(articles.filter({ searchFor.isEmpty ||
-                        $0.mainType == 2 ||
-                        $0.subType1.localizedStandardContains (searchFor) ||
                         $0.title.localizedStandardContains (searchFor) ||
-                        $0.introduction.localizedStandardContains (searchFor) ||
-                        $0.subType1.localizedStandardContains (searchFor)    } )) {
+                        $0.introduction.localizedStandardContains (searchFor)  } )) {
                             article in
-                            if article.mainType == 2 {
+                            if article.subType1 == 1 {
                                 NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
                                     //  ArticleAllView(article: article,
                                     //                 searchText: searchFor)
@@ -151,13 +148,10 @@ struct Articles: View {
                     ///     subtype1
                     ///
                     ForEach(articles.filter({ searchFor.isEmpty ||
-                        $0.mainType == 2 ||
-                        $0.subType1.localizedStandardContains (searchFor) ||
                         $0.title.localizedStandardContains (searchFor) ||
-                        $0.introduction.localizedStandardContains (searchFor) ||
-                        $0.subType1.localizedStandardContains (searchFor)    } )) {
+                        $0.introduction.localizedStandardContains (searchFor) } )) {
                             article in
-                            if article.mainType == 2 {
+                            if article.subType1 == 1 {
                                 NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
                                     //  ArticleAllView(article: article,
                                     //                 searchText: searchFor)
@@ -300,6 +294,8 @@ struct ArticleTipsView: View {
             Text(mainTypes[article.mainType])
                 .bold().foregroundColor(.red)
             Text(subTypes[article.subType])
+                .bold().foregroundColor(.red)
+            Text(subTypes1[article.subType1])
                 .bold().foregroundColor(.red)
             Text(article.introduction)
             Spacer()

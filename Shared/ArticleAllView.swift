@@ -34,63 +34,56 @@ struct ArticleAllView: View {
                     )
                 VStack (alignment: .leading, spacing: 5) {
                     #if os(iOS)
-                    HilightedText(str: mainTypes[article.mainType],
-                                  search: searchText)
+                    
+                    HStack (spacing: 20) {
+                        HilightedText(str: mainTypes[article.mainType],
+                                      search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    HilightedText(str: subTypes[article.subType],
-                                  search: searchText)
+                        HilightedText(str: subTypes[article.subType],
+                                      search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    HilightedText(str: article.subType1,
-                                  search: searchText)
-                       .font(.system(size: 15, weight: .regular))
+                        HilightedText(str: subTypes1[article.subType1],
+                                      search: searchText)
+                        .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
+                    }
                     HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
-                    if article.mainType == 2 {
-                        HilightedText(str: article.introduction,
+                    HilightedText(str: article.introduction,
                                       search: searchText)
                         .font(.system(size: 11, weight: .light))
                         .lineLimit(nil)
-                    } else {
-                        HilightedText(str: article.introduction,
-                                      search: searchText)
-                        .font(.system(size: 11, weight: .light))
-                        .lineLimit(nil)
-                    }
                     Text(article.url)
                         .font(.system(size: 13, weight: .light))
                         .foregroundColor(.gray)
                     #elseif os(macOS)
-                    HilightedText(str: mainTypes[article.mainType],
-                                  search: searchText)
+                    
+                    HStack (spacing: 20) {
+                        HilightedText(str: mainTypes[article.mainType],
+                                      search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    HilightedText(str: subTypes[article.subType],
-                                  search: searchText)
+                        HilightedText(str: subTypes[article.subType],
+                                      search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
-                    HilightedText(str: article.subType1,
-                                  search: searchText)
+                        HilightedText(str: subTypes1[article.subType1],
+                                      search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .foregroundColor(.red)
+                    }
+                    
                     HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
                         .lineLimit(nil)
-                    if article.mainType == 2 {
-                        HilightedText(str: article.introduction,
+                    HilightedText(str: article.introduction,
                                       search: searchText)
                         .font(.system(size: 11, weight: .light))
                         .lineLimit(nil)
-                    } else {
-                        HilightedText(str: article.introduction,
-                                      search: searchText)
-                        .font(.system(size: 11, weight: .light))
-                        .lineLimit(nil)
-                    }
                     Text(article.url)
                         .font(.system(size: 11, weight: .light))
                         .foregroundColor(.gray)
