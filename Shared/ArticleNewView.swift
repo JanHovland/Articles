@@ -423,15 +423,15 @@ struct SetAttributedString: View {
     var body: some View {
         ScrollView {
             VStack (alignment: .leading) {
-                HStack (spacing: 20) {
+                HStack (spacing: 10) {
                     Text(mainTypes[article.mainType])
-                        .bold().foregroundColor(.red)
+                        .foregroundColor(.red)
                     Text(subTypes[article.subType])
-                        .bold().foregroundColor(.red)
+                        .foregroundColor(.red)
                     Text(subTypes1[article.subType1])
-                        .bold().foregroundColor(.red)
+                        .foregroundColor(.red)
                     Text(article.title)
-                        .bold().foregroundColor(.red)
+                        .foregroundColor(.red)
                     Spacer()
                 }
                 .padding(.bottom, 10)
@@ -440,7 +440,7 @@ struct SetAttributedString: View {
             }
             .padding(.leading, 5)
             .textSelection(.enabled)
-            .font(.subheadline)
+            .font(.system(size: 15, weight: .regular))
         }
         .task {
             deleteRecord.recordId = article.recordID

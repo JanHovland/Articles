@@ -38,17 +38,13 @@ struct ArticleAllView: View {
                     HStack (spacing: 20) {
                         HilightedText(str: mainTypes[article.mainType],
                                       search: searchText)
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
                         HilightedText(str: subTypes[article.subType],
                                       search: searchText)
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
                         HilightedText(str: subTypes1[article.subType1],
                                       search: searchText)
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
                     }
+                    .font(.system(size: 15, weight: .regular))
+                    .foregroundColor(.red)
                     HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
@@ -64,18 +60,14 @@ struct ArticleAllView: View {
                     HStack (spacing: 20) {
                         HilightedText(str: mainTypes[article.mainType],
                                       search: searchText)
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
                         HilightedText(str: subTypes[article.subType],
                                       search: searchText)
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
                         HilightedText(str: subTypes1[article.subType1],
                                       search: searchText)
-                        .font(.system(size: 15, weight: .regular))
-                        .foregroundColor(.red)
                     }
-                    
+                    .font(.system(size: 15, weight: .regular))
+                    .foregroundColor(.red)
+
                     HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))

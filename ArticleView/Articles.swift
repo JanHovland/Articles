@@ -153,8 +153,6 @@ struct Articles: View {
                             article in
                             if article.subType1 == 1 {
                                 NavigationLink(destination: SetAttributedString(str: article.introduction, article: article)) {
-                                    //  ArticleAllView(article: article,
-                                    //                 searchText: searchFor)
                                     HStack {
                                         Image(systemName: "square.and.pencil")
                                             .resizable()
