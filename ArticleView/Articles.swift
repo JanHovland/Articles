@@ -22,6 +22,14 @@ import CloudKit
 
 struct Articles: View {
 
+    /// Skjuler scroll indicators.
+    
+#if os(iOS)
+    init() {
+        UITableView.appearance().showsVerticalScrollIndicator = false
+    }
+#endif
+    
     @EnvironmentObject var deleteRecord: DeleteRecord
     
     @State private var articles = [Article]()

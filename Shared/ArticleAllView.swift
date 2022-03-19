@@ -48,6 +48,7 @@ struct ArticleAllView: View {
                     HilightedText(str: article.title,
                                   search: searchText)
                         .font(.system(size: 15, weight: .regular))
+                        .foregroundColor(.green)
                     HilightedText(str: article.introduction,
                                       search: searchText)
                         .font(.system(size: 11, weight: .light))
