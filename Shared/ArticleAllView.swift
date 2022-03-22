@@ -98,7 +98,7 @@ func HilightedText(str: String,
     for word in str.split(separator: " ") {
         var text = Text(word)
         if word.uppercased().contains(search.uppercased())  {
-            text = text.bold().foregroundColor(.green).underline()
+            text = text.bold().foregroundColor(.purple).underline()
         }
         result = (result == nil ? text : result + Text(" ") + text)
     }
