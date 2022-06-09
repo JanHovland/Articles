@@ -25,8 +25,6 @@
 		DB507D022761141700AA6C31 /* CloudKitArticleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */; };
 		DB507D042761415000AA6C31 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D032761415000AA6C31 /* ToDoView.swift */; };
 		DB507D052761415000AA6C31 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB507D032761415000AA6C31 /* ToDoView.swift */; };
-		DB6FA61D25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
-		DB6FA61E25E56E1000B16944 /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */; };
 		DB9A7F7127C7E1D800CA86BC /* Extension Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A7F7027C7E1D800CA86BC /* Extension Text.swift */; };
 		DB9A7F7227C7E1D800CA86BC /* Extension Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9A7F7027C7E1D800CA86BC /* Extension Text.swift */; };
 		DBB20C1B25D9250F007CAF2B /* Articles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C0525D9250D007CAF2B /* Articles.xcdatamodeld */; };
@@ -45,6 +43,8 @@
 		DBB20C3625D92849007CAF2B /* ArticleAllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB20C3425D92849007CAF2B /* ArticleAllView.swift */; };
 		DBB2E3BC25DA7460005E9EE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBB2E3BA25DA7460005E9EE5 /* InfoPlist.strings */; };
 		DBB2E3BF25DA7460005E9EE5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBB2E3BD25DA7460005E9EE5 /* Localizable.strings */; };
+		DBC0373627F436C30036AE2C /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DBC0373527F436C30036AE2C /* Create iOS Icons.jsx */; };
+		DBC0373727F436C30036AE2C /* Create iOS Icons.jsx in Resources */ = {isa = PBXBuildFile; fileRef = DBC0373527F436C30036AE2C /* Create iOS Icons.jsx */; };
 		DBDF382727D7B8BF0043CAF9 /* ArticleEnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF382627D7B8BF0043CAF9 /* ArticleEnvironmentValues.swift */; };
 		DBDF382827D7B8BF0043CAF9 /* ArticleEnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDF382627D7B8BF0043CAF9 /* ArticleEnvironmentValues.swift */; };
 		DBE670E225D92C0900AB15B6 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE670E125D92C0900AB15B6 /* Article.swift */; };
@@ -70,7 +70,6 @@
 		DB507CFD2761000B00AA6C31 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitArticleHelper.swift; sourceTree = "<group>"; };
 		DB507D032761415000AA6C31 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
-		DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Create iOS Icons.jsx"; sourceTree = "<group>"; };
 		DB9A7F7027C7E1D800CA86BC /* Extension Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension Text.swift"; sourceTree = "<group>"; };
 		DBB20C0625D9250D007CAF2B /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		DBB20C0725D9250D007CAF2B /* ArticlesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesApp.swift; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		DBB20C3425D92849007CAF2B /* ArticleAllView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleAllView.swift; sourceTree = "<group>"; };
 		DBB2E3BB25DA7460005E9EE5 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DBB2E3BE25DA7460005E9EE5 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DBC0373527F436C30036AE2C /* Create iOS Icons.jsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Create iOS Icons.jsx"; sourceTree = "<group>"; };
 		DBDF382627D7B8BF0043CAF9 /* ArticleEnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleEnvironmentValues.swift; sourceTree = "<group>"; };
 		DBE670E125D92C0900AB15B6 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		DBE670EA25D92E8D00AB15B6 /* SafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 				DBB20C0A25D9250F007CAF2B /* Assets.xcassets */,
 				DBE670ED25D92F6F00AB15B6 /* CloudKitArticle.swift */,
 				DB507D002761141700AA6C31 /* CloudKitArticleHelper.swift */,
-				DB6FA61C25E56E1000B16944 /* Create iOS Icons.jsx */,
+				DBC0373527F436C30036AE2C /* Create iOS Icons.jsx */,
 				DB11366425DC3EAA0065B836 /* DismissingKeyboard.swift */,
 				DBB20C0925D9250D007CAF2B /* Persistence.swift */,
 				DBE670EA25D92E8D00AB15B6 /* SafariView.swift */,
@@ -248,7 +248,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					DBB20C0E25D9250F007CAF2B = {
 						CreatedOnToolsVersion = 12.5;
@@ -285,7 +285,7 @@
 			files = (
 				DBB20C2325D9250F007CAF2B /* Assets.xcassets in Resources */,
 				DBB2E3BF25DA7460005E9EE5 /* Localizable.strings in Resources */,
-				DB6FA61D25E56E1000B16944 /* Create iOS Icons.jsx in Resources */,
+				DBC0373627F436C30036AE2C /* Create iOS Icons.jsx in Resources */,
 				DBB2E3BC25DA7460005E9EE5 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +296,7 @@
 			files = (
 				DBB20C2425D9250F007CAF2B /* Assets.xcassets in Resources */,
 				DB49355F25DA77F300C73658 /* InfoPlist.strings in Resources */,
-				DB6FA61E25E56E1000B16944 /* Create iOS Icons.jsx in Resources */,
+				DBC0373727F436C30036AE2C /* Create iOS Icons.jsx in Resources */,
 				DB49355C25DA769D00C73658 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +431,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -491,6 +492,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -519,7 +521,7 @@
 				DEVELOPMENT_TEAM = 6UR9TA6744;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -543,7 +545,7 @@
 				DEVELOPMENT_TEAM = 6UR9TA6744;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -567,6 +569,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6UR9TA6744;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -592,6 +595,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6UR9TA6744;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
