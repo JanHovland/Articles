@@ -65,8 +65,9 @@ struct CloudKitArticle {
     }
 
     // MARK: - fetching from CloudKit inside CloudKitArticle
-    static func getAllArticles(_ predicate:  NSPredicate) async throws -> [Article] {
+     static func getAllArticles() async throws -> [Article] {
         var articles = [Article]()
+        let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: RecordType.Article, predicate: predicate)
         do {
             ///

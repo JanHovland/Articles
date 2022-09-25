@@ -46,12 +46,12 @@ func articleExist(_ article: Article) async -> (err: LocalizedStringKey, exist: 
     return (err, exist)
 }
 
-func findArticles(_ predicate: NSPredicate) async -> (err: LocalizedStringKey, articles: [Article]) {
+func findArticles() async -> (err: LocalizedStringKey, articles: [Article]) {
     var err : LocalizedStringKey = ""
     var articles = [Article]()
     do {
         err = ""
-        articles = try await CloudKitArticle.getAllArticles(predicate)
+        articles = try await CloudKitArticle.getAllArticles()
     } catch {
         err  = LocalizedStringKey(error.localizedDescription)
         articles = [Article]()

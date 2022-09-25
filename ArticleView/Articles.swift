@@ -18,7 +18,7 @@ import SwiftUI
 import Network
 import CloudKit
 
-@MainActor
+// @MainActor
 
 struct Articles: View {
 
@@ -240,9 +240,8 @@ struct Articles: View {
     
     func findAllArticles() async {
         var value: (LocalizedStringKey, [Article])
-        let predicate = NSPredicate(value: true)
         articles.removeAll()
-        await value = findArticles(predicate)
+        await value = findArticles()
         if value.0 != "" {
             message = value.0
             title = "Error message from the Server"
